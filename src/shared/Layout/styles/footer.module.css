@@ -1,0 +1,6 @@
+.footer {
+  text-align: center;
+  padding: 1rem;
+  font-size: 0.875rem; /* text-sm */
+  color: #718096; /* Tailwind의 gray-600 */
+}
