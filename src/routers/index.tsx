@@ -1,29 +1,34 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "../index.css";
-import App from "../App";
+import { Lists, Posts, Search, Write } from "../pages";
+import { GlobalLayout } from "../shared/Layout/GlobalLayout";
+import { Home } from "../pages/home/Home";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <App />,
+    element: <GlobalLayout />,
     children: [
       {
         path: "/home",
         element: <Home />
       },
       {
-        path: "/home",
-        element: <Home />
+        path: "/post/:id",
+        element: <Posts />
       },
       {
-        path: "/home",
-        element: <Home />
+        path: "/search",
+        element: <Search />
       },
       {
-        path: "/home",
-        element: <Home />
+        path: "/write",
+        element: <Write />
       },
-     
+      {
+        path: "/list/:menu",
+        element: <Lists />
+      }
     ]
   }
 ]);
