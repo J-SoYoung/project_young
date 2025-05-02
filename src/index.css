@@ -2,17 +2,29 @@
   max-width: 1400px;
   margin: 0 auto;
 
+  /* color */
+  --color-primary: #1e3932; /* green-900 */
+  --color-secondary: #046241;
+  --color-white: #f0f0f0;
+  --color-black: #4b5563; 
+
+  /* weight */
+  --weight-light: 300;
+  --weight-regular: 400;
+  --weight-bold: 700;
+  --weight-black: 900;
+
   /* font */
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
   font-size: 16px;
 
-  --font-h1: 2.25rem;
-  --font-h2: 2rem;
-  --font-h3: 1.25rem;
-  --font-base: 1rem;
-  --font-small: 0.9rem;
+  --font-size-h1: 2.25rem;
+  --font-size-h2: 2rem;
+  --font-size-h3: 1.25rem;
+  --font-size-base: 1rem;
+  --font-size-small: 0.9rem;
 }
 
 a {
@@ -34,7 +46,10 @@ div,
 li {
   font-size: var(--font-base);
 }
-
+button{
+  padding: 0;
+  margin: 0;
+}
 p,
 div,
 h1,
@@ -44,7 +59,6 @@ h4,
 body {
   margin: 0;
   padding: 0;
-  background-color: #f1e7d4;
 }
 html {
   background-color: #fff;
