@@ -11,10 +11,10 @@ export const Header = () => {
         {[
           "GAMY",
           "EMPOWER",
-          "STRENGTH DESIGN 201",
-          "GAMY",
+          "STRENGTH ",
+          "301",
           "INSPIRE",
-          "STRENGTH DESIGN 301"
+          "DESIGN"
         ].map((tag, idx) => (
           <button key={idx} className={styles.tagButton}>
             {tag}
