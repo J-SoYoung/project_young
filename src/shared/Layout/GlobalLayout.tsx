@@ -26,11 +26,13 @@ export const GlobalLayout = () => {
 
   if (isTablet) {
     return (
-      <div className={`${styles.container} ${styles.tablet}`}>
+      <div
+        className={`${styles.container} ${styles.tablet}`}
+      >
         <Header />
-        <div className={styles.main}>
-          <Outlet />
+        <div className={`${styles.main} ${styles.subContainer}`}>
           <MenubarTablet />
+          <Outlet />
         </div>
         <Footer />
       </div>
@@ -40,7 +42,7 @@ export const GlobalLayout = () => {
   return (
     <div className={`${styles.container} ${styles.mobile}`}>
       <Header />
-      <div className={styles.main}>
+      <div className={`${styles.main} ${styles.subContainer}`}>
         <MenubarTablet />
         <Outlet />
       </div>
