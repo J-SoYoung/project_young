@@ -3,5 +3,15 @@
   "references": [
     { "path": "./tsconfig.app.json" },
     { "path": "./tsconfig.node.json" }
-  ]
+  ],
+  "compilerOptions": {
+    /* 절대경로 설정 */
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"],
+      "@/pages/*": ["src/pages/*"],
+      "@/routers/*": ["src/routers/*"],
+      "@/shared/components/*": ["src/shared/components/*"],
+    }
+  }
 }
