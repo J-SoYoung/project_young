@@ -1,5 +1,5 @@
 import { Outlet } from "react-router-dom";
-import { Footer, Header, MenubarDesktop, MenubarTablet } from "./components";
+import { Footer, Header, MenubarDesktop, TopNavigate } from "./components";
 
 import styles from "./globalLayout.module.css";
 import { useDeviceType } from "./hooks/useDeviceType";
@@ -9,10 +9,11 @@ export const GlobalLayout = () => {
 
   if (isDesktop) {
     return (
-      <div className={`${styles.container} ${styles.desktop}`}>
+      <div className={styles.container}>
         <Header />
         <div className={styles.main}>
           <div className={styles.outletWrapper}>
+            <TopNavigate />
             <Outlet />
           </div>
           <div className={styles.sidebarWrapper}>
@@ -26,12 +27,10 @@ export const GlobalLayout = () => {
 
   if (isTablet) {
     return (
-      <div
-        className={`${styles.container} ${styles.tablet}`}
-      >
+      <div className={styles.container}>
         <Header />
-        <div className={`${styles.main} ${styles.subContainer}`}>
-          <MenubarTablet />
+        <div className={styles.tabletMain}>
+          <TopNavigate />
           <Outlet />
         </div>
         <Footer />
@@ -40,10 +39,10 @@ export const GlobalLayout = () => {
   }
 
   return (
-    <div className={`${styles.container} ${styles.mobile}`}>
+    <div className={styles.container}>
       <Header />
-      <div className={`${styles.main} ${styles.subContainer}`}>
-        <MenubarTablet />
+      <div className={styles.tabletMain}>
+        <TopNavigate />
         <Outlet />
       </div>
       <Footer />
