@@ -1,26 +1,19 @@
 import { Link } from "react-router-dom";
 import styles from "../styles/header.module.css";
+import { Categories } from "./Categories";
+import { MenubarTablet } from "./MenubarTablet";
+import { useDeviceType } from "../hooks/useDeviceType";
 
 export const Header = () => {
+  const { isDesktop } = useDeviceType();
+
   return (
     <header className={styles.header}>
       <h1 className={styles.title}>
         <Link to={"/home"}>PROJECT YOUNG</Link>
       </h1>
-      <nav className={styles.nav}>
-        {[
-          "GAMY",
-          "EMPOWER",
-          "STRENGTH ",
-          "301",
-          "INSPIRE",
-          "DESIGN"
-        ].map((tag, idx) => (
-          <button key={idx} className={styles.tagButton}>
-            {tag}
-          </button>
-        ))}
-      </nav>
+      <Categories />
+      {!isDesktop && <MenubarTablet />}
     </header>
   );
 };
