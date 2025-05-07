@@ -3,10 +3,10 @@ import {
   Navigate,
   RouterProvider
 } from "react-router-dom";
+
 import "../index.css";
-import { Lists, Posts, Search, Write, Detail } from "../pages";
 import { GlobalLayout } from "../shared/Layout/GlobalLayout";
-import { Home } from "../pages/home/Home";
+import { Home, EditPosts, Lists, Posts, Search, Write } from "../pages";
 
 const router = createBrowserRouter([
   {
@@ -22,14 +22,6 @@ const router = createBrowserRouter([
         element: <Home />
       },
       {
-        path: "/detail/:id",
-        element: <Detail />
-      },
-      {
-        path: "/post/:id",
-        element: <Posts />
-      },
-      {
         path: "/search",
         element: <Search />
       },
@@ -38,7 +30,19 @@ const router = createBrowserRouter([
         element: <Write />
       },
       {
+        path: "/edit/:id",
+        element: <EditPosts />
+      },
+      {
+        path: "/posts/:id",
+        element: <Posts />
+      },
+      {
         path: "/list/:menu",
+        element: <Lists />
+      },
+      {
+        path: "/categories/:tag",
         element: <Lists />
       }
     ]
