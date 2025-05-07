@@ -1,0 +1,27 @@
+.nav {
+  display: flex;
+  gap: 1.25rem;
+  flex-wrap: wrap;
+}
+
+.tagButton {
+  background: none;
+  border: none;
+  font-weight: var(--weight-regular);
+  font-size: var(--font-size-base);
+  color: var(--color-white);
+  cursor: pointer;
+  /* transition: opacity 0.2s ease; */
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+.tagButton:hover {
+  opacity: 0.75;
+  transform: translateY(-3px);
+}
+
+/* mobile  */
+@media (max-width: 1279px) {
+  .nav {
+    display: none;
+  }
+}
