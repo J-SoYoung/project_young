@@ -1,17 +1,16 @@
 .aside {
+  width: 100%;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  justify-content: flex-start;
+  align-items: center
 }
 
 .menuSection {
-  max-width: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
   box-sizing: border-box;
   margin: 1rem 0;
-  order: 1;
 }
 
 .menuSection a {
@@ -38,27 +37,18 @@
 .menuSection a:hover::after {
   width: 100%;
 }
-.searchSection {
-  order: 2;
-}
-@media (max-width: 768px) {
+
+@media (min-width: 768px) {
   .aside {
     width: 100%;
-    flex-direction: column;
-    align-items: flex-end;
   }
   .menuSection {
     width: 100%;
     margin: 0;
     justify-content: space-between;
     align-items: center;
-    order: 2;
   }
   .menuSection a {
-    margin: 0.5rem 0;
-  }
-  .searchSection {
-    order: 1;
     margin: 0.5rem 0;
   }
 }

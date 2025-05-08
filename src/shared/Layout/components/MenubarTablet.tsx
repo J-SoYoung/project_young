@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import styles from "../styles/menubarTablet.module.css";
+import { SearchBar } from "./SearchBar";
 
 export const MenubarTablet = () => {
   return (
@@ -9,14 +10,8 @@ export const MenubarTablet = () => {
         <Link to={"/list/achiving"}>ACHIVING</Link>
         <Link to={"/list/study"}>STUDY</Link>
         <Link to={"/list/book"}>BOOK</Link>
+        <SearchBar />
       </nav>
-      <section className={styles.searchSection}>
-        <input
-          type="text"
-          placeholder="Search posts..."
-          className={styles.searchInput}
-        />
-      </section>
     </aside>
   );
 };

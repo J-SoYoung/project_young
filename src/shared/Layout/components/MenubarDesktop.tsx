@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import me from "../../../assets/m.jpg";
 import styles from "../styles/menubarDesktop.module.css";
+import { SearchBar } from "./SearchBar";
 
 export const MenubarDesktop = () => {
   return (
@@ -8,15 +9,7 @@ export const MenubarDesktop = () => {
       <div className={styles.imageBox}>
         <img src={me} alt="so-young image" className={styles.sidebarImage} />
       </div>
-
-      <section className={styles.searchSection}>
-        <h3 className={styles.sectionTitle}>Search</h3>
-        <input
-          type="text"
-          placeholder="Search posts..."
-          className={styles.searchInput}
-        />
-      </section>
+      <SearchBar />
 
       <nav className={styles.menuSection}>
         <h3 className={styles.sectionTitle}>Menu</h3>
