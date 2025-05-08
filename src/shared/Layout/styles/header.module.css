@@ -1,6 +1,6 @@
 .header {
   background-color: var(--color-primary);
-  padding: 1.5rem 2.5rem;
+  padding: 1.25rem 2rem;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
@@ -9,7 +9,7 @@
 }
 .title > a {
   display: block;
-  font-size: var(--font-size-h1);
+  font-size: var(--font-size-h2);
   font-weight: var(--weight-black);
   color: var(--color-white);
   margin-bottom: 1rem;
