@@ -4,7 +4,7 @@ import styles from "./styles/home.module.css";
 export const Home = () => {
   const navigate = useNavigate();
   const movePage = () => {
-    navigate(`/detail/${1}`);
+    navigate(`/posts/${1}`);
   };
 
   return (
