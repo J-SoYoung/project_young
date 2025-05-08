@@ -41,7 +41,7 @@ export const GlobalLayout = () => {
   return (
     <div className={styles.container}>
       <Header />
-      <div className={styles.tabletMain}>
+      <div className={styles.mobiletMain}>
         <TopNavigate />
         <Outlet />
       </div>

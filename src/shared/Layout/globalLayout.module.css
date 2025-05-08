@@ -8,15 +8,12 @@
 .main {
   display: flex;
   width: 100%;
-  max-width: 1120px;
+  max-width: 1200px;
   margin: 0 auto;
-  padding-left: 1rem;
-  padding-right: 1rem;
-  box-sizing: border-box;
-  gap: 1.5rem;
 }
 
 .outletWrapper {
+  min-height: 100vh;
   flex: 7.5;
 }
 
@@ -24,7 +21,18 @@
   flex: 2.5;
 }
 
-.tabletMain{
-  border: 1px solid red;
+.tabletMain {
+  min-height: 100vh;
   padding: 0 4rem;
+}
+/* tablet half 이하 */
+@media (max-width: 768px) {
+  .tabletMain {
+    padding: 0 2rem;
+  }
+}
+
+.mobiletMain {
+  min-height: 100vh;
+  padding: 0 1rem;
 }
