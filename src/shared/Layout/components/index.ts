@@ -4,6 +4,7 @@ import { Header } from "./Header";
 import { MenubarDesktop } from "./MenubarDesktop";
 import { MenubarTablet } from "./MenubarTablet";
 import { TopNavigate } from "./TopNavigate";
+import { SearchBar } from "./SearchBar";
 
 export {
   Categories,
@@ -11,5 +12,6 @@ export {
   Header,
   MenubarDesktop,
   MenubarTablet,
-  TopNavigate
+  TopNavigate,
+  SearchBar
 };
