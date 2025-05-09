@@ -10,8 +10,8 @@ export const MenubarTablet = () => {
         <Link to={"/list/achiving"}>ACHIVING</Link>
         <Link to={"/list/study"}>STUDY</Link>
         <Link to={"/list/book"}>BOOK</Link>
-        <SearchBar />
       </nav>
+      <SearchBar />
     </aside>
   );
 };
