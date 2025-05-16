@@ -38,11 +38,11 @@ const router = createBrowserRouter([
         element: <Posts />
       },
       {
-        path: "/list/:menu",
+        path: "/list/:keyword",
         element: <Lists />
       },
       {
-        path: "/categories/:tag",
+        path: "/postTags/:keyword",
         element: <Lists />
       }
     ]
