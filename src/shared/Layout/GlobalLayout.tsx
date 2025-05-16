@@ -1,8 +1,8 @@
 import { Outlet } from "react-router-dom";
-import { Footer, Header, MenubarDesktop, TopNavigate } from "./components";
+import { Footer, Header, MainCategories, TopNavigate } from "./components";
 
 import styles from "./globalLayout.module.css";
-import { useDeviceType } from "./hooks/useDeviceType";
+import { useDeviceType } from "../hooks/useDeviceType";
 
 export const GlobalLayout = () => {
   const { isTablet, isDesktop } = useDeviceType();
@@ -17,7 +17,7 @@ export const GlobalLayout = () => {
             <Outlet />
           </div>
           <div className={styles.sidebarWrapper}>
-            <MenubarDesktop />
+            <MainCategories />
           </div>
         </div>
         <Footer />
