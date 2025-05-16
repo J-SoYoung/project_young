@@ -12,6 +12,7 @@
       "@/pages/*": ["src/pages/*"],
       "@/routers/*": ["src/routers/*"],
       "@/shared/components/*": ["src/shared/components/*"],
+      "@/shared/hooks/*": ["src/shared/hooks/*"],
     }
   }
 }

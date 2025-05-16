@@ -10,6 +10,7 @@ export default defineConfig({
       { find: "@/pages", replacement: "/src/pages" },
       { find: "@/routers", replacement: "/src/routers" },
       { find: "@/shared/components", replacement: "/src/shared/components" },
+      { find: "@/shared/hooks", replacement: "/src/shared/hooks" },
 
     ]
   },
