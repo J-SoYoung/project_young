@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 import styles from "../styles/searchBar.module.css";
 import { IoSearch } from "react-icons/io5";
-import { useDeviceType } from "../hooks/useDeviceType";
+import { useDeviceType } from "../../hooks/useDeviceType";
 
 export const SearchBar = () => {
   const navigate = useNavigate();
