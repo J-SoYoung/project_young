@@ -1,13 +1,13 @@
 import { useParams } from "react-router-dom";
+import { PostLists } from "../../shared/components/postLists/PostLists";
 
 export const Lists = () => {
-  const { menu } = useParams<{ menu: string }>();
-  console.log(menu);
+  const { keyword } = useParams<{ keyword: string }>();
+  console.log(keyword);
+
   return (
     <div>
-      <h1>Lists</h1>
-      <h2>{menu}</h2>
-      <p>This is the Lists page .</p>
+      <PostLists />
     </div>
   );
 };
