@@ -1,17 +1,8 @@
-import { Categories } from "./Categories";
+import { PostTags } from "./PostTags";
 import { Footer } from "./Footer";
 import { Header } from "./Header";
-import { MenubarDesktop } from "./MenubarDesktop";
-import { MenubarTablet } from "./MenubarTablet";
+import { MainCategories } from "./MainCategories";
 import { TopNavigate } from "./TopNavigate";
 import { SearchBar } from "./SearchBar";
 
-export {
-  Categories,
-  Footer,
-  Header,
-  MenubarDesktop,
-  MenubarTablet,
-  TopNavigate,
-  SearchBar
-};
+export { PostTags, Footer, Header, MainCategories, TopNavigate, SearchBar };
