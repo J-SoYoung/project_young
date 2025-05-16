@@ -6,15 +6,16 @@ import styles from "../styles/topNavigate.module.css";
 export const TopNavigate = () => {
   const location = useLocation();
   const navigate = useNavigate();
+  const pageNamed = location.pathname.split("/").pop();
 
-  console.log(location.pathname); // 현재 경로를 확인할 수 있습니다.
+  console.log(pageNamed);
 
   return (
     <nav className={styles.nav}>
       <button className={styles.navigateBtn}>
         <FaChevronLeft />
       </button>
-      <span className={styles.curPageName}>{location.pathname}</span>
+      <span className={styles.curPageName}>{pageNamed}</span>
     </nav>
   );
 };
