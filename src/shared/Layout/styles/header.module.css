@@ -7,12 +7,18 @@
   align-items: flex-start;
   justify-content: space-between;
 }
+.titleContainer {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-bottom: 1rem;
+}
 .title > a {
   display: block;
   font-size: var(--font-size-h2);
   font-weight: var(--weight-black);
   color: var(--color-white);
-  margin-bottom: 1rem;
 }
 
 /* tablet half 이상 */
