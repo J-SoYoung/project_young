@@ -7,8 +7,7 @@ import { useDeviceType } from "../../hooks";
 
 export const MainCategories = () => {
   const { isDesktop } = useDeviceType();
-  console.log("디바이스 desktop?", isDesktop);
-  
+
   if (isDesktop) {
     return (
       <aside className={styles.sidebar}>
@@ -39,13 +38,13 @@ export const MainCategories = () => {
   }
   return (
     <aside className={styles.tabletAside}>
+      <SearchBar />
       <nav className={styles.tabletMenuSection}>
         <Link to={"/list/memo"}>MEMO</Link>
         <Link to={"/list/achiving"}>ACHIVING</Link>
         <Link to={"/list/study"}>STUDY</Link>
         <Link to={"/list/book"}>BOOK</Link>
       </nav>
-      <SearchBar />
     </aside>
   );
 };

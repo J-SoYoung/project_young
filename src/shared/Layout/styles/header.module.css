@@ -1,6 +1,6 @@
 .header {
   background-color: var(--color-primary);
-  padding: 1.25rem 2rem;
+  padding: 1.25rem 1rem;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
