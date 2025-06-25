@@ -1,0 +1,132 @@
+.header {
+  position: sticky;
+  top: 0;
+  background: #fff;
+  padding: 1.25rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #ccc;
+  z-index: 1000;
+}
+.logo {
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+.nav {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.main {
+  padding: 1.25rem;
+  background: #f9f9f9;
+  color: #000;
+}
+section{
+  /* border: 1px solid red; */
+  margin-bottom: 4rem;
+}
+.sectionTitle{
+  margin-bottom: 1.25rem;
+}
+
+/* Greeting */
+.greeting {
+  margin-bottom: 2rem;
+}
+.greeting h1{
+  margin-bottom: 1.5rem;
+}
+.greeting p {
+  padding: 1.5rem 0;
+  box-sizing: border-box;
+}
+
+/* Notes */
+.notesSection h2,
+.deepdivesSection h2,
+.portfolioSection h2 {
+  font-size: 1.5rem;
+  /* margin-bottom: 0.25rem; */
+}
+.notesList li {
+  margin-bottom: 1rem;
+  margin: 0;
+}
+.notesList time {
+  font-size: 0.85rem;
+  color: #666;
+  display: block;
+}
+.notesList a {
+  font-weight: bold;
+  text-decoration: none;
+  color: #000;
+}
+
+/* Deep Dives */
+.deepdivesList {
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  box-sizing: border-box;
+  gap: 1rem;
+}
+.deepdivesList li {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background: #fff;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  border: 1px solid #ccc;
+}
+
+/* Portfolio */
+.portfolioList {
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  box-sizing: border-box;
+  gap: 1rem;
+}
+.portfolioList li {
+  background: #fff;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  border: 1px solid #ccc;
+  list-style: none;
+}
+.portfolioList time {
+  font-size: 0.9rem;
+  color: #333;
+}
+.portfolioList strong {
+  display: block;
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+}
+.portfolioList a {
+  margin-right: 0.5rem;
+  color: #000;
+  text-decoration: underline;
+  font-size: 0.9rem;
+}
+
+/* footer */
+.footer {
+  padding: 2rem;
+  text-align: center;
+  font-size: 0.9rem;
+  color: #666;
+  background: #f1f1f1;
+  margin-top: 4rem;
+}
+
+.footer a {
+  color: #000;
+  margin: 0 0.3rem;
+  text-decoration: none;
+  font-weight: 500;
+}

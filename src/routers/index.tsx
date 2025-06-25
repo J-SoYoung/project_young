@@ -11,7 +11,7 @@ import { Home, EditPosts, Lists, Posts, Search, Write } from "../pages";
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <GlobalLayout />,
+    // element: <GlobalLayout />,
     children: [
       {
         index: true, // path 없이 루트 경로를 의미
