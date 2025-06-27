@@ -1,3 +1,3 @@
-import { PostLists } from "./postLists/PostLists";
+import { WriteButton } from "./writeButton/WriteButton";
 
-export { PostLists };
+export { WriteButton };

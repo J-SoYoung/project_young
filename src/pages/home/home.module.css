@@ -1,4 +1,4 @@
-.header {
+/* .header {
   position: sticky;
   top: 0;
   background: #fff;
@@ -16,26 +16,42 @@
 .nav {
   display: flex;
   gap: 0.75rem;
-}
+} */
 
 .main {
   padding: 1.25rem;
   background: #f9f9f9;
   color: #000;
 }
-section{
-  /* border: 1px solid red; */
+section {
   margin-bottom: 4rem;
 }
-.sectionTitle{
+.sectionTitle {
   margin-bottom: 1.25rem;
+}
+.sectionTitle h2 span {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 0 1rem 0 0;
+}
+.sectionTitle h2 a {
+  text-decoration: none;
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+.sectionTitle p {
+  font-size: 0.875rem;
+  color: #666;
+  margin: 0;
 }
 
 /* Greeting */
 .greeting {
   margin-bottom: 2rem;
 }
-.greeting h1{
+.greeting h1 {
+  font-size: 1.5rem;
   margin-bottom: 1.5rem;
 }
 .greeting p {
@@ -44,15 +60,17 @@ section{
 }
 
 /* Notes */
-.notesSection h2,
-.deepdivesSection h2,
-.portfolioSection h2 {
-  font-size: 1.5rem;
-  /* margin-bottom: 0.25rem; */
+.notesList {
+  padding: 0;
+  margin: 0;
 }
 .notesList li {
+  display: block;
   margin-bottom: 1rem;
   margin: 0;
+  padding: 0.8rem 0;
+  box-sizing: border-box;
+  border-bottom: 1px solid #ddd;
 }
 .notesList time {
   font-size: 0.85rem;
@@ -81,6 +99,7 @@ section{
   padding: 1rem;
   border-radius: 0.5rem;
   border: 1px solid #ccc;
+  cursor: pointer;
 }
 
 /* Portfolio */
@@ -97,6 +116,7 @@ section{
   border-radius: 0.5rem;
   border: 1px solid #ccc;
   list-style: none;
+  cursor: pointer;
 }
 .portfolioList time {
   font-size: 0.9rem;
@@ -115,7 +135,7 @@ section{
 }
 
 /* footer */
-.footer {
+/* .footer {
   padding: 2rem;
   text-align: center;
   font-size: 0.9rem;
@@ -129,4 +149,4 @@ section{
   margin: 0 0.3rem;
   text-decoration: none;
   font-weight: 500;
-}
+} */

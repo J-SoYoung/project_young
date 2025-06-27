@@ -1,23 +1,7 @@
 .postTitle {
   font-size: var(--font-size-Main-tablet);
   font-weight: 700;
-  margin-bottom: 0.75rem;
-}
-
-/* 태그 */
-.postTags {
-  display: flex;
-  gap: 0.5rem;
-  margin-bottom: 1rem;
-}
-.tag {
-  padding: 4px 10px;
-  box-sizing: border-box;
-  border-radius: 12px;
-  font-size: var(--font-size-small);
-  font-weight: var(--weight-bold);
-  background: var(--color-secondary);
-  color: var(--color-white);
+  margin: 1rem 0;
 }
 
 /* 작성자, 날짜, 좋아요 */
@@ -47,9 +31,8 @@
 }
 
 /* 글 내용 */
-.postContent {
-  border: 1px solid red;
+.postContent p {
   line-height: var(--line-height-posts);
   font-size: var(--font-size-base);
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem;
 }

@@ -8,12 +8,6 @@ export const Posts = () => {
         States
       </h1>
 
-      {/* 태그 */}
-      <div className={styles.postTags}>
-        <span className={styles.tag}>programing</span>
-        <span className={styles.tag}>programing</span>
-      </div>
-
       {/* 작성자, 날짜, 좋아요 */}
       <div className={styles.postMeta}>
         <div className={styles.authorInfo}>
@@ -62,22 +56,6 @@ export const Posts = () => {
         </div>
       </section>
 
-      {/* 비슷한 글 */}
-      <section className={styles.similarStories}>
-        <h3>Similar stories</h3>
-        <ul className={styles.storyList}>
-          {[1, 2, 3].map((post) => {
-            return (
-              <li className={styles.storyItem} key={post}>
-                <img src="https://placehold.co/100x100" alt="Story 1" />
-                <p className={styles.storyTitle}>
-                  {post} = Google announces ChatGPT rival Bard...
-                </p>
-              </li>
-            );
-          })}
-        </ul>
-      </section>
     </main>
   );
 };
