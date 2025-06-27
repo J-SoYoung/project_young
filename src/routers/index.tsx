@@ -5,12 +5,10 @@ import {
 } from "react-router-dom";
 
 import "../index.css";
-// import { GlobalLayout } from "../shared/Layout/GlobalLayout";
 import { Layout } from "../shared/Layout";
 import {
   Home,
   EditPosts,
-  // Lists,
   Posts,
   Search,
   Write,
@@ -23,7 +21,6 @@ import {
 const router = createBrowserRouter([
   {
     path: "/",
-    // element: <GlobalLayout />,
     element: <Layout />,
     children: [
       {
@@ -62,19 +59,10 @@ const router = createBrowserRouter([
         path: "/thoughts",
         element: <Thoughts />
       },
-
       {
         path: "/:menu/:id",
         element: <Posts />
       }
-      // {
-      //   path: "/list/:keyword",
-      //   element: <Lists />
-      // },
-      // {
-      //   path: "/postTags/:keyword",
-      //   element: <Lists />
-      // }
     ]
   }
 ]);

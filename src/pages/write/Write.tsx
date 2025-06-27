@@ -18,25 +18,6 @@ export const Write = () => {
     }));
   };
 
-  const handleTagKeyDown = (e) => {
-    if (e.key === "Enter" && formState.tagInput.trim()) {
-      e.preventDefault();
-      if (formState.tags.length >= 3) return;
-
-      const cleanTag = formState.tagInput.startsWith("#")
-        ? formState.tagInput
-        : `#${formState.tagInput}`;
-
-      if (!formState.tags.includes(cleanTag)) {
-        setFormState((prev) => ({
-          ...prev,
-          tags: [...prev.tags, cleanTag],
-          tagInput: ""
-        }));
-      }
-    }
-  };
-
   const handleSubmit = (e) => {
     e.preventDefault();
     const postData = {
@@ -50,7 +31,8 @@ export const Write = () => {
   };
 
   return (
-    <div>
+    <main>
+      <h1>글 작성</h1>
       <form className={styles.form} onSubmit={handleSubmit}>
         <select
           name="category"
@@ -58,11 +40,11 @@ export const Write = () => {
           onChange={handleChange}
           className={styles.select}
         >
-          <option value="">카테고리</option>
-          <option value="memo">Memo</option>
-          <option value="book">Book</option>
-          <option value="achiving">Achiving</option>
-          <option value="study">Study</option>
+          <option value="">카테고리를 선택해주세요</option>
+          <option value="memo">TechNote</option>
+          <option value="book">Thought</option>
+          <option value="achiving">DeepDives</option>
+          <option value="study">Portfolio</option>
         </select>
 
         <input
@@ -88,7 +70,6 @@ export const Write = () => {
             name="tagInput"
             value={formState.tagInput}
             onChange={handleChange}
-            onKeyDown={handleTagKeyDown}
             placeholder="#태그입력"
             className={styles.tagInput}
           />
@@ -105,6 +86,6 @@ export const Write = () => {
           글 작성
         </button>
       </form>
-    </div>
+    </main>
   );
 };

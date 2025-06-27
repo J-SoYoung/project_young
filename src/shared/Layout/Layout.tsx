@@ -1,12 +1,15 @@
-import { Link, Outlet } from "react-router-dom";
+import { Link, Outlet, useNavigate } from "react-router-dom";
 import { AiOutlineMenu } from "react-icons/ai";
 import { IoLogoGithub } from "react-icons/io";
 import { MdDarkMode } from "react-icons/md";
+import { LuPencil } from "react-icons/lu";
 // import { MdOutlineDarkMode } from "react-icons/md";
 
 import styles from "./layout.module.css";
 
 export const Layout = () => {
+  const navigate = useNavigate();
+
   return (
     <>
       <header className={styles.header}>
@@ -14,13 +17,20 @@ export const Layout = () => {
           <Link to="/">DEV.SoYoung</Link>
         </div>
         <nav className={styles.nav}>
+          <LuPencil
+            size={25}
+            onClick={() => navigate(`/write`)}
+            className={styles.icons}
+          />
           <AiOutlineMenu size={25} className={styles.icons} />
           <IoLogoGithub size={25} className={styles.icons} />
           {/* <MdOutlineDarkMode size={25} className={styles.icons} /> */}
           <MdDarkMode size={25} className={styles.icons} />
         </nav>
       </header>
+
       <Outlet />
+
       <footer className={styles.footer}>
         <div>
           <a href="#">RSS feed</a> · <a href="https://github.com">GitHub</a> ·{" "}
