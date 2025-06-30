@@ -6,12 +6,14 @@ import { LuPencil } from "react-icons/lu";
 // import { MdOutlineDarkMode } from "react-icons/md";
 
 import styles from "./layout.module.css";
+import { ScrollToTop } from "../components";
 
 export const Layout = () => {
   const navigate = useNavigate();
 
   return (
     <>
+      <ScrollToTop />
       <header className={styles.header}>
         <div className={styles.logo}>
           <Link to="/">DEV.SoYoung</Link>
