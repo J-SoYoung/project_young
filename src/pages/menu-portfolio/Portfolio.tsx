@@ -1,5 +1,7 @@
 import styles from "./portfolio.module.css";
 
+import { portfolio } from "../home/exampleData";
+
 export const Portfolio = () => {
   return (
     <main className={styles.container}>
@@ -11,34 +13,19 @@ export const Portfolio = () => {
       </div>
 
       {/* 포트폴리오 항목들 */}
-      <section className="portfolio_list">
-        <ul className={styles.portfolioList}>
-          <li>
-            <time>2024</time>
-            <p>
-              <strong>BOOKSOME</strong>
-            </p>
-            <p>독서 다이어리 기반 리뷰 서비스</p>
-            <a href="#">Demo</a> · <a href="#">Related Article</a>
+      <ul className={styles.portfolioList}>
+        {portfolio.map((post) => (
+          <li key={post.id}>
+            <time>{post.date}</time>
+            <div>
+              <strong>{post.title}</strong>
+            </div>
+            <p>{post.description}</p>
+            <a href={post.githublink}>github</a>
+            <a href={post.link}> 포트폴리오 더보기 </a>
           </li>
-          <li>
-            <time>2024</time>
-            <p>
-              <strong>BOOKSOME</strong>
-            </p>
-            <p>독서 다이어리 기반 리뷰 서비스</p>
-            <a href="#">Demo</a> · <a href="#">Related Article</a>
-          </li>
-          <li>
-            <time>2023</time>
-            <p>
-              <strong>Mini Vite Blog</strong>
-            </p>
-            <p>Vite + Firebase 블로그 프로젝트</p>
-            <a href="#">Demo</a> · <a href="#">Related Article</a>
-          </li>
-        </ul>
-      </section>
+        ))}
+      </ul>
     </main>
   );
 };
