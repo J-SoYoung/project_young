@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import styles from "./thoughts.module.css";
+import { thoughts } from "../home/exampleData";
 
 export const Thoughts = () => {
   return (
@@ -11,24 +12,14 @@ export const Thoughts = () => {
 
       {/* 노트 항목들 */}
       <ul className={styles.notesList}>
-        <li>
-          <time>2025.01</time>
-          <p>
-            <Link to="/thought/1">개발자와 커뮤니케이션 감각</Link>
-          </p>
-        </li>
-        <li>
-          <time>2025.01</time>
-          <p>
-            <Link to="/pothoughtsts/1">개발자와 커뮤니케이션 감각</Link>
-          </p>
-        </li>
-        <li>
-          <time>2024.11</time>
-          <p>
-            <Link to="/thought/1">나만의 블로그를 만든 이유</Link>
-          </p>
-        </li>
+        {thoughts.map((post) => (
+          <li key={post.id}>
+            <time>{post.date}</time>
+            <p>
+              <Link to={post.link}>{post.title}</Link>
+            </p>
+          </li>
+        ))}
       </ul>
     </main>
   );

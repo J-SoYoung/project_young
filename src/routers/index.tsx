@@ -51,7 +51,7 @@ const router = createBrowserRouter([
         element: <Portfolio />
       },
       {
-        path: "/notes",
+        path: "/tech-notes",
         element: <TechNotes />
       },
       {

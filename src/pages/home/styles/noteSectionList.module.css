@@ -1,0 +1,46 @@
+.section {
+  margin-bottom: 4rem;
+}
+.sectionTitle {
+  margin-bottom: 1.25rem;
+}
+.sectionTitle h2 span {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 0 1rem 0 0;
+}
+.sectionTitle h2 a {
+  text-decoration: none;
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+.sectionTitle p {
+  font-size: 0.875rem;
+  color: #666;
+  margin: 0;
+}
+
+/* Notes */
+.notesList {
+  padding: 0;
+  margin: 0;
+}
+.notesList li {
+  display: block;
+  margin-bottom: 1rem;
+  margin: 0;
+  padding: 0.8rem 0;
+  box-sizing: border-box;
+  border-bottom: 1px solid #ddd;
+}
+.notesList time {
+  font-size: 0.85rem;
+  color: #666;
+  display: block;
+}
+.notesList a {
+  font-weight: bold;
+  text-decoration: none;
+  color: #000;
+}
