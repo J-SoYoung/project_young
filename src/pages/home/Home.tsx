@@ -36,7 +36,7 @@ export const Home = () => {
         title={"thoughts"}
         moreToLink={"/thoughts"}
         description={
-          "다양한 개발 주제에 대한 심층 분석, 튜토리얼을 정리한 글입니다"
+          "개발 및 프로젝트 등 대한 개인적인 생각을 정리한 글입니다"
         }
         posts={thoughts}
       />
