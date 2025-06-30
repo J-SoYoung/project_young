@@ -9,13 +9,16 @@ import { Layout } from "../shared/Layout";
 import {
   Home,
   EditPosts,
-  Posts,
   Search,
   Write,
   Portfolio,
-  Notes,
+  TechNotes,
   DeepDives,
   Thoughts,
+  TechNotesDetail,
+  ThoughtsDetail,
+  DeepDivesDetail,
+  PortfolioDetail
 } from "../pages";
 
 const router = createBrowserRouter([
@@ -49,7 +52,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/notes",
-        element: <Notes />
+        element: <TechNotes />
       },
       {
         path: "/deepdives",
@@ -60,9 +63,25 @@ const router = createBrowserRouter([
         element: <Thoughts />
       },
       {
-        path: "/:menu/:id",
-        element: <Posts />
+        path: "/tech-notes/:id",
+        element: <TechNotesDetail />
+      },
+      {
+        path: "/thoughts/:id",
+        element: <ThoughtsDetail />
+      },
+      {
+        path: "/deep-dives/:id",
+        element: <DeepDivesDetail />
+      },
+      {
+        path: "/portfolio/:id",
+        element: <PortfolioDetail />
       }
+      // {
+      //   path: "/:menu/:id",
+      //   element: <Posts />
+      // }
     ]
   }
 ]);
