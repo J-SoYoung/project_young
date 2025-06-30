@@ -53,16 +53,16 @@ export const thoughts: NotesData[] = [
     link: "/thoughts/1"
   },
   {
-    id: "1",
+    id: "2",
     date: "2025.04",
     title: "나만의 블로그를 만든 이유",
-    link: "/thoughts/1"
+    link: "/thoughts/2"
   },
   {
-    id: "1",
+    id: "3",
     date: "2025.05",
     title: "AI시대의 개발자의 역할은",
-    link: "/thoughts/1"
+    link: "/thoughts/3"
   }
 ];
 
