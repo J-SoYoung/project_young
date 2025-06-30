@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
-import styles from "./notes.module.css";
+import styles from "./techNotes.module.css";
 
-export const Notes = () => {
+export const TechNotes = () => {
   return (
     <main className={styles.container}>
       <div className={styles.titleContainer}>
@@ -32,7 +32,6 @@ export const Notes = () => {
           </p>
         </li>
       </ul>
-
     </main>
   );
 };
