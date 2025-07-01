@@ -11,14 +11,11 @@ import {
   EditPosts,
   Search,
   Write,
-  Portfolio,
-  TechNotes,
-  DeepDives,
-  Thoughts,
   TechNotesDetail,
   ThoughtsDetail,
   DeepDivesDetail,
-  PortfolioDetail
+  PortfolioDetail,
+  MenuMoreListsPage
 } from "../pages";
 
 const router = createBrowserRouter([
@@ -46,22 +43,11 @@ const router = createBrowserRouter([
         path: "/edit/:id",
         element: <EditPosts />
       },
-      {
-        path: "/portfolio",
-        element: <Portfolio />
+      { // 카테고리 별 리스트 페이지 
+        path: "/menu/:category",
+        element: <MenuMoreListsPage />
       },
-      {
-        path: "/tech-notes",
-        element: <TechNotes />
-      },
-      {
-        path: "/deepdives",
-        element: <DeepDives />
-      },
-      {
-        path: "/thoughts",
-        element: <Thoughts />
-      },
+    
       {
         path: "/tech-notes/:id",
         element: <TechNotesDetail />
