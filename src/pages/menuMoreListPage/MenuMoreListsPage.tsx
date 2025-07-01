@@ -13,6 +13,8 @@ export const MenuMoreListsPage = () => {
         <h1 className="title">{title}</h1>
         <p>{desc}</p>
       </header>
+
+      {/* posts list */}
       {component}
     </main>
   );
