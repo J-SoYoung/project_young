@@ -35,8 +35,11 @@ export const Layout = () => {
 
       <footer className={styles.footer}>
         <div>
-          <a href="#">RSS feed</a> · <a href="https://github.com">GitHub</a> ·{" "}
-          <a href="#">Buy me a coffee</a>
+          <a href="#">RSS feed</a> ·{" "}
+          <a href="https://github.com" target="_blank">
+            GitHub
+          </a>{" "}
+          · <a href="#">Buy me a coffee</a>
         </div>
         <p>© 2025 DEV.SoYoung. All rights reserved.</p>
       </footer>
