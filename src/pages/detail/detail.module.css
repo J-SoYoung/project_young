@@ -31,8 +31,29 @@
 }
 
 /* 글 내용 */
+/* 마크다운으로 write가능한가 */
+.postContent {
+  padding: 3rem 0;
+  box-sizing: border-box;
+}
+.postContent h3 {
+  margin-bottom: 1rem;
+}
 .postContent p {
   line-height: var(--line-height-posts);
   font-size: var(--font-size-base);
   margin-bottom: 1.5rem;
+}
+
+/* feedback box */
+.insightSection{
+  padding: 2rem 0 ;
+  box-sizing: border-box;
+  text-align: center;
+}
+.insightSection h4{
+  margin-bottom: 1rem;
+}
+.feedbackButtons button{
+  margin: 1rem;
 }
