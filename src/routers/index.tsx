@@ -11,11 +11,8 @@ import {
   EditPosts,
   Search,
   Write,
-  TechNotesDetail,
-  ThoughtsDetail,
-  DeepDivesDetail,
-  PortfolioDetail,
-  MenuMoreListsPage
+  MenuMoreListsPage,
+  Detail
 } from "../pages";
 
 const router = createBrowserRouter([
@@ -47,27 +44,10 @@ const router = createBrowserRouter([
         path: "/menu/:category",
         element: <MenuMoreListsPage />
       },
-    
-      {
-        path: "/tech-notes/:id",
-        element: <TechNotesDetail />
+      { // 카테고리 별 상세 페이지 
+        path: "/detail/:category/:id",
+        element: <Detail />
       },
-      {
-        path: "/thoughts/:id",
-        element: <ThoughtsDetail />
-      },
-      {
-        path: "/deep-dives/:id",
-        element: <DeepDivesDetail />
-      },
-      {
-        path: "/portfolio/:id",
-        element: <PortfolioDetail />
-      }
-      // {
-      //   path: "/:menu/:id",
-      //   element: <Posts />
-      // }
     ]
   }
 ]);
