@@ -1,18 +1,9 @@
 import { Link } from "react-router-dom";
 import styles from "../styles/listsStyle.module.css";
+import { Post } from "../types/posts";
 
-type Props = {
-  posts: {
-    id: string;
-    date: string;
-    title: string;
-    description: string;
-    githublink: string;
-    link: string;
-  }[];
-};
 
-export const ListsPortfolio = ({ posts }: Props) => {
+export const ListsPortfolio = ({ posts }: { posts: Post[] }) => {
   return (
     <ul className={styles.portfolioList}>
       {posts.map((post) => (
@@ -25,7 +16,7 @@ export const ListsPortfolio = ({ posts }: Props) => {
           <a href={post.githublink} target="_blank">
             github
           </a>
-          <Link to={post.link}> 포트폴리오 더보기 </Link>
+          <Link  to={`/detail/${post.category}/${post.id}`}> 포트폴리오 더보기 </Link>
         </li>
       ))}
     </ul>

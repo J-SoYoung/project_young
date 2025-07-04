@@ -1,24 +1,15 @@
 import { Link } from "react-router-dom";
-import styles from "../styles/listsStyle.module.css"
+import styles from "../styles/listsStyle.module.css";
+import { Post } from "../types/posts";
 
-type Props = {
-  posts: {
-    id: string;
-    date: string;
-    title: string;
-    link: string;
-    imageSrc: string;
-    imageDesc: string;
-  }[];
-};
 
-export const ListsDeepDive = ({ posts }: Props) => {
+export const ListsDeepDive = ({ posts }: { posts: Post[] }) => {
   return (
     <ul className={styles.deepdivesList}>
       {posts.map((post) => (
         <li key={post.id}>
-          <Link to={post.link}>
-            <img src={post.imageSrc} alt={post.imageDesc} />
+          <Link to={`/detail/${post.category}/${post.id}`}>
+            <img src={post.imageSrc} alt={post.title} />
             <span>{post.title}</span>
           </Link>
         </li>

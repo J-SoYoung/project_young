@@ -1,48 +1,39 @@
+import { useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+
 import { FaHeart } from "react-icons/fa6";
 // import { FaRegHeart } from "react-icons/fa6";
 
 import styles from "./detail.module.css";
-import { useParams } from "react-router-dom";
-import { deepdives, portfolio, techNotes, thoughts } from "../home/exampleData";
+import { getPostById } from "../../shared/apis/posts";
+import { Post } from "../../shared/types/posts";
 
-type PostData = {
-  author: string;
-  authorProfile: string;
-  id: string;
-  date: string;
-  title: string;
-  link: string;
-  content: string;
-  imageSrc?: string;
-  imageDesc?: string;
-  description?: string;
-  githublink?: string;
-};
 
 export const Detail = () => {
   const { category, id } = useParams();
 
-  const getPostFromCategory = (category: string | undefined): PostData[] => {
-    switch (category) {
-      case "tech-notes":
-        return techNotes;
-      case "thoughts":
-        return thoughts;
-      case "deepdives":
-        return deepdives;
-      case "portfolio":
-        return portfolio;
-      default:
-        return [];
-    }
-  };
-  const postList = getPostFromCategory(category);
-  const post = postList.find((item) => item.id === id);
+  const [post, setPost] = useState<Post | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      if (!category || !id) return alert("잘못된 요청입니다");
+      const data = await getPostById(category, id);
+      setPost(data);
+      setLoading(false);
+    };
+    fetchData();
+  }, [category, id]);
+
+  if (loading) return <p> 로딩중 ... </p>;
+  if (!post) return <p>포스트를 찾을 수 없습니다</p>;
+
+  const { title, author, authorProfile, date, content } = post;
+
 
   if (!post) {
     return <p>포스트를 찾을 수 없습니다.</p>;
   }
-  const { title, author, authorProfile, date, content } = post;
 
   return (
     <main className={styles.postDetailContainer}>
