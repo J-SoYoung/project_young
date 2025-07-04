@@ -1,26 +1,32 @@
 import { Link } from "react-router-dom";
 import styles from "../styles/section.module.css";
 
-import { ListsDeepDive, ListsNote, ListsPortfolio } from "../../../shared/components";
-import { deepdives, portfolio, techNotes, thoughts } from "../exampleData";
+import {
+  ListsDeepDive,
+  ListsNote,
+  ListsPortfolio
+} from "../../../shared/components";
+
+import { Post } from "../../../shared/types/posts";
 
 type Props = {
   title: string;
   moreToLink: string;
   description: string;
+  posts: Post[];
 };
 
-export const Section = ({ title, moreToLink, description }: Props) => {
+export const Section = ({ title, moreToLink, description, posts }: Props) => {
   const renderPosts = () => {
     switch (title) {
       case "Tech Notes":
-        return <ListsNote posts={techNotes} />;
+        return <ListsNote posts={posts} />;
       case "Thoughts":
-        return <ListsNote posts={thoughts} />;
+        return <ListsNote posts={posts} />;
       case "Deep Dives":
-        return <ListsDeepDive posts={deepdives} />;
+        return <ListsDeepDive posts={posts} />;
       case "Portfolio":
-        return <ListsPortfolio posts={portfolio} />;
+        return <ListsPortfolio posts={posts} />;
       default:
         return null;
     }
