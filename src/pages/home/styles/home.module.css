@@ -1,0 +1,13 @@
+/* Greeting */
+.greeting {
+  margin-bottom: 2rem;
+}
+.greeting h1 {
+  font-size: 1.75rem;
+  margin-bottom: 1.5rem;
+  line-height: 1.5;
+}
+.greeting p {
+  padding: 1.5rem 0;
+  box-sizing: border-box;
+}

@@ -1,5 +1,4 @@
 import { useLocation } from "react-router-dom";
-import { PostLists } from "../../shared/components";
 import styles from "./search.module.css";
 
 export const Search = () => {
@@ -13,7 +12,7 @@ export const Search = () => {
         <h2>'{query}' 의 게시글 결과입니다.</h2>
         <p>총 10개의 게시글이 검색되었습니다</p>
       </div>
-      <PostLists />
+      <></>
     </>
   );
 };

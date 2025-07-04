@@ -5,13 +5,20 @@ import {
 } from "react-router-dom";
 
 import "../index.css";
-import { GlobalLayout } from "../shared/Layout/GlobalLayout";
-import { Home, EditPosts, Lists, Posts, Search, Write } from "../pages";
+import { Layout } from "../shared/Layout";
+import {
+  Home,
+  EditPosts,
+  Search,
+  Write,
+  MenuMoreListsPage,
+  Detail
+} from "../pages";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <GlobalLayout />,
+    element: <Layout />,
     children: [
       {
         index: true, // path 없이 루트 경로를 의미
@@ -33,18 +40,14 @@ const router = createBrowserRouter([
         path: "/edit/:id",
         element: <EditPosts />
       },
-      {
-        path: "/posts/:id",
-        element: <Posts />
+      { // 카테고리 별 리스트 페이지 
+        path: "/menu/:category",
+        element: <MenuMoreListsPage />
       },
-      {
-        path: "/list/:keyword",
-        element: <Lists />
+      { // 카테고리 별 상세 페이지 
+        path: "/detail/:category/:id",
+        element: <Detail />
       },
-      {
-        path: "/postTags/:keyword",
-        element: <Lists />
-      }
     ]
   }
 ]);
