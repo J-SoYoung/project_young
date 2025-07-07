@@ -5,17 +5,32 @@ export type Category =
   | "portfolio"
   | "";
 
-export interface Post {
-  id?: string; // Firestore 문서 ID
+export type BasePost = {
   author: string;
   authorProfile: string;
-  category: Category;
-  content: string;
   date: string;
-  imageSrc: string;
-  link: string;
+  category: Category;
   title: string;
-  // portfolio 전용 필드
-  githublink?: string;
+  content: string;
+  imageSrc: string;
+};
+
+export type FormState = {
+  category: Category;
+  title: string;
+  content: string;
+  imageSrc: string;
   description?: string;
-}
+  githublink?: string;
+};
+
+export type PortfolioPost = BasePost & {
+  description: string;
+  githublink: string;
+};
+
+export type Post = BasePost | PortfolioPost;
+
+export type PostWithId = Post & {
+  id: string;
+};
