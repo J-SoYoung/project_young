@@ -1,23 +1,24 @@
 // Add Posts
-import { collection, query, where, getDocs } from "firebase/firestore";
-import { Post } from "../types/posts";
+import {
+  collection,
+  query,
+  where,
+  getDocs,
+  addDoc,
+  setDoc
+} from "firebase/firestore";
+
 import { db } from "../service/firebase";
+import { Post, PostWithId } from "../../pages/write/types";
 
-// export const addPost = async (post: Omit<Post, "id" | "createdAt">) => {
-//   try {
-//     const docRef =
-//   } catch (error) {}
-// };
-
-// Get Posts // 카테고리 리스트 
+// Get Posts // 카테고리 리스트
 export const getPostsByCategory = async (category: string) => {
   const q = query(collection(db, "posts"), where("category", "==", category));
   const snapshot = await getDocs(q);
-  const posts: Post[] = snapshot.docs.map((doc) => ({
-    id: doc.id,
-    ...(doc.data() as Omit<Post, "id">)
-  }));
-  return posts;
+  return snapshot.docs.map((doc) => ({
+    ...doc.data(),
+    id: doc.id
+  })) as PostWithId[];
 };
 
 // Get Post // 상세페이지 게시글
@@ -29,11 +30,24 @@ export const getPostById = async (category: string, id: string) => {
   );
 
   const snapshot = await getDocs(q);
+
   if (snapshot.empty) return null;
   const doc = snapshot.docs[0];
 
   return {
-    id: doc.id,
-    ...(doc.data() as Omit<Post, "id">)
-  };
+    ...doc.data(),
+    id: doc.id
+  } as PostWithId;
+};
+
+export const addPost = async (post: Post) => {
+  try {
+    const docRef = await addDoc(collection(db, "posts"), post);
+    await setDoc(docRef, { ...post, id: docRef.id }); 
+    console.log("Document written with ID: ", docRef.id);
+    return docRef.id as string;
+  } catch (error) {
+    console.error("Error adding document: ", error);
+    throw error;
+  }
 };
