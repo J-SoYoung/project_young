@@ -6,13 +6,12 @@ import { FaHeart } from "react-icons/fa6";
 
 import styles from "./detail.module.css";
 import { getPostById } from "../../shared/apis/posts";
-import { Post } from "../../shared/types/posts";
-
+import { PostWithId } from "../../shared/types/posts";
 
 export const Detail = () => {
   const { category, id } = useParams();
 
-  const [post, setPost] = useState<Post | null>(null);
+  const [post, setPost] = useState<PostWithId | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -29,7 +28,6 @@ export const Detail = () => {
   if (!post) return <p>포스트를 찾을 수 없습니다</p>;
 
   const { title, author, authorProfile, date, content } = post;
-
 
   if (!post) {
     return <p>포스트를 찾을 수 없습니다.</p>;
