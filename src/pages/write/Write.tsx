@@ -1,35 +1,13 @@
 import { useState } from "react";
 import styles from "./write.module.css";
-
-type Category = "tech-notes" | "thoughts" | "deepdives" | "portfolio" | "";
-
-type BasePost = {
-  author: string;
-  authorProfile: string;
-  date: string;
-  category: Category;
-  title: string;
-  content: string;
-  imageSrc: string;
-};
-
-type PortfolioPost = BasePost & {
-  description: string;
-  githublink: string;
-};
-
-type Post = BasePost | PortfolioPost;
-
-type FormState = {
-  category: Category;
-  title: string;
-  content: string;
-  imageSrc: string;
-  description?: string;
-  githublink?: string;
-};
+import { FormState, Post } from "../../shared/types/posts";
+import { getTodayDate } from "./utils";
+import { addPost } from "../../shared/apis/posts";
+import { useNavigate } from "react-router-dom";
 
 export const Write = () => {
+  const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(false);
   const [formState, setFormState] = useState<FormState>({
     category: "",
     title: "",
@@ -66,17 +44,9 @@ export const Write = () => {
     }
   };
 
-  // 날짜 형식
-  const getTodayDate = () => {
-    const today = new Date();
-    const yyyy = today.getFullYear();
-    const mm = String(today.getMonth() + 1).padStart(2, "0");
-    const dd = String(today.getDate()).padStart(2, "0");
-    return `${yyyy}-${mm}-${dd}`;
-  };
-
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setIsLoading(true);
 
     const basePost = {
       author: "SoYoung",
@@ -98,9 +68,22 @@ export const Write = () => {
       };
     }
 
+    try {
+      const postId = await addPost(finalPost);
+      navigate(`/detail/${finalPost.category}/${postId}`);
+    } catch (error) {
+      console.log(error);
+      alert("글 작성 중 오류가 발생했습니다");
+      setIsLoading(false);
+    }
+
     console.log("제출할 데이터:", finalPost);
     // Firebase 연동 or API 요청 가능
   };
+
+  if (isLoading) {
+    return <p>글 작성 중입니다</p>;
+  }
 
   return (
     <main>
@@ -127,7 +110,6 @@ export const Write = () => {
           onChange={handleChange}
           placeholder="제목을 입력하세요"
           className={styles.input}
-          // className={styles.titleInput}
           required
         />
         <div className={styles.imageBox}>
