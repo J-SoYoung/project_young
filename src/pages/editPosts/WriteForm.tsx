@@ -1,22 +1,41 @@
-import { useState } from "react";
-import styles from "./write.module.css";
-import { FormState, Post } from "../../shared/types/posts";
-import { getTodayDate } from "./utils";
-import { addPost } from "../../shared/apis/posts";
+import { useEffect, useState } from "react";
+import { FormState, PostWithId } from "../../shared/types/posts";
+import styles from "./writeForm.module.css";
+import { updatePost } from "../../shared/apis/posts";
 import { useNavigate } from "react-router-dom";
 
-export const Write = () => {
+type Props = {
+  title: string;
+  initialData: PostWithId;
+  buttonText: string;
+  // onSubmit: () => void;
+};
+export const WriteForm = ({ title, initialData, buttonText }: Props) => {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
   const [formState, setFormState] = useState<FormState>({
-    category: "",
     title: "",
     content: "",
     imageSrc: "",
     description: "",
-    githublink: ""
+    githublink: "",
+    category: ""
   });
 
+  useEffect(() => {
+    if (initialData) {
+      setFormState({
+        title: initialData.title || "",
+        content: initialData.content || "",
+        imageSrc: initialData.imageSrc || "",
+        description: initialData.description || "",
+        githublink: initialData.githublink || "",
+        category: initialData.category || ""
+      });
+    }
+  }, [initialData]);
+
+  const handleImageUpload = () => {};
   const handleChange = (
     e:
       | React.ChangeEvent<HTMLInputElement>
@@ -30,64 +49,49 @@ export const Write = () => {
     }));
   };
 
-  const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setFormState((prev) => ({
-          ...prev,
-          imageSrc: reader.result as string
-        }));
-      };
-      reader.readAsDataURL(file);
-    }
-  };
-
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsLoading(true);
 
     const basePost = {
-      author: "SoYoung",
-      authorProfile: "https://placehold.co/50x50", // 필요에 따라 정적 이미지 경로
-      date: getTodayDate(),
-      category: formState.category,
-      title: formState.title,
-      content: formState.content,
-      imageSrc: formState.imageSrc
+      author: initialData.author,
+      authorProfile: initialData.authorProfile,
+      date: initialData.date,
+      category: formState.category ?? initialData.category,
+      title: formState.title ?? initialData.title,
+      content: formState.content ?? initialData.content,
+      imageSrc: formState.imageSrc ?? initialData.imageSrc
     };
 
-    let finalPost: Post = { ...basePost };
+    let finalPost = {
+      ...basePost,
+      id: initialData.id
+    };
 
     if (formState.category === "portfolio") {
       finalPost = {
         ...finalPost,
-        description: formState.description,
-        githublink: formState.githublink
+        description: formState.description ?? initialData.description,
+        githublink: formState.githublink ?? initialData.githublink
       };
     }
 
     try {
-      const postId = await addPost(finalPost);
-      navigate(`/detail/${finalPost.category}/${postId}`);
+      await updatePost(finalPost);
+      alert("수정이 완료되었습니다!");
+      navigate(`/detail/${finalPost.category}/${finalPost.id}`);
     } catch (error) {
       console.log(error);
-      alert("글 작성 중 오류가 발생했습니다");
+      alert("글 수정 중 오류가 발생했습니다");
       setIsLoading(false);
     }
-
-    console.log("제출할 데이터:", finalPost);
-    // Firebase 연동 or API 요청 가능
   };
 
-  if (isLoading) {
-    return <p>글 작성 중입니다</p>;
-  }
+  if (isLoading) return <p> 포스트를 수정하고 있습니다 ... </p>;
 
   return (
-    <main>
-      <h1>글 작성</h1>
+    <section>
+      <h1>{title}</h1>
       <form className={styles.form} onSubmit={handleSubmit}>
         <select
           name="category"
@@ -158,9 +162,9 @@ export const Write = () => {
         )}
 
         <button type="submit" className={styles.submitButton}>
-          글 작성
+          {buttonText}
         </button>
       </form>
-    </main>
+    </section>
   );
 };
