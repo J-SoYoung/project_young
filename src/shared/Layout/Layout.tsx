@@ -2,8 +2,8 @@ import { Link, Outlet, useNavigate } from "react-router-dom";
 import { AiOutlineMenu } from "react-icons/ai";
 import { IoLogoGithub } from "react-icons/io";
 import { MdDarkMode } from "react-icons/md";
-import { LuPencil } from "react-icons/lu";
 // import { MdOutlineDarkMode } from "react-icons/md";
+import { PiNotePencilDuotone } from "react-icons/pi";
 
 import styles from "./layout.module.css";
 import { ScrollToTop } from "../components";
@@ -19,8 +19,8 @@ export const Layout = () => {
           <Link to="/">DEV.SoYoung</Link>
         </div>
         <nav className={styles.nav}>
-          <LuPencil
-            size={25}
+          <PiNotePencilDuotone
+            size={27}
             onClick={() => navigate(`/write`)}
             className={styles.icons}
           />
