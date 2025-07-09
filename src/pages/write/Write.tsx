@@ -1,9 +1,11 @@
 import { useState } from "react";
-import styles from "./write.module.css";
-import { FormState, Post } from "../../shared/types/posts";
-import { getTodayDate } from "./utils";
-import { addPost } from "../../shared/apis/posts";
 import { useNavigate } from "react-router-dom";
+import { MdOutlineEditNote } from "react-icons/md";
+
+import styles from "./write.module.css";
+import { getTodayDate } from "./utils";
+import { FormState, Post } from "../../shared/types/posts";
+import { addPost } from "../../shared/apis/posts";
 
 export const Write = () => {
   const navigate = useNavigate();
@@ -82,7 +84,12 @@ export const Write = () => {
   };
 
   if (isLoading) {
-    return <p>글 작성 중입니다</p>;
+    return (
+      <div className={styles.loaderContainer}>
+        <MdOutlineEditNote className={styles.iconWrapper} />
+        <p className={styles.message}>글 작성 중입니다...</p>
+      </div>
+    );
   }
 
   return (
