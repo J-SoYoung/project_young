@@ -37,7 +37,7 @@ const router = createBrowserRouter([
         element: <Write />
       },
       {
-        path: "/edit/:id",
+        path: "/edit/:category/:id",
         element: <EditPosts />
       },
       { // 카테고리 별 리스트 페이지 
