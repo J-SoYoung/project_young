@@ -1,6 +1,7 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 
+import { LuPencil } from "react-icons/lu";
 import { FaHeart } from "react-icons/fa6";
 // import { FaRegHeart } from "react-icons/fa6";
 
@@ -9,6 +10,7 @@ import { getPostById } from "../../shared/apis/posts";
 import { PostWithId } from "../../shared/types/posts";
 
 export const Detail = () => {
+  const navigate = useNavigate();
   const { category, id } = useParams();
 
   const [post, setPost] = useState<PostWithId | null>(null);
@@ -35,7 +37,16 @@ export const Detail = () => {
 
   return (
     <main className={styles.postDetailContainer}>
-      <h1 className={styles.postTitle}>{title}</h1>
+      <div className={styles.postTitleBox}>
+        <h1 className={styles.postTitle}>{title}</h1>
+        <LuPencil
+          size={20}
+          className={styles.icons}
+          onClick={() => {
+            navigate(`/edit/${category}/${id}`);
+          }}
+        />
+      </div>
 
       {/* 작성자, 날짜, 좋아요 */}
       <div className={styles.postMeta}>

@@ -1,9 +1,15 @@
+.postTitleBox{
+  display: flex;
+  align-items: center;
+}
 .postTitle {
   font-size: var(--font-size-Main-tablet);
   font-weight: 700;
-  margin: 1rem 0;
+  margin: 1rem 1rem 1rem 0;
 }
-
+.icons{
+  cursor: pointer;
+}
 /* 작성자, 날짜, 좋아요 */
 .postMeta {
   display: flex;
