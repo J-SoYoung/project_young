@@ -11,8 +11,13 @@
       "@/*": ["src/*"],
       "@/pages/*": ["src/pages/*"],
       "@/routers/*": ["src/routers/*"],
+      "@/assets/*": ["src/assets/*"],
+      "@/shared/apis/*": ["src/shared/apis/*"],
       "@/shared/components/*": ["src/shared/components/*"],
       "@/shared/hooks/*": ["src/shared/hooks/*"],
+      "@/shared/service/*": ["src/shared/service/*"],
+      "@/shared/types/*": ["src/shared/types/*"],
+      "@/shared/utils/*": ["src/shared/utils/*"]
     }
   }
 }
