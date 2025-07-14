@@ -5,16 +5,6 @@ export type Category =
   | "portfolio"
   | "";
 
-export type BasePost = {
-  author: string;
-  authorProfile: string;
-  date: string;
-  category: Category;
-  title: string;
-  content: string;
-  imageSrc: string;
-};
-
 export type FormState = {
   category: Category;
   title: string;
@@ -24,13 +14,15 @@ export type FormState = {
   githublink?: string;
 };
 
-export type PortfolioPost = BasePost & {
-  description: string;
-  githublink: string;
-};
-
-export type Post = BasePost | PortfolioPost;
-
-export type PostWithId = Post & {
-  id: string;
+export type Post = {
+  id?: string;
+  author: string;
+  authorProfile: string;
+  category: Category;
+  content: string;
+  date: string;
+  imageSrc: string;
+  title: string;
+  githublink?: string;
+  description?: string;
 };
