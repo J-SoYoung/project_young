@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getPostById } from "../../shared/apis/posts";
-import { PostWithId } from "../../shared/types/posts";
-import { WriteForm } from "./WriteForm";
+import { Post } from "../../shared/types/posts";
+import { WriteForm } from "../../shared/components";
 
 export const EditPosts = () => {
   const { category, id } = useParams<{ category: string; id: string }>();
 
-  const [initialData, setInitialData] = useState<PostWithId | null>(null);
+  const [initialData, setInitialData] = useState<Post | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -26,9 +26,10 @@ export const EditPosts = () => {
   return (
     <main>
       <WriteForm
+        mode={"edit"}
         title={"Edit Posts"}
         initialData={initialData}
-        buttonText = {'글 수정'}
+        buttonText={"글 수정"}
       />
     </main>
   );
