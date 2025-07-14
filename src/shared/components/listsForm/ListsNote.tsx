@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
-import styles from "../styles/listsStyle.module.css";
-import { Post } from "../types/posts";
+import styles from "./listsStyle.module.css";
+import { Post } from "../../types/posts";
 
 export const ListsNote = ({ posts }: { posts: Post[] }) => {
   return (
