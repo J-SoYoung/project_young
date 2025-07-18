@@ -7,13 +7,13 @@ import { FaHeart } from "react-icons/fa6";
 
 import styles from "./detail.module.css";
 import { getPostById } from "../../shared/apis/posts";
-import { PostWithId } from "../../shared/types/posts";
+import { Post } from "../../shared/types/posts";
 
 export const Detail = () => {
   const navigate = useNavigate();
   const { category, id } = useParams();
 
-  const [post, setPost] = useState<PostWithId | null>(null);
+  const [post, setPost] = useState<Post | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -38,7 +38,7 @@ export const Detail = () => {
   return (
     <main className={styles.postDetailContainer}>
       <div className={styles.postTitleBox}>
-        <h1 className={styles.postTitle}>{title}</h1>
+        <h1>{title}</h1>
         <LuPencil
           size={20}
           className={styles.icons}
