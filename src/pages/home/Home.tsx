@@ -32,20 +32,25 @@ export const Home = () => {
   return (
     <main className={styles.main}>
       <Gretting />
-      <Section
-        title={"Tech Notes"}
-        moreToLink={"/menu/tech-notes"}
-        description={
-          "프로그래밍 기술 팁, 트러블 슈팅 등의 메모를 작성한 글입니다"
-        }
-        posts={techNotes}
-      />
-      <Section
-        title={"Thoughts"}
-        moreToLink={"/menu/thoughts"}
-        description={"개발 및 프로젝트 등 대한 개인적인 생각을 정리한 글입니다"}
-        posts={thoughts}
-      />
+      <div className={styles.noteSection}>
+        <Section
+          title={"Tech Notes"}
+          moreToLink={"/menu/tech-notes"}
+          description={
+            "개발 관련 기술 노트입니다"
+          }
+          posts={techNotes}
+        />
+        <Section
+          title={"Thoughts"}
+          moreToLink={"/menu/thoughts"}
+          description={
+            "개발 / 일상적인 생각을 정리한 글입니다"
+          }
+          posts={thoughts}
+        />
+      </div>
+
       <Section
         title={"Deep Dives"}
         moreToLink={"/menu/deepdives"}

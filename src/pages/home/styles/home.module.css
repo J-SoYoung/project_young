@@ -1,15 +1,15 @@
 /* 800px이상부터 style변경 */
-@media (min-width: 800px){
-.main {
+@media (min-width: 800px) {
+  .main {
     max-width: 720px;
     margin: 2rem auto;
   }
 }
 
-@media (min-width: 481px) and (max-width: 1279px) {
-  
-}
-
-/* Desktop: 1280px 이상 */
-@media (min-width: 1280px) {
+/* Desktop: 1200px 이상 */
+@media (min-width: 1200px) {
+  .noteSection {
+    display: flex;
+    gap: 2rem;
+  }
 }
