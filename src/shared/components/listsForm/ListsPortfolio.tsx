@@ -8,17 +8,16 @@ export const ListsPortfolio = ({ posts }: { posts: Post[] }) => {
       {posts.map((post) => (
         <li key={post.id}>
           <time>{post.date}</time>
-          <div>
-            <strong>{post.title}</strong>
-          </div>
+          <strong>{post.title}</strong>
           <p>{post.description}</p>
-          <a href={post.githublink} target="_blank">
-            github
-          </a>
-          <Link to={`/detail/${post.category}/${post.id}`}>
-            {" "}
-            포트폴리오 더보기{" "}
-          </Link>
+          <div className={styles.portfolioLinks}>
+            <a href={post.githublink} target="_blank">
+              github
+            </a>
+            <Link to={`/detail/${post.category}/${post.id}`}>
+              포트폴리오 더보기
+            </Link>
+          </div>
         </li>
       ))}
     </ul>
