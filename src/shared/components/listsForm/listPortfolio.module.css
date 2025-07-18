@@ -2,8 +2,6 @@
 .portfolioList {
   display: flex;
   flex-direction: column;
-  padding: 0;
-  box-sizing: border-box;
   gap: 1rem;
 }
 .portfolioList li {
@@ -61,7 +59,7 @@
     gap: 1rem;
   }
   .portfolioList li {
-    width: 43%;
+    width: 48%;
     margin: 0;
   }
 }
