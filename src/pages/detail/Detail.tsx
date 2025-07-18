@@ -36,7 +36,7 @@ export const Detail = () => {
   }
 
   return (
-    <main className={styles.postDetailContainer}>
+    <main className={styles.main}>
       <div className={styles.postTitleBox}>
         <h1>{title}</h1>
         <LuPencil

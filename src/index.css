@@ -8,17 +8,18 @@
   /* Color Palette */
   --color-primary: #f9c416;
   --color-primary-dark: #daa701;
-  --color-primary-light: #faecae;
+  --color-primary-light: #fff9dd;
   --color-primary-accent: #fbde3c;
   --color-primary-bg: #fefefe;
 
   --color-white: #ffffff;
   --color-background: #fefefe;
-  --color-title:#daa701;
+  --color-content-bg: #fffbe9;
+  --color-title: #e2ae02;
   --color-text: #272623;
   --color-muted: #6d6c6a;
   --color-border: #e7dbc9;
-  
+
   /* --color-primary: #f97316;
   --color-primary-dark: #ea580c;
   --color-primary-light: #fdba74;
@@ -148,7 +149,7 @@ button {
 }
 
 /* Tablet: 481px ~ 1279px */
-@media (min-width: 481px) and (max-width: 1279px) {
+@media (min-width: 481px) and (max-width: 1199px) {
   :root {
     --font-size-base: 0.95rem; /* ~15.2px */
     --font-size-h1: 1.75rem; /* ~28px */
@@ -157,12 +158,20 @@ button {
   }
 }
 
-/* Desktop: 1280px 이상 */
-@media (min-width: 1280px) {
+/* Desktop: 1200px 이상 */
+@media (min-width: 1200px) {
   :root {
     --font-size-base: 1rem; /* 16px */
     --font-size-h1: 2rem; /* ~32px */
     --font-size-h2: 1.75rem; /* ~28px */
     --font-size-h3: 1.5rem; /* ~24px */
+  }
+}
+
+/* 800px이상부터 main width고정 */
+@media (min-width: 800px) {
+  main {
+    max-width: 720px;
+    margin: 2rem auto;
   }
 }

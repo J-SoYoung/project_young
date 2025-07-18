@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import styles from "./listsStyle.module.css";
+import styles from "./listPortfolio.module.css";
 import { Post } from "../../types/posts";
 
 export const ListsPortfolio = ({ posts }: { posts: Post[] }) => {
@@ -9,7 +9,7 @@ export const ListsPortfolio = ({ posts }: { posts: Post[] }) => {
         <li key={post.id}>
           <time>{post.date}</time>
           <strong>{post.title}</strong>
-          <p>{post.description}</p>
+          <p className={styles.description}>{post.description}</p>
           <div className={styles.portfolioLinks}>
             <a href={post.githublink} target="_blank">
               github
