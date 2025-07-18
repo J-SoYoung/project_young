@@ -6,18 +6,31 @@
   --layout-max-width: 1400px;
 
   /* Color Palette */
-  --color-primary: #f97316;
+  --color-primary: #f9c416;
+  --color-primary-dark: #daa701;
+  --color-primary-light: #faecae;
+  --color-primary-accent: #fbde3c;
+  --color-primary-bg: #fefefe;
+
+  --color-white: #ffffff;
+  --color-background: #fefefe;
+  --color-title:#daa701;
+  --color-text: #272623;
+  --color-muted: #6d6c6a;
+  --color-border: #e7dbc9;
+  
+  /* --color-primary: #f97316;
   --color-primary-dark: #ea580c;
   --color-primary-light: #fdba74;
   --color-primary-accent: #fb923c;
-  --color-primary-bg: #fff7ed;
+  --color-primary-bg: #fefefe;
 
   --color-white: #ffffff;
   --color-background: #fefefe;
   --color-title:#ea580c;
   --color-text: #272623;
   --color-muted: #6d6c6a;
-  --color-border: #e7dbc9;
+  --color-border: #e7dbc9; */
 
   --color-shadow: rgba(0, 0, 0, 0.05);
   --color-bg-dark: #0f172a;
@@ -128,7 +141,7 @@ button {
 @media (max-width: 480px) {
   :root {
     --font-size-base: 0.9rem; /* ~14.4px */
-    --font-size-h1: 1.75rem; /* ~28px */
+    --font-size-h1: 1.5rem; /* ~24px */
     --font-size-h2: 1.25rem; /* ~20px */
     --font-size-h3: 1rem; /* ~16px */
   }
@@ -138,7 +151,7 @@ button {
 @media (min-width: 481px) and (max-width: 1279px) {
   :root {
     --font-size-base: 0.95rem; /* ~15.2px */
-    --font-size-h1: 2rem; /* ~32px */
+    --font-size-h1: 1.75rem; /* ~28px */
     --font-size-h2: 1.5rem; /* ~24px */
     --font-size-h3: 1.25rem; /* ~20px */
   }
@@ -148,7 +161,7 @@ button {
 @media (min-width: 1280px) {
   :root {
     --font-size-base: 1rem; /* 16px */
-    --font-size-h1: 2.25rem; /* ~36px */
+    --font-size-h1: 2rem; /* ~32px */
     --font-size-h2: 1.75rem; /* ~28px */
     --font-size-h3: 1.5rem; /* ~24px */
   }

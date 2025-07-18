@@ -1,12 +1,15 @@
-/* Greeting */
-.greeting {
-  margin-bottom: 2rem;
+/* 800px이상부터 style변경 */
+@media (min-width: 800px){
+.main {
+    max-width: 720px;
+    margin: 2rem auto;
+  }
 }
-.greeting h1 {
-  margin-bottom: 1.5rem;
-  line-height: 1.5;
+
+@media (min-width: 481px) and (max-width: 1279px) {
+  
 }
-.greeting p {
-  padding: 1.5rem 0;
-  box-sizing: border-box;
+
+/* Desktop: 1280px 이상 */
+@media (min-width: 1280px) {
 }

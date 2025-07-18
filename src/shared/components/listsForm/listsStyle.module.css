@@ -9,7 +9,7 @@
   margin: 0;
   padding: 0.8rem 0;
   box-sizing: border-box;
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid var(--color-border);
 }
 .notesList time {
   font-size: 0.85rem;
@@ -35,7 +35,7 @@
   background: #fff;
   padding: 1rem;
   border-radius: 0.5rem;
-  border: 1px solid #ccc;
+  border: 1px solid var(--color-border);
   cursor: pointer;
 }
 .deepdivesList li a {
@@ -71,7 +71,7 @@
   background: #fff;
   padding: 1rem;
   border-radius: 0.5rem;
-  border: 1px solid #ccc;
+  border: 1px solid var(--color-border);
   list-style: none;
 }
 .portfolioList time {
@@ -87,7 +87,6 @@
   display: flex;
   gap: 1rem;
   margin-top: 1rem;
-  
 }
 .portfolioList a {
   padding: 0.25rem 0.8rem;
