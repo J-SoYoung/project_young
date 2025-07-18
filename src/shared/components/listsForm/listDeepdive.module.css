@@ -1,0 +1,51 @@
+/* DeepDives */
+.deepdivesList {
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  box-sizing: border-box;
+  gap: 1rem;
+}
+.deepdivesList li {
+  list-style: none;
+  padding: 1rem;
+  background: var(--color-content-bg);
+  border: 2px solid var(--color-border);
+  border-radius: 0.5rem;
+  cursor: pointer;
+}
+.deepdivesList li a {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+.deepdivesList li a img {
+  width: 50px;
+  height: 50px;
+  margin-right: 1rem;
+  border-radius: 0.25rem;
+}
+.deepdivesList li a strong {
+  color: var(--color-text);
+}
+.deepdivesList li:hover {
+  border: 2px solid var(--color-title);
+}
+.deepdivesList li:hover strong {
+  color: var(--color-title);
+}
+
+@media (min-width: 800px) {
+  .deepdivesList {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+  }
+  .deepdivesList li {
+    width: 43%;
+    margin: 0;
+  }
+}

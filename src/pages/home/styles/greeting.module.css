@@ -40,7 +40,7 @@
 }
 
 /* tablet 사이즈 둘로 나눠 styling */
-@media (min-width: 481px) and (max-width: 800px) {
+@media (min-width: 481px) and (max-width: 799px) {
   .greeting .profile {
     display: block;
     width: 170px;
@@ -50,7 +50,7 @@
   }
 }
 /* tablet ~ desktop */
-@media (min-width: 801px) {
+@media (min-width: 800px) {
   .greeting {
     padding: 1rem;
     box-sizing: border-box;

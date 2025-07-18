@@ -1,0 +1,23 @@
+/* Notes */
+.notesList {
+  padding: 0;
+  margin: 0;
+}
+.notesList li {
+  display: block;
+  margin-bottom: 1rem;
+  margin: 0;
+  padding: 0.8rem 0;
+  box-sizing: border-box;
+  border-bottom: 1px solid var(--color-border);
+}
+.notesList time {
+  font-size: 0.85rem;
+  color: var(--color-muted);
+  display: block;
+}
+.notesList a {
+  font-weight: bold;
+  text-decoration: none;
+  color: var(--color-title);
+}
