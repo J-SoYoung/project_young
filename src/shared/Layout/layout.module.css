@@ -2,13 +2,13 @@
 .header {
   position: sticky;
   top: 0;
-  background: #fff;
   padding: 1.25rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 1px solid #ccc;
-  z-index: 1000;
+  border-bottom: 2px solid var(--color-border);
+  background-color: var(--color-primary-bg);
+  z-index: 10;
 }
 .logo {
   font-weight: bold;
@@ -26,14 +26,10 @@
 .footer {
   padding: 2rem;
   text-align: center;
-  font-size: 0.9rem;
-  color: #666;
-  background: #f1f1f1;
+  border-top: 2px solid var(--color-border);
+  color: var(--color-muted);
 }
 
 .footer a {
-  color: #000;
-  margin: 0 0.3rem;
-  text-decoration: none;
-  font-weight: 500;
+  color: var(--color-muted);
 }
