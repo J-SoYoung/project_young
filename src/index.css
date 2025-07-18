@@ -167,3 +167,11 @@ button {
     --font-size-h3: 1.5rem; /* ~24px */
   }
 }
+
+/* 800px이상부터 main width고정 */
+@media (min-width: 800px) {
+  main {
+    max-width: 720px;
+    margin: 2rem auto;
+  }
+}

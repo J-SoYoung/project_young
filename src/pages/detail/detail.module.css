@@ -1,4 +1,4 @@
-.postTitleBox{
+.postTitleBox {
   display: flex;
   align-items: center;
 }
@@ -6,7 +6,7 @@
   font-weight: var(--weight-bold);
   margin: 1rem 1rem 1rem 0;
 }
-.icons{
+.icons {
   cursor: pointer;
 }
 /* 작성자, 날짜, 좋아요 */
@@ -23,6 +23,7 @@
   display: flex;
   justify-content: flex-start;
   align-items: center;
+  color: var(--color-muted);
 }
 .authorAvatar {
   width: 50px;
@@ -51,14 +52,14 @@
 }
 
 /* feedback box */
-.insightSection{
-  padding: 2rem 0 ;
+.insightSection {
+  padding: 2rem 0;
   box-sizing: border-box;
   text-align: center;
 }
-.insightSection h4{
+.insightSection h4 {
   margin-bottom: 1rem;
 }
-.feedbackButtons button{
+.feedbackButtons button {
   margin: 1rem;
 }
