@@ -20,19 +20,6 @@
   --color-muted: #6d6c6a;
   --color-border: #e7dbc9;
 
-  /* --color-primary: #f97316;
-  --color-primary-dark: #ea580c;
-  --color-primary-light: #fdba74;
-  --color-primary-accent: #fb923c;
-  --color-primary-bg: #fefefe;
-
-  --color-white: #ffffff;
-  --color-background: #fefefe;
-  --color-title:#ea580c;
-  --color-text: #272623;
-  --color-muted: #6d6c6a;
-  --color-border: #e7dbc9; */
-
   --color-shadow: rgba(0, 0, 0, 0.05);
   --color-bg-dark: #0f172a;
 
@@ -61,6 +48,23 @@
   /* Element Sizes */
   --button-height: 40px;
   --icon-size: 20px;
+}
+
+
+/* ===============================
+   Dark Mode Variables
+================================ */
+:root.dark {
+  --color-primary-bg: #1e293b;
+  --color-background: #0f172a;
+  --color-content-bg: #1f2937;
+
+  --color-title: #facc15;
+  --color-text: #e2e8f0;
+  --color-muted: #94a3b8;
+  --color-border: #334155;
+
+  --color-shadow: rgba(255, 255, 255, 0.05);
 }
 
 /* ===============================
@@ -175,3 +179,4 @@ button {
     margin: 2rem auto;
   }
 }
+
