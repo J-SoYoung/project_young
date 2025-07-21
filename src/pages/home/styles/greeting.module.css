@@ -56,12 +56,15 @@
     box-sizing: border-box;
     border: 5px solid var(--color-primary);
     border-radius: 1rem;
-    background-color: var(--color-white);
+    background-color: var(--color-background);
     display: flex;
     justify-content: space-between;
     align-items: center;
   }
-  .greeting .profileContainer{
+  .greeting .intro h1{
+    color: var(--color-title);
+  }
+  .greeting .profileContainer {
     display: flex;
     flex-direction: column;
     justify-content: center;
