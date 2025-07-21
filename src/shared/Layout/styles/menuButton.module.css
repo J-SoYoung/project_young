@@ -1,0 +1,12 @@
+.menuButton{
+  display: flex;
+  gap: 1.25rem;
+}
+.menuButton a{
+  display: flex;
+  align-items: center;
+}
+.menuButton a span{
+  display: block;
+  margin-left: 0.25rem;
+}

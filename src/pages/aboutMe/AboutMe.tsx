@@ -1,4 +1,4 @@
-import profile from "../../assets/m2.jpg";
+import profile from "../../assets/m.jpg";
 import styles from "./aboutMe.module.css";
 
 export const AboutMe = () => {

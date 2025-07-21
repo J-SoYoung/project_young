@@ -1,0 +1,13 @@
+/* header */
+
+/* footer */
+.footer {
+  padding: 2rem;
+  text-align: center;
+  border-top: 2px solid var(--color-border);
+  color: var(--color-muted);
+}
+
+.footer a {
+  color: var(--color-muted);
+}
