@@ -1,0 +1,39 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+}
+
+.modal {
+  background-color: var(--color-primary-bg);
+  padding: 2rem;
+  border-radius: 10px;
+  width: 80%;
+  max-width: 300px;
+  margin: 100px auto;
+  position: relative;
+}
+
+.closeButton {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+.menuList {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.menuList a {
+  color: var(--color-text);
+  font-weight: bold;
+  font-size: 1rem;
+  text-decoration: none;
+}
