@@ -5,9 +5,11 @@ import { LuPencil } from "react-icons/lu";
 import { FaHeart } from "react-icons/fa6";
 // import { FaRegHeart } from "react-icons/fa6";
 
-import styles from "./detail.module.css";
+import styles from "./styles/detail.module.css";
+import { CommentInput, CommentList } from "./components";
 import { getPostById } from "../../shared/apis/posts";
 import { Post } from "../../shared/types/posts";
+import { comments } from "../../shared/example";
 
 export const Detail = () => {
   const navigate = useNavigate();
@@ -75,14 +77,11 @@ export const Detail = () => {
         dangerouslySetInnerHTML={{ __html: content }}
       />
 
-      {/* feedback box */}
-      <section className={styles.insightSection}>
-        <h4>Did you find this insightful?</h4>
-        <div className={styles.feedbackButtons}>
-          <button>😐 Nope</button>
-          <button>🙂 Sort of</button>
-          <button>😍 Absolutely</button>
-        </div>
+      {/* comment box */}
+      <section className={styles.commentSection}>
+        <h4 className={styles.commentHeader}>댓글 0개</h4>
+        <CommentList comments={comments} />
+        <CommentInput />
       </section>
     </main>
   );

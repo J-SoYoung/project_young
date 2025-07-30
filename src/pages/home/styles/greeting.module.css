@@ -32,7 +32,7 @@
   background-color: var(--color-background);
   border: 1px solid var(--color-title);
   border-radius: 0.5rem;
-  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--box-shadow);
 }
 .aboutMe:hover {
   color: var(--color-white);
@@ -56,12 +56,15 @@
     box-sizing: border-box;
     border: 5px solid var(--color-primary);
     border-radius: 1rem;
-    background-color: var(--color-white);
+    background-color: var(--color-background);
     display: flex;
     justify-content: space-between;
     align-items: center;
   }
-  .greeting .profileContainer{
+  .greeting .intro h1 {
+    color: var(--color-title);
+  }
+  .greeting .profileContainer {
     display: flex;
     flex-direction: column;
     justify-content: center;

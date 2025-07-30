@@ -2,25 +2,32 @@ import { Link } from "react-router-dom";
 import { FcAnswers, FcIdea, FcCamera, FcComments } from "react-icons/fc";
 import styles from "./styles/menubutton.module.css";
 
-export const MenuButton = () => {
+type MenuButtonProps = {
+  menuType: "header" | "modal";
+  onClose?: () => void; // Optional for modal
+};
+
+export const MenuButton = ({ menuType, onClose }: MenuButtonProps) => {
   return (
-    <div className={styles.menuButton}>
-      <Link to={"/menu/tech-notes"}>
+    <nav
+      className={menuType === "modal" ? styles.menuModal : styles.menuButton}
+    >
+      <Link to={"/menu/tech-notes"} onClick={onClose}>
         <FcAnswers size={20} />
         <span>TechNote</span>
       </Link>
-      <Link to={"/menu/thoughts"}>
+      <Link to={"/menu/thoughts"} onClick={onClose}>
         <FcIdea size={20} />
         <span>Thought</span>
       </Link>
-      <Link to={"/menu/deepdives"}>
+      <Link to={"/menu/deepdives"} onClick={onClose}>
         <FcComments size={20} />
         <span>DeepDives</span>
       </Link>
-      <Link to={"/menu/portfolio"}>
+      <Link to={"/menu/portfolio"} onClick={onClose}>
         <FcCamera size={20} />
         <span>Portfolio</span>
       </Link>
-    </div>
+    </nav>
   );
 };

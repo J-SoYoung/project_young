@@ -1,12 +1,22 @@
-.menuButton{
+.menuButton {
   display: flex;
   gap: 1.25rem;
 }
-.menuButton a{
+.menuModal {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  justify-content: center;
+  align-items: flex-start;
+  padding-left: 6rem;
+  box-sizing: border-box;
+}
+
+nav a {
   display: flex;
   align-items: center;
 }
-.menuButton a span{
+nav span {
   display: block;
   margin-left: 0.25rem;
 }

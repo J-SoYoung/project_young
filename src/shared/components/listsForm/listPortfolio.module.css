@@ -42,7 +42,7 @@
   background-color: var(--color-background);
   border: 1px solid var(--color-title);
   border-radius: 0.5rem;
-  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--box-shadow);
 }
 .portfolioList a:hover {
   color: var(--color-white);
