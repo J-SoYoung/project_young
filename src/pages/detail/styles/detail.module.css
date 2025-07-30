@@ -17,7 +17,7 @@
   padding: 3rem 0 1rem 0;
   box-sizing: border-box;
   margin-bottom: 1rem;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid var(--color-title);
 }
 .authorInfo {
   display: flex;
@@ -51,15 +51,9 @@
   margin-bottom: 1.5rem;
 }
 
-/* feedback box */
-.insightSection {
-  padding: 2rem 0;
+/* comment */
+.commentSection {
+  padding: 1rem 0;
   box-sizing: border-box;
-  text-align: center;
-}
-.insightSection h4 {
-  margin-bottom: 1rem;
-}
-.feedbackButtons button {
-  margin: 1rem;
+  border-top: 1px solid var(--color-title);
 }
