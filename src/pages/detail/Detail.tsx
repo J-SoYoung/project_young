@@ -79,7 +79,7 @@ export const Detail = () => {
 
       {/* comment box */}
       <section className={styles.commentSection}>
-        <h4 className={styles.commentHeader}>댓글 0개</h4>
+        <h4 className={styles.commentHeader}>댓글 {comments.length}개</h4>
         <CommentList comments={comments} />
         <CommentInput />
       </section>
