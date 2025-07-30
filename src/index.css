@@ -20,7 +20,7 @@
   --color-muted: #6d6c6a;
   --color-border: #e7dbc9;
 
-  --color-shadow: rgba(0, 0, 0, 0.05);
+  --color-shadow: rgba(0, 0, 0, 0.1);
   --color-bg-dark: #0f172a;
 
   /* Typography - base (mobile first) */
@@ -48,8 +48,10 @@
   /* Element Sizes */
   --button-height: 40px;
   --icon-size: 20px;
-}
 
+  /* 기타 */
+  --box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.1);
+}
 
 /* ===============================
    Dark Mode Variables
@@ -179,4 +181,3 @@ button {
     margin: 2rem auto;
   }
 }
-
