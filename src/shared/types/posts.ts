@@ -25,4 +25,13 @@ export type Post = {
   title: string;
   githublink?: string;
   description?: string;
+  comments?: Comment[];
+};
+
+export type Comment = {
+  id?: string;
+  author: string;
+  content: string;
+  createdAt: string;
+  isOwner: boolean;
 };
