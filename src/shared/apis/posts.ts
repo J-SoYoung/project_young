@@ -7,11 +7,12 @@ import {
   addDoc,
   setDoc,
   updateDoc,
-  doc
+  doc,
+  deleteDoc
 } from "firebase/firestore";
 
 import { db } from "../service/firebase";
-import { PostWithId, Post } from "../types/posts";
+import { Post } from "../types/posts";
 
 // Get Posts // 카테고리 리스트
 export const getPostsByCategory = async (category: string) => {
@@ -20,29 +21,41 @@ export const getPostsByCategory = async (category: string) => {
   return snapshot.docs.map((doc) => ({
     ...doc.data(),
     id: doc.id
-  })) as PostWithId[];
+  })) as Post[];
 };
 
-// Get Post // 상세페이지 게시글
-export const getPostById = async (category: string, id: string) => {
-  const q = query(
+// Get Post // 상세페이지 게시글 가져오기
+export const getPostById = async (
+  category: string,
+  id: string
+): Promise<Post | null> => {
+  // post
+  const postQuery = query(
     collection(db, "posts"),
     where("category", "==", category),
     where("id", "==", id)
   );
 
-  const snapshot = await getDocs(q);
-  if (snapshot.empty) {
+  const postSnapshot = await getDocs(postQuery);
+  if (postSnapshot.empty) {
     return null;
   } else {
-    const doc = snapshot.docs[0];
-    return {
-      ...doc.data(),
-      id: doc.id
-    } as PostWithId;
+    const postDoc = postSnapshot.docs[0];
+    const postData = { ...postDoc.data(), id: postDoc.id };
+
+    // comment
+    const commentQuery = query(collection(db, "posts", id, "comments"));
+    const commentSnapshot = await getDocs(commentQuery);
+    const commentData: Comment[] = commentSnapshot.docs.map((doc) => ({
+      id: doc.id,
+      ...doc.data()
+    }));
+    console.log(commentData);
+    return { ...postData, comments: commentData };
   }
 };
 
+// 게시글 추가
 export const addPost = async (post: Post) => {
   try {
     const docRef = await addDoc(collection(db, "posts"), post);
@@ -55,13 +68,57 @@ export const addPost = async (post: Post) => {
   }
 };
 
-export const updatePost = async (post: PostWithId) => {
+// 게시글 수정
+export const updatePost = async (post: Post) => {
   try {
+    if (!post.id) {
+      return;
+    }
     const postRef = doc(db, "posts", post.id);
-    // const { id, ...postData } = post;
     await updateDoc(postRef, post);
   } catch (error) {
     console.error("Error updatePost document: ", error);
     throw error;
+  }
+};
+
+type AddCommentProps = {
+  postId: string;
+  newComment: {
+    id?: string;
+    author: string;
+    content: string;
+    createdAt: string;
+    isOwner: boolean;
+  };
+};
+
+// 댓글 작성
+export const addComment = async ({
+  postId,
+  newComment
+}: AddCommentProps): Promise<Comment> => {
+  console.log(postId, newComment);
+  try {
+    const docRef = await addDoc(collection(db, "posts", postId, "comments"), {
+      ...newComment
+    });
+    await setDoc(docRef, { ...newComment, id: docRef.id });
+    return { ...newComment, id: docRef.id };
+  } catch (error) {
+    console.error("Error adding comment: ", error);
+    throw error;
+  }
+};
+
+// 댓글 삭제
+export const deleteComment = async (postId: string, commentId: string) => {
+  console.log(postId, commentId);
+  try {
+    const commentRef = doc(db, "posts", postId, "comments", commentId);
+    await deleteDoc(commentRef);
+    console.log("댓글 삭제 완료:", commentId);
+  } catch (error) {
+    console.error(error);
   }
 };
