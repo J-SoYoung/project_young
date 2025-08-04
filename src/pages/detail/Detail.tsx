@@ -9,20 +9,22 @@ import styles from "./styles/detail.module.css";
 import { CommentInput, CommentList } from "./components";
 import { getPostById } from "../../shared/apis/posts";
 import { Post } from "../../shared/types/posts";
-import { comments } from "../../shared/example";
 
 export const Detail = () => {
   const navigate = useNavigate();
-  const { category, id } = useParams();
+  const { category, id } = useParams<string>();
 
   const [post, setPost] = useState<Post | null>(null);
+  const [comments, setComments] = useState<Comment[] | []>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
       if (!category || !id) return alert("잘못된 요청입니다");
-      const data = await getPostById(category, id);
-      setPost(data);
+      const postWithComments = await getPostById(category, id);
+      const { comments, ...postData } = postWithComments;
+      setPost(postData);
+      setComments(comments);
       setLoading(false);
     };
     fetchData();
@@ -79,9 +81,15 @@ export const Detail = () => {
 
       {/* comment box */}
       <section className={styles.commentSection}>
-        <h4 className={styles.commentHeader}>댓글 {comments.length}개</h4>
-        <CommentList comments={comments} />
-        <CommentInput />
+        <h4 className={styles.commentHeader}>
+          댓글 {comments ? comments.length : 0}개
+        </h4>
+        <CommentList
+          postId={id}
+          comments={comments ? comments : []}
+          setComments={setComments}
+        />
+        <CommentInput postId={id} />
       </section>
     </main>
   );
