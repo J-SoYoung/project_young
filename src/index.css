@@ -24,7 +24,8 @@
   --color-bg-dark: #0f172a;
 
   /* Typography - base (mobile first) */
-  --font-family-base: "Inter", system-ui, Avenir, Helvetica, Arial, sans-serif;
+  --font-family-base: "Pretendard-Regular", "Inter", system-ui, Avenir,
+    Helvetica, Arial, sans-serif;
   --font-size-base: 0.9rem; /* ≈ 14.4px */
   --font-size-h1: 1.75rem; /* ≈ 28px */
   --font-size-h2: 1.25rem; /* ≈ 20px */
@@ -72,6 +73,13 @@
 /* ===============================
    Reset & Base Styling
 ================================ */
+@font-face {
+  font-family: "Pretendard-Regular";
+  src: url("https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff")
+    format("woff");
+  font-weight: 400;
+  font-style: normal;
+}
 
 html {
   font-family: var(--font-family-base);
