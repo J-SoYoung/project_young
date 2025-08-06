@@ -9,6 +9,7 @@ import styles from "./styles/header.module.css";
 import { useDeviceType } from "../hooks";
 import { MenuButton } from "./Menubutton";
 import { MenuModal } from "./MenuModal";
+import { LoginForm } from "./LoginForm";
 
 export const Header = () => {
   const { isTablet, isDesktop } = useDeviceType();
@@ -64,6 +65,7 @@ export const Header = () => {
             />
           )}
 
+          <LoginForm />
           <Link to={"/write"}>
             <AiFillSignature size={27} className={styles.icons} />
           </Link>
