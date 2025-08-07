@@ -1,22 +1,14 @@
-import { useEffect, useState } from "react";
 import { logout, signInWithGoogle } from "../service/auth";
 import styles from "./styles/loginForm.module.css";
-import { useDeviceType } from "../hooks";
-import { useAuth } from "../service/authProvider";
+import { useAuth } from "../service/AauthProvider";
 
 export const LoginForm = () => {
   const { user } = useAuth();
-  const { isDesktop } = useDeviceType();
-  const [loginPopupType, setLoginPopupType] = useState(false);
-  useEffect(() => {
-    setLoginPopupType(isDesktop);
-  }, [isDesktop]);
-
   const handleGoogleLogin = async () => {
     try {
-      const user = await signInWithGoogle(loginPopupType);
-      if (user) {
-        alert(`환영합니다♥ ${user.displayName}님!`);
+      const userData = await signInWithGoogle();
+      if (userData) {
+        alert(`환영합니다♥ ${userData.displayName}님!`);
       }
     } catch (error) {
       console.log(error);
