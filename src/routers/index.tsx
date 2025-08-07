@@ -15,10 +15,6 @@ import {
   Detail,
   AboutMe
 } from "../pages";
-import { useEffect } from "react";
-import { getRedirectResult, onAuthStateChanged } from "firebase/auth";
-import { auth } from "../shared/service/firebase";
-import { AuthProvider } from "../shared/service/authProvider";
 
 const router = createBrowserRouter([
   {
@@ -64,35 +60,5 @@ const router = createBrowserRouter([
 ]);
 
 export default function Router() {
-  useEffect(() => {
-    const handleRedirectLogin = async () => {
-      try {
-        // Firebase Auth가 초기화 완료되었는지 확인
-        onAuthStateChanged(auth, async (user) => {
-          if (!user) {
-            const result = await getRedirectResult(auth);
-            if (result?.user) {
-              console.log("redirect로그인성공", result.user);
-              alert(`환영합니다!, ${result.user.displayName}`);
-            } else {
-              console.log("redirect결과없음");
-            }
-          } else {
-            // 이미 로그인 된 상태
-            console.log("로그인 된 사용자");
-          }
-        });
-      } catch (error) {
-        console.error("redirect 로그인 오류", error);
-      }
-    };
-
-    handleRedirectLogin();
-  }, []);
-
-  return (
-    <AuthProvider>
-      <RouterProvider router={router} />
-    </AuthProvider>
-  );
+  return <RouterProvider router={router} />;
 }
