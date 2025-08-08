@@ -10,8 +10,12 @@ import { useDeviceType } from "../hooks";
 import { MenuButton } from "./Menubutton";
 import { MenuModal } from "./MenuModal";
 import { LoginForm } from "./LoginForm";
+import { useAuth } from "../contexts/AauthProvider";
 
 export const Header = () => {
+  const { user } = useAuth();
+  const isAdmin = user?.uid === import.meta.env.VITE_ADMID_UID;
+
   const { isTablet, isDesktop } = useDeviceType();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(() => {
@@ -66,9 +70,12 @@ export const Header = () => {
           )}
 
           <LoginForm />
-          <Link to={"/write"}>
-            <AiFillSignature size={27} className={styles.icons} />
-          </Link>
+          
+          {isAdmin && (
+            <Link to={"/write"}>
+              <AiFillSignature size={27} className={styles.icons} />
+            </Link>
+          )}
         </nav>
       </header>
       {isMenuOpen && <MenuModal onClose={() => setIsMenuOpen(false)} />}
