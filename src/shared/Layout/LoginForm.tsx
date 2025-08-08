@@ -1,6 +1,6 @@
 import { logout, signInWithGoogle } from "../service/auth";
 import styles from "./styles/loginForm.module.css";
-import { useAuth } from "../service/AauthProvider";
+import { useAuth } from "../contexts/AauthProvider";
 
 export const LoginForm = () => {
   const { user } = useAuth();
