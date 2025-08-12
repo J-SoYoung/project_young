@@ -3,12 +3,12 @@ import styles from "./styles/loginForm.module.css";
 import { useAuth } from "../contexts/AauthProvider";
 
 export const LoginForm = () => {
-  const { user } = useAuth();
+  const { profile } = useAuth();
   const handleGoogleLogin = async () => {
     try {
-      const userData = await signInWithGoogle();
-      if (userData) {
-        alert(`환영합니다♥ ${userData.displayName}님!`);
+      const userProfile = await signInWithGoogle();
+      if (userProfile) {
+        alert(`환영합니다♥ ${userProfile.username}님!`);
       }
     } catch (error) {
       console.log(error);
@@ -23,7 +23,7 @@ export const LoginForm = () => {
 
   return (
     <div className={styles.login}>
-      {user ? (
+      {profile ? (
         <button onClick={handleLogout}>로그아웃</button>
       ) : (
         <button onClick={handleGoogleLogin}>로그인</button>

@@ -3,8 +3,11 @@ import styles from "../styles/commentInput.module.css";
 
 import { Comment } from "../../../shared/types/posts";
 import { addComment } from "../../../shared/apis/posts";
+import { useAuth } from "../../../shared/contexts/AauthProvider";
 
 export const CommentInput = ({ postId }: { postId: string | undefined }) => {
+  const { profile } = useAuth();
+  console.log(profile)
   const [comment, setComment] = useState("");
 
   const handleSubmit = async () => {
