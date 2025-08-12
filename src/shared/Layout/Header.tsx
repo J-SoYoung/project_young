@@ -13,8 +13,8 @@ import { LoginForm } from "./LoginForm";
 import { useAuth } from "../contexts/AauthProvider";
 
 export const Header = () => {
-  const { user } = useAuth();
-  const isAdmin = user?.uid === import.meta.env.VITE_ADMID_UID;
+  const { profile } = useAuth();
+  const isOwner = profile?.userId === import.meta.env.VITE_BLOG_OWNER_UID;
 
   const { isTablet, isDesktop } = useDeviceType();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -71,7 +71,7 @@ export const Header = () => {
 
           <LoginForm />
           
-          {isAdmin && (
+          {isOwner && (
             <Link to={"/write"}>
               <AiFillSignature size={27} className={styles.icons} />
             </Link>

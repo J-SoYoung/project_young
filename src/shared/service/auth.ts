@@ -1,28 +1,19 @@
-import { doc, getDoc, setDoc } from "firebase/firestore";
-import { auth, db } from "./firebase";
 import { GoogleAuthProvider, signInWithPopup, signOut } from "firebase/auth";
 
-// google Provider인스턴스 생성
+import { auth } from "./firebase";
+import { getOrCreateUserProfile } from "../apis/users";
+
+const BLOG_OWNER_UID = import.meta.env.VITE_BLOG_OWNER_UID as string;
 
 // google login
 export const signInWithGoogle = async () => {
+  // google Provider인스턴스 생성
   const provider = new GoogleAuthProvider();
   const result = await signInWithPopup(auth, provider);
-  const user = result.user;
+  const googleUser = result.user;
 
-  const userRef = doc(db, "users", user.uid);
-  const userSnapshot = await getDoc(userRef);
-
-  if (!userSnapshot.exists()) {
-    await setDoc(userRef, {
-      userId: user.uid,
-      email: user.email,
-      username: user.displayName,
-      profileImage: user.photoURL,
-      createdAt: new Date().toISOString(),
-    });
-  }
-  return user;
+  const profile = await getOrCreateUserProfile(googleUser, BLOG_OWNER_UID);
+  return profile;
 };
 
 // logout
