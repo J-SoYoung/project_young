@@ -25,11 +25,12 @@ export type Post = {
   title: string;
   githublink?: string;
   description?: string;
-  comments?: Comment[];
+  comments?: CommentType[];
 };
 
-export type Comment = {
-  id?: string;
+export type CommentType = {
+  id: string;
+  userId: string;
   author: string;
   content: string;
   createdAt: string;
