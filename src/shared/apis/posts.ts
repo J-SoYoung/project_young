@@ -12,9 +12,9 @@ import {
 } from "firebase/firestore";
 
 import { db } from "../service/firebase";
-import { Post } from "../types/posts";
+import { CommentType, Post } from "../types/posts";
 
-// Get Posts // 카테고리 리스트
+// Get Posts // 카테고리 리스트 가져오기
 export const getPostsByCategory = async (category: string) => {
   const q = query(collection(db, "posts"), where("category", "==", category));
   const snapshot = await getDocs(q);
@@ -41,17 +41,22 @@ export const getPostById = async (
     return null;
   } else {
     const postDoc = postSnapshot.docs[0];
-    const postData = { ...postDoc.data(), id: postDoc.id };
 
     // comment
     const commentQuery = query(collection(db, "posts", id, "comments"));
     const commentSnapshot = await getDocs(commentQuery);
-    const commentData: Comment[] = commentSnapshot.docs.map((doc) => ({
-      id: doc.id,
-      ...doc.data()
-    }));
-    console.log(commentData);
-    return { ...postData, comments: commentData };
+    if (commentSnapshot.empty) {
+      return { ...postDoc.data(), id: postDoc.id } as Post;
+    } else {
+      const commentData = commentSnapshot.docs.map((doc) => {
+        const data = doc.data() as CommentType
+        // const data = doc.data() as Omit<CommentType, "id">;
+        return { ...data, id: doc.id };
+      });
+      const postBase = postDoc.data() as Post;
+      // const postBase = postDoc.data() as Omit<Post, "id" | "comments">;
+      return { ...postBase, id: postDoc.id, comments: commentData } as Post;
+    }
   }
 };
 
@@ -84,20 +89,11 @@ export const updatePost = async (post: Post) => {
 
 type AddCommentProps = {
   postId: string;
-  newComment: {
-    id?: string;
-    author: string;
-    content: string;
-    createdAt: string;
-    isOwner: boolean;
-  };
+  newComment: CommentType;
 };
 
 // 댓글 작성
-export const addComment = async ({
-  postId,
-  newComment
-}: AddCommentProps): Promise<Comment> => {
+export const addComment = async ({ postId, newComment }: AddCommentProps) => {
   console.log(postId, newComment);
   try {
     const docRef = await addDoc(collection(db, "posts", postId, "comments"), {

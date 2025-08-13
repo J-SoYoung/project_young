@@ -42,9 +42,9 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     if (!authUser) {
       setProfile(null);
       return;
-    }
-    const unsub = subscribeUserProfile(authUser.uid, setProfile);
-    return () => unsub();
+    };
+    subscribeUserProfile(authUser.uid, setProfile);
+    return;
   }, [authUser]);
 
   const value = useMemo(
