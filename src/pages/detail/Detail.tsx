@@ -7,24 +7,33 @@ import { FaHeart } from "react-icons/fa6";
 
 import styles from "./styles/detail.module.css";
 import { CommentInput, CommentList } from "./components";
+
 import { getPostById } from "../../shared/apis/posts";
-import { Post } from "../../shared/types/posts";
+import { Post, CommentType } from "../../shared/types/posts";
+import { useAuth } from "../../shared/contexts/AauthProvider";
 
 export const Detail = () => {
+  const { profile } = useAuth();
   const navigate = useNavigate();
   const { category, id } = useParams<string>();
 
-  const [post, setPost] = useState<Post | null>(null);
-  const [comments, setComments] = useState<Comment[] | []>([]);
+  const [post, setPost] = useState<Omit<Post, "comments"> | null>(null);
+  const [commentLists, setCommentLists] = useState<CommentType[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
-      if (!category || !id) return alert("잘못된 요청입니다");
+      if (!category || !id) return alert("포스트를 찾을 수 없습니다");
       const postWithComments = await getPostById(category, id);
-      const { comments, ...postData } = postWithComments;
-      setPost(postData);
-      setComments(comments);
+      if (!postWithComments) {
+        setPost(null);
+        setCommentLists([]);
+        setLoading(false);
+        return;
+      }
+      const { comments = [], ...postData } = postWithComments;
+      setPost(postData); // Omit<Post, "comments">
+      setCommentLists(comments); // CommentType[]
       setLoading(false);
     };
     fetchData();
@@ -82,14 +91,16 @@ export const Detail = () => {
       {/* comment box */}
       <section className={styles.commentSection}>
         <h4 className={styles.commentHeader}>
-          댓글 {comments ? comments.length : 0}개
+          댓글 {commentLists ? commentLists.length : 0}개
         </h4>
         <CommentList
-          postId={id}
-          comments={comments ? comments : []}
-          setComments={setComments}
+          postId={id || ""}
+          comments={commentLists ? commentLists : []}
+          setCommentLists={setCommentLists}
         />
-        <CommentInput postId={id} />
+        {profile && (
+          <CommentInput postId={id} setCommentLists={setCommentLists} />
+        )}
       </section>
     </main>
   );
