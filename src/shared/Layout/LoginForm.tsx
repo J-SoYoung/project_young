@@ -3,7 +3,7 @@ import styles from "./styles/loginForm.module.css";
 import { useAuth } from "../contexts/AauthProvider";
 
 export const LoginForm = () => {
-  const { profile } = useAuth();
+  const { profile, loading } = useAuth();
   const handleGoogleLogin = async () => {
     try {
       const userProfile = await signInWithGoogle();
@@ -23,7 +23,9 @@ export const LoginForm = () => {
 
   return (
     <div className={styles.login}>
-      {profile ? (
+      {loading ? (
+        <p>로딩중</p>
+      ) : profile ? (
         <button onClick={handleLogout}>로그아웃</button>
       ) : (
         <button onClick={handleGoogleLogin}>로그인</button>
