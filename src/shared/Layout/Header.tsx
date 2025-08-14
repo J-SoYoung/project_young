@@ -7,16 +7,19 @@ import { IoLogoGithub } from "react-icons/io";
 
 import styles from "./styles/header.module.css";
 import { useDeviceType } from "../hooks";
-import { MenuModal } from "./MenuModal";
-import { LoginForm } from "./LoginForm";
 import { useAuth } from "../contexts/AauthProvider";
+import { logout } from "../service/auth";
+
+import { MenuModal } from "./MenuModal";
 import { MenuButtons } from "./MenuButtons";
+import { LoginModal } from "./LoginModal";
 
 export const Header = () => {
-  const { profile } = useAuth();
+  const { profile,authUser } = useAuth();
   const isOwner = profile?.userId === import.meta.env.VITE_BLOG_OWNER_UID;
 
   const { isTablet, isDesktop } = useDeviceType();
+  const [isLoginOpen, setIsLoginOpen] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(() => {
     const saved = localStorage.getItem("theme");
@@ -33,6 +36,11 @@ export const Header = () => {
       localStorage.setItem("theme", "light");
     }
   }, [isDarkMode]);
+
+  const handleLogout = async () => {
+    await logout();
+    alert("로그아웃 되었습니다.");
+  };
 
   return (
     <>
@@ -69,7 +77,13 @@ export const Header = () => {
             />
           )}
 
-          <LoginForm />
+          {/* <Login /> */}
+          {authUser ? (
+            <button onClick={handleLogout}>로그아웃</button>
+          ) : (
+            <button onClick={() => setIsLoginOpen(true)}>로그인</button>
+          )}
+          {isLoginOpen && <LoginModal onClose={() => setIsLoginOpen(false)} />}
 
           {isOwner && (
             <Link to={"/write"}>
