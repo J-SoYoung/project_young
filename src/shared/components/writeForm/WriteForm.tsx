@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import styles from "./writeForm.module.css";
-import profileImg from "@/assets/m2.jpg";
+import profileImg from "../../../assets/m2.jpg";
 
 import { FormState, Post } from "../../types/posts";
 import { addPost, updatePost } from "../../apis/posts";
