@@ -1,13 +1,13 @@
 import { Link } from "react-router-dom";
 import { FcAnswers, FcIdea, FcCamera, FcComments } from "react-icons/fc";
-import styles from "./styles/menubutton.module.css";
+import styles from "./styles/menuButton.module.css";
 
 type MenuButtonProps = {
   menuType: "header" | "modal";
   onClose?: () => void; // Optional for modal
 };
 
-export const MenuButton = ({ menuType, onClose }: MenuButtonProps) => {
+export const MenuButtons = ({ menuType, onClose }: MenuButtonProps) => {
   return (
     <nav
       className={menuType === "modal" ? styles.menuModal : styles.menuButton}

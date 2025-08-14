@@ -7,10 +7,10 @@ import { IoLogoGithub } from "react-icons/io";
 
 import styles from "./styles/header.module.css";
 import { useDeviceType } from "../hooks";
-import { MenuButton } from "./Menubutton";
 import { MenuModal } from "./MenuModal";
 import { LoginForm } from "./LoginForm";
 import { useAuth } from "../contexts/AauthProvider";
+import { MenuButtons } from "./MenuButtons";
 
 export const Header = () => {
   const { profile } = useAuth();
@@ -42,7 +42,7 @@ export const Header = () => {
         </div>
         <nav className={styles.nav}>
           {isTablet || isDesktop ? (
-            <MenuButton menuType={"header"} />
+            <MenuButtons menuType={"header"} />
           ) : (
             <AiOutlineMenu
               size={25}
@@ -70,7 +70,7 @@ export const Header = () => {
           )}
 
           <LoginForm />
-          
+
           {isOwner && (
             <Link to={"/write"}>
               <AiFillSignature size={27} className={styles.icons} />

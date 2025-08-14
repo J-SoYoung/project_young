@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import { MenuButton } from "./Menubutton";
+import { MenuButton } from "./MenuButtond";
 import styles from "./styles/menuModal.module.css";
 
 type Props = {
@@ -24,7 +24,7 @@ export const MenuModal = ({ onClose }: Props) => {
         <button onClick={onClose} className={styles.closeButton}>
           ✕
         </button>
-        <MenuButton menuType={"modal"}  onClose={onClose}  />
+        <MenuButton menuType={"modal"} onClose={onClose} />
       </div>
     </div>
   );
