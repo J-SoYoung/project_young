@@ -70,7 +70,7 @@ export const Detail = () => {
           <img
             src={authorProfile}
             alt={author}
-            className={styles.authorAvatar}
+            className={styles.authorProfile}
           />
           <div>
             <span className={styles.authorName}>{author}</span>

@@ -1,10 +1,12 @@
 .postTitleBox {
   display: flex;
   align-items: center;
+  justify-content: space-between;
 }
 .postTitleBox h1 {
   font-weight: var(--weight-bold);
   margin: 1rem 1rem 1rem 0;
+  width: 95%;
 }
 .icons {
   cursor: pointer;
@@ -25,9 +27,10 @@
   align-items: center;
   color: var(--color-muted);
 }
-.authorAvatar {
+.authorProfile {
   width: 50px;
   height: 50px;
+  object-fit: cover;
   margin-right: 0.5rem;
   border-radius: 50%;
 }
