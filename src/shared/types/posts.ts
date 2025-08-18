@@ -34,5 +34,4 @@ export type CommentType = {
   author: string;
   content: string;
   createdAt: string;
-  isOwner: boolean;
 };
