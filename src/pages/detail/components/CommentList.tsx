@@ -1,5 +1,6 @@
 import { deleteComment } from "../../../shared/apis/posts";
-import { useAuth } from "../../../shared/contexts/AauthProvider";
+import { useAuth } from "../../../shared/hooks/useAuth";
+
 import { CommentType } from "../../../shared/types/posts";
 import styles from "../styles/commentList.module.css";
 

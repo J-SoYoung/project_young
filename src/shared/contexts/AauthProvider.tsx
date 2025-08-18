@@ -1,7 +1,6 @@
 import {
   createContext,
   ReactNode,
-  useContext,
   useEffect,
   useMemo,
   useState
@@ -17,7 +16,7 @@ type AuthContextType = {
   loading: boolean;
 };
 
-const AuthContext = createContext<AuthContextType>({
+export const AuthContext = createContext<AuthContextType>({
   authUser: null,
   profile: null,
   loading: true
@@ -54,5 +53,3 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };
-
-export const useAuth = () => useContext(AuthContext);
