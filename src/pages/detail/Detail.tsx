@@ -6,7 +6,7 @@ import { FaHeart } from "react-icons/fa6";
 // import { FaRegHeart } from "react-icons/fa6";
 
 import styles from "./styles/detail.module.css";
-import { CommentInput, CommentList } from "./components";
+import { CommentInput, CommentList, MarkdownWithHighlight } from "./components";
 
 import { getPostById } from "../../shared/apis/posts";
 import { Post, CommentType } from "../../shared/types/posts";
@@ -86,10 +86,9 @@ export const Detail = () => {
       </div>
 
       {/* 글 내용 */}
-      <article
-        className={styles.postContent}
-        dangerouslySetInnerHTML={{ __html: content }}
-      />
+      <article className={styles.postContent}>
+        <MarkdownWithHighlight content={content} />
+      </article>
 
       {/* comment box */}
       <section className={styles.commentSection}>
