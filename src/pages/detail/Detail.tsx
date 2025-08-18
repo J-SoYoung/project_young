@@ -12,11 +12,11 @@ import { getPostById } from "../../shared/apis/posts";
 import { Post, CommentType } from "../../shared/types/posts";
 import { useAuth } from "../../shared/hooks/useAuth";
 
-
 export const Detail = () => {
-  const { profile } = useAuth();
   const navigate = useNavigate();
   const { category, id } = useParams<string>();
+  const { profile } = useAuth();
+  const isOwner = profile?.userId === import.meta.env.VITE_BLOG_OWNER_UID;
 
   const [post, setPost] = useState<Omit<Post, "comments"> | null>(null);
   const [commentLists, setCommentLists] = useState<CommentType[]>([]);
@@ -53,13 +53,15 @@ export const Detail = () => {
     <main className={styles.main}>
       <div className={styles.postTitleBox}>
         <h1>{title}</h1>
-        <LuPencil
-          size={20}
-          className={styles.icons}
-          onClick={() => {
-            navigate(`/edit/${category}/${id}`);
-          }}
-        />
+        {isOwner && (
+          <LuPencil
+            size={20}
+            className={styles.icons}
+            onClick={() => {
+              navigate(`/edit/${category}/${id}`);
+            }}
+          />
+        )}
       </div>
 
       {/* 작성자, 날짜, 좋아요 */}
@@ -68,7 +70,7 @@ export const Detail = () => {
           <img
             src={authorProfile}
             alt={author}
-            className={styles.authorAvatar}
+            className={styles.authorProfile}
           />
           <div>
             <span className={styles.authorName}>{author}</span>

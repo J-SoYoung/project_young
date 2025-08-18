@@ -26,7 +26,6 @@ export const CommentInput = ({
       userId: profile?.userId || "",
       content: comment,
       createdAt: getTodayDate(),
-      isOwner: profile?.role === "owner"
     };
     setComment("");
     setCommentLists((prev) => [newComment, ...prev]);
