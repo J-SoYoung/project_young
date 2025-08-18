@@ -21,6 +21,8 @@
   cursor: pointer;
 }
 
+.header button {
+  color: var(--color-text);
+}
 @media (min-width: 800px) {
-
 }
