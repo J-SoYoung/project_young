@@ -10,7 +10,8 @@ import { CommentInput, CommentList } from "./components";
 
 import { getPostById } from "../../shared/apis/posts";
 import { Post, CommentType } from "../../shared/types/posts";
-import { useAuth } from "../../shared/contexts/AauthProvider";
+import { useAuth } from "../../shared/hooks/useAuth";
+
 
 export const Detail = () => {
   const { profile } = useAuth();

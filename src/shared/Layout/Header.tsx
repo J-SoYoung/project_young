@@ -7,7 +7,7 @@ import { IoLogoGithub } from "react-icons/io";
 
 import styles from "./styles/header.module.css";
 import { useDeviceType } from "../hooks";
-import { useAuth } from "../contexts/AauthProvider";
+import { useAuth } from "../hooks/useAuth";
 import { logout } from "../service/auth";
 
 import { MenuModal } from "./MenuModal";

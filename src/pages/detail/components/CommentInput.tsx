@@ -3,8 +3,8 @@ import styles from "../styles/commentInput.module.css";
 
 import { CommentType } from "../../../shared/types/posts";
 import { addComment } from "../../../shared/apis/posts";
-import { useAuth } from "../../../shared/contexts/AauthProvider";
 import { getTodayDate } from "../../../shared/utils/getTodayDate";
+import { useAuth } from "../../../shared/hooks/useAuth";
 
 type CommentInputProps = {
   postId: string | undefined;
