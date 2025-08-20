@@ -13,7 +13,8 @@ import {
   Write,
   MenuMoreListsPage,
   Detail,
-  AboutMe
+  AboutMe,
+  Mypage
 } from "../pages";
 
 const router = createBrowserRouter([
@@ -36,6 +37,10 @@ const router = createBrowserRouter([
       {
         path: "/search",
         element: <Search />
+      },
+      {
+        path: "/mypage",
+        element: <Mypage />
       },
       {
         path: "/write",

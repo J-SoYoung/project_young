@@ -1,5 +1,12 @@
 import { Link } from "react-router-dom";
-import { FcAnswers, FcIdea, FcCamera, FcComments } from "react-icons/fc";
+import {
+  FcAnswers,
+  FcIdea,
+  FcCamera,
+  FcComments,
+  FcUnlock
+} from "react-icons/fc"; //Flat Color Icons
+
 import styles from "./styles/menuButton.module.css";
 
 type MenuButtonProps = {
@@ -27,6 +34,10 @@ export const MenuButtons = ({ menuType, onClose }: MenuButtonProps) => {
       <Link to={"/menu/portfolio"} onClick={onClose}>
         <FcCamera size={20} />
         <span>Portfolio</span>
+      </Link>
+      <Link to={"/mypage"} onClick={onClose}>
+        <FcUnlock size={20} />
+        <span>MyPage</span>
       </Link>
     </nav>
   );

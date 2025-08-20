@@ -1,0 +1,56 @@
+.card {
+  padding: 1rem;
+  box-sizing: border-box;
+  margin-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: var(--color-background);
+  border: 1px solid var(--color-border);
+  border-radius: 0.5rem;
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.02);
+}
+
+/* profile */
+.profileSection {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 1rem;
+}
+.profileSection > div {
+  display: flex;
+  flex-direction: column;
+}
+.profileImage {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  object-fit: cover;
+  background: #f3f4f6;
+  border: 1px solid var(--color-border);
+}
+.profileMeta {
+margin-bottom: 1rem;
+}
+.profileMeta > .name {
+  color: var(--color-text);
+  font-size: var(--font-size-base);
+}
+.profileMeta > .bio {
+  color: var(--color-muted);
+  font-size: var(--font-size-base);
+}
+.profileEditButton {
+  width: 50%;
+  height: 40px;
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  border: none;
+  font-size: 1rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+}
+.profileEditButton:hover {
+  background-color: var(--color-primary-dark);
+}
