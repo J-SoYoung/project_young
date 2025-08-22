@@ -29,11 +29,17 @@ export type Post = {
   comments?: CommentType[];
 };
 
-export type CommentType = {
-  id?: string;
-  userId: string;
+export type CommentBase = {
   author: string;
   comment: string;
   createdAt: string;
   postId: string;
+  userId: string;
 };
+export interface CommentType extends CommentBase {
+  id?: string;
+}
+export interface ActicityCommentType extends CommentBase {
+  id: string;
+  postTitle: string;
+}
