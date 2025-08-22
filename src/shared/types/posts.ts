@@ -43,3 +43,10 @@ export interface ActicityCommentType extends CommentBase {
   id: string;
   postTitle: string;
 }
+
+export type MypageActiveListType = {
+  id: string;
+  title: string;
+  subTitle?: string;
+  createdAt: string;
+};
