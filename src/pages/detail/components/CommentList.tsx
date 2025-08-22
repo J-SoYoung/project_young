@@ -33,7 +33,7 @@ export const CommentList = ({
               <span className={styles.time}>{c.createdAt}</span>
             </div>
             <div className={styles.commentsBox}>
-              <p className={styles.content}>{c.content}</p>
+              <p className={styles.content}>{c.comment}</p>
               {profile?.userId === c.userId && (
                 <button
                   className={styles.deleteButton}

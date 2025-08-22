@@ -7,7 +7,7 @@ export const ListsNote = ({ posts }: { posts: Post[] }) => {
     <ul className={styles.notesList}>
       {posts.map((post) => (
         <li key={post.id}>
-          <time>{post.date}</time>
+          <time>{post.createdAt}</time>
           <p>
             <Link to={`/detail/${post.category}/${post.id}`}>{post.title}</Link>
           </p>

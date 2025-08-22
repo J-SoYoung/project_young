@@ -17,10 +17,11 @@ export type FormState = {
 export type Post = {
   id?: string;
   author: string;
+  authorId?: string;
   authorProfile: string;
   category: Category;
   content: string;
-  date: string;
+  createdAt: string;
   imageSrc: string;
   title: string;
   githublink?: string;
@@ -28,10 +29,24 @@ export type Post = {
   comments?: CommentType[];
 };
 
-export type CommentType = {
-  id: string;
-  userId: string;
+export type CommentBase = {
   author: string;
-  content: string;
+  comment: string;
+  createdAt: string;
+  postId: string;
+  userId: string;
+};
+export interface CommentType extends CommentBase {
+  id?: string;
+}
+export interface ActicityCommentType extends CommentBase {
+  id: string;
+  postTitle: string;
+}
+
+export type MypageActiveListType = {
+  id: string;
+  title: string;
+  subTitle?: string;
   createdAt: string;
 };

@@ -24,8 +24,8 @@ export const Detail = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      if (!category || !id) return alert("포스트를 찾을 수 없습니다");
-      const postWithComments = await getPostById(category, id);
+      if (!id) return alert("포스트를 찾을 수 없습니다");
+      const postWithComments = await getPostById(id);
       if (!postWithComments) {
         setPost(null);
         setCommentLists([]);
@@ -38,12 +38,12 @@ export const Detail = () => {
       setLoading(false);
     };
     fetchData();
-  }, [category, id]);
+  }, [id]);
 
   if (loading) return <p> 로딩중 ... </p>;
   if (!post) return <p>포스트를 찾을 수 없습니다</p>;
 
-  const { title, author, authorProfile, date, content } = post;
+  const { title, author, authorProfile, createdAt, content } = post;
 
   if (!post) {
     return <p>포스트를 찾을 수 없습니다.</p>;
@@ -74,7 +74,7 @@ export const Detail = () => {
           />
           <div>
             <span className={styles.authorName}>{author}</span>
-            <span className={styles.postDate}>{date}</span>
+            <span className={styles.postDate}>{createdAt}</span>
             {/* 예시 날짜 형식 Today at 11:37 AM */}
           </div>
         </div>
