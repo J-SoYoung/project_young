@@ -17,10 +17,11 @@ export type FormState = {
 export type Post = {
   id?: string;
   author: string;
+  authorId?: string;
   authorProfile: string;
   category: Category;
   content: string;
-  date: string;
+  createdAt: string;
   imageSrc: string;
   title: string;
   githublink?: string;
@@ -29,9 +30,10 @@ export type Post = {
 };
 
 export type CommentType = {
-  id: string;
+  id?: string;
   userId: string;
   author: string;
-  content: string;
+  comment: string;
   createdAt: string;
+  postId: string;
 };
