@@ -4,25 +4,47 @@ import { FcComments, FcLike, FcRules } from "react-icons/fc";
 
 import styles from "./mypage.module.css";
 import { useAuth } from "../../shared/hooks/useAuth";
-import { CommentType, Post } from "../../shared/types/posts";
+import { MypageActiveListType } from "../../shared/types/posts";
 import { getAllComments, getAllPosts } from "../../shared/apis/posts";
+import { ActLists } from "./components/ActLists";
+// import { useNavigate } from "react-router-dom";
 
-const likePosts = [];
+type Panel = "posts" | "comments" | "likes" | null;
+const likePosts: MypageActiveListType[] = [
+  {
+    id: "aa11",
+    title: "좋아요 포스트 제목11",
+    createdAt: "2025-08-22"
+  },
+  {
+    id: "aa22",
+    title: "좋아요 포스트 제목22",
+    createdAt: "2025-08-24"
+  }
+];
+
 // 좋아요 한 게시글id / title, 좋아요 한 날짜
-const commentPosts = [];
-// 댓글 단 게시글 id / title, 댓글 단 날짜, 댓글 내용
-
 export const Mypage = () => {
+  // const navigate = useNavigate();
   const { profile, loading } = useAuth();
   const isOwner = profile?.role === "owner";
-  const [myPosts, setMyPosts] = useState<Post[]>([]);
-  const [myComments, setMyComments] = useState<CommentType[]>([]);
+
+  const [myPosts, setMyPosts] = useState<MypageActiveListType[]>([]);
+  const [myComments, setMyComments] = useState<MypageActiveListType[]>([]);
+  const [myLikes] = useState<MypageActiveListType[]>(likePosts); // TODO 좋아요 미구현
+  const [activeType, setActiveType] = useState<Panel>("posts");
 
   useEffect(() => {
     const fetchAllPosts = async () => {
       const allPosts = await getAllPosts();
       if (!allPosts) setMyPosts([]);
-      setMyPosts(allPosts);
+      const items = allPosts.map((p) => ({
+        id: p.id || "",
+        title: p.title,
+        subTitle: p.category,
+        createdAt: p.createdAt
+      }));
+      setMyPosts(items);
     };
     fetchAllPosts();
   }, []);
@@ -32,17 +54,28 @@ export const Mypage = () => {
       if (!profile?.userId) return;
       const allComments = await getAllComments(profile?.userId);
       if (!allComments) setMyComments([]);
-      setMyComments(allComments);
+      const items = allComments.map((c) => ({
+        id: c.id || "",
+        title: c.comment, // 댓글내용
+        subTitle: c.postTitle, // 댓글 달린 포스트 제목
+        createdAt: c.createdAt
+      }));
+      setMyComments(items);
     };
     fetchMyComments();
   }, [profile?.userId]);
 
   const onEditProfile = () => {};
+
   const handleClickPost = (id: string) => {
     console.log("페이지이동", id);
+    // navigate(`/post/${id}`);
+    // TODO-URL변경, category이동... 확인 현재 /detail/category/postId임
   };
-  const handleClickActivity = (type: string) => {
-    console.log("activity-type", type);
+
+  const handleClickActivity = (type: "posts" | "comments" | "likes") => {
+    if (type === "posts" && !isOwner) return;
+    setActiveType(type);
   };
 
   if (loading) {
@@ -53,6 +86,27 @@ export const Mypage = () => {
       </main>
     );
   }
+
+  const map = {
+    posts: {
+      title: "My Posts",
+      emptyText: "작성한 포스트가 없습니다.",
+      lists: myPosts,
+      icon: <FcRules size={20} />
+    },
+    comments: {
+      title: "My Comments",
+      emptyText: "작성한 댓글이 없습니다.",
+      lists: myComments,
+      icon: <FcComments size={20} />
+    },
+    likes: {
+      title: "My Likes",
+      emptyText: "좋아요한 글이 없습니다.",
+      lists: myLikes,
+      icon: <FcLike size={20} />
+    }
+  } as const;
 
   return (
     <main>
@@ -89,78 +143,54 @@ export const Mypage = () => {
       {/* Activity */}
       <section aria-label="내 활동 요약">
         <div className={styles.activity}>
-          <button type="button" onClick={() => handleClickActivity("posts")}>
+          <button
+            type="button"
+            aria-controls="mypage-list"
+            disabled={!isOwner}
+            title={!isOwner ? "관리자만 확인 가능합니다." : undefined}
+            onClick={() => handleClickActivity("posts")}
+          >
             <p className={styles.subtitle}>Posts</p>
             <span className={styles.counter}>
               <FcRules size={20} />
               {myPosts.length}
             </span>
           </button>
-          <button type="button" onClick={() => handleClickActivity("comments")}>
+          <button
+            type="button"
+            aria-controls="mypage-list"
+            onClick={() => handleClickActivity("comments")}
+          >
             <p className={styles.subtitle}>Comments</p>
             <span className={styles.counter}>
               <FcComments size={20} />
               {myComments.length}
             </span>
           </button>
-          <button type="button" onClick={() => handleClickActivity("likes")}>
+          <button
+            type="button"
+            aria-controls="mypage-list"
+            onClick={() => handleClickActivity("likes")}
+          >
             <p className={styles.subtitle}>Likes</p>
             <span className={styles.counter}>
               <FcLike size={20} />
-              <span>10</span>
+              <span>{myLikes.length}</span>
             </span>
           </button>
         </div>
       </section>
 
       {/* My Activity Listt */}
-      <div>
-        <header className={styles.sectionHead}>My Posts</header>
-        <ul className={styles.list}>
-          {myPosts.length === 0 && (
-            <li className={styles.empty}>작성한 글이 없습니다.</li>
-          )}
-          {myPosts.map((p) => (
-            <li key={p.id}>
-              <button
-                className={styles.rowBtn}
-                onClick={() => handleClickPost(p.id)}
-                aria-label={`${p.title} 상세로 이동`}
-              >
-                <div className={styles.rowText}>
-                  <span className={styles.rowCategory}>[ {p.category} ]</span>
-                  <span className={styles.rowTitle}>{p.title}</span>
-                  <time className={styles.rowDate}>{p.createdAt}</time>
-                </div>
-              </button>
-            </li>
-          ))}
-        </ul>
-      </div>
-
-      {/* My Activity Comment */}
-      <div>
-        <header className={styles.sectionHead}>My Comments</header>
-        <ul className={styles.list}>
-          {myComments.length === 0 && (
-            <li className={styles.empty}>작성한 댓글이 없습니다.</li>
-          )}
-          {myComments.map((p) => (
-            <li key={p.id}>
-              <button
-                className={styles.rowBtn}
-                onClick={() => handleClickPost(p.id)}
-                aria-label={`${p.title} 상세로 이동`}
-              >
-                <div className={styles.rowText}>
-                  <span className={styles.rowTitle}>{p.title}</span>
-                  <time className={styles.rowDate}>{p.createdAt}</time>
-                </div>
-              </button>
-            </li>
-          ))}
-        </ul>
-      </div>
+      {activeType && (
+        <ActLists
+          title={map[activeType].title}
+          emptyText={map[activeType].emptyText}
+          lists={map[activeType].lists}
+          handleClickPost={handleClickPost}
+          icon={map[activeType].icon}
+        />
+      )}
     </main>
   );
 };
