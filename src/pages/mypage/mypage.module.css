@@ -125,7 +125,7 @@
   font-weight: 600;
   color: var(--color-text);
 }
-.rowDate {
+.rowDate,.rowSubTitle {
   color: var(--color-muted);
   font-size: 13px;
 }
