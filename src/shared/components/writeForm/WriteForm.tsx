@@ -75,8 +75,8 @@ export const WriteForm = ({ mode, title, initialData, buttonText }: Props) => {
     const basePost = {
       author: "SoYoung",
       authorProfile: profileImg,
-      date:
-        mode === "edit" ? initialData?.date ?? getTodayDate() : getTodayDate(),
+      createdAt:
+        mode === "edit" ? initialData?.createdAt ?? getTodayDate() : getTodayDate(),
       category: formState.category,
       title: formState.title,
       content: formState.content,

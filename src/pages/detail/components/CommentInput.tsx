@@ -24,14 +24,15 @@ export const CommentInput = ({
       id: "",
       author: profile?.username || "사용자",
       userId: profile?.userId || "",
-      content: comment,
+      comment: comment,
       createdAt: getTodayDate(),
+      postId: postId as string
     };
     setComment("");
     setCommentLists((prev) => [newComment, ...prev]);
     try {
       if (postId) {
-        await addComment({ postId, newComment });
+        await addComment(newComment);
       }
     } catch (error) {
       console.error("댓글 등록 실패:", error);
