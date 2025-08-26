@@ -37,7 +37,7 @@ export const CommentList = ({
               {profile?.userId === c.userId && (
                 <button
                   className={styles.deleteButton}
-                  onClick={() => handleDelete(c.id)}
+                  onClick={() => handleDelete(c.id || "")}
                 >
                   삭제
                 </button>

@@ -13,7 +13,7 @@ export const EditPosts = () => {
   useEffect(() => {
     const fetchPost = async () => {
       if (!category || !id) return alert("잘못된 요청입니다");
-      const data = await getPostById(category, id);
+      const data = await getPostById(id);
       setInitialData(data);
       setIsLoading(false);
     };

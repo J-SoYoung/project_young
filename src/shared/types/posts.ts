@@ -30,6 +30,7 @@ export type Post = {
 };
 
 export type CommentBase = {
+  id?: string;
   author: string;
   comment: string;
   createdAt: string;

@@ -7,7 +7,7 @@ export const ListsPortfolio = ({ posts }: { posts: Post[] }) => {
     <ul className={styles.portfolioList}>
       {posts.map((post) => (
         <li key={post.id}>
-          <time>{post.date}</time>
+          <time>{post.createdAt}</time>
           <strong>{post.title}</strong>
           <p className={styles.description}>{post.description}</p>
           <div className={styles.portfolioLinks}>
