@@ -148,18 +148,6 @@ export const getAllComments = async (userId: string) => {
       id: doc.id
     })) as CommentType[];
 
-    // const commentInfo = comments.map(async (comment) => {
-    //   console.log("댓글", comment);
-    //   const p = query(
-    //     collection(db, "posts"),
-    //     where("id", "==", comment.postId)
-    //   );
-    //   const snapshot = await getDocs(p);
-    //   const post = snapshot.docs[0].data();
-    //   console.log(comment, post)
-    //   return { ...comment, ...post };
-    // });
-
     const withPost = await Promise.all(
       comments.map(async (c) => {
         const postRef = doc(db, "posts", c.postId);
