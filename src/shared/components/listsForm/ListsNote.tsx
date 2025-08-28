@@ -9,7 +9,7 @@ export const ListsNote = ({ posts }: { posts: Post[] }) => {
         <li key={post.id}>
           <time>{post.createdAt}</time>
           <p>
-            <Link to={`/detail/${post.category}/${post.id}`}>{post.title}</Link>
+            <Link to={`/detail/${post.id}`}>{post.title}</Link>
           </p>
         </li>
       ))}

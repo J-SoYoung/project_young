@@ -14,7 +14,7 @@ export const ListsPortfolio = ({ posts }: { posts: Post[] }) => {
             <a href={post.githublink} target="_blank">
               github
             </a>
-            <Link to={`/detail/${post.category}/${post.id}`}>
+            <Link to={`/detail/${post.id}`}>
               포트폴리오 더보기
             </Link>
           </div>
