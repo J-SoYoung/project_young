@@ -57,7 +57,7 @@ const router = createBrowserRouter([
       },
       {
         // 카테고리 별 상세 페이지
-        path: "/detail/:category/:id",
+        path: "/detail/:id",
         element: <Detail />
       }
     ]

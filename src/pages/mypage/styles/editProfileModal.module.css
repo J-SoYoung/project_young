@@ -1,0 +1,171 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+}
+
+.modal {
+  background-color: var(--color-primary-bg);
+  padding: 1rem;
+  box-sizing: border-box;
+  border-radius: 10px;
+  width: 90%;
+  max-width: 600px;
+  margin: 100px auto;
+  position: relative;
+}
+
+.closeButton {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+.menuList {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.menuList a {
+  color: var(--color-text);
+  font-weight: bold;
+  font-size: 1rem;
+  text-decoration: none;
+}
+
+/* ------- Edit UI ------- */
+.body {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* Profile */
+.avatarCol {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+.avatarWrap {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+  background: var(--color-background);
+}
+.avatarWrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.avatarBtns {
+  display: flex;
+  gap: 8px;
+}
+.fileBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  background: var(--color-primary);
+  color: var(--color-primary-bg);
+  border: 0;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: var(--font-size-base);
+}
+.fileBtn:hover {
+  background: var(--color-primary-dark);
+}
+.textBtn {
+  background: transparent;
+  border: 0;
+  color: var(--color-text);
+  cursor: pointer;
+  font-size: var(--font-size-base);
+}
+.textBtn:hover {
+  font-weight: var(--weight-bold);
+}
+
+/* Biography */
+.formCol {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 1rem;
+}
+.formCol > label {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  font-weight: var(--weight-bold);
+  font-size: var(--font-size-base);
+  color: var(--color-text);
+  margin-bottom: 1rem;
+}
+
+.input,
+.textarea {
+  width: 100%;
+  margin-top: 0.25rem;
+  border: 1px solid var(--color-border);
+  border-radius: 0.25rem;
+  padding: 10px 12px;
+  box-sizing: border-box;
+  resize: none;
+  font-size: var(--font-size-base);
+  color: var(--color-text);
+  outline: none;
+}
+
+.textarea {
+  min-height: 12rem;
+}
+.formCol > label > .counter {
+  width: 100%;
+  padding: 0.25rem 0;
+  box-sizing: border-box;
+  display: block;
+  text-align: right;
+  color: var(--color-muted);
+  font-weight: var(--weight-light);
+}
+
+/* footer */
+.footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.footer button {
+  width: 100%;
+  height: 40px;
+  border-radius: 0.2rem;
+}
+.footer .ghostBtn {
+  background-color: var(--color-background);
+  color: var(--color-mute);
+  border: 1px solid var(--color-border);
+}
+.footer .primaryBtn {
+  background-color: var(--color-primary);
+  color: var(--color-primary-bg);
+}
+.footer .ghostBtn:hover {
+  font-weight: var(--weight-bold);
+}
+.footer .primaryBtn:hover {
+  background-color: var(--color-primary-dark);
+}

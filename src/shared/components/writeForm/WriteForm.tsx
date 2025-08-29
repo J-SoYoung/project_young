@@ -98,12 +98,12 @@ export const WriteForm = ({ mode, title, initialData, buttonText }: Props) => {
         // 글 수정
         await updatePost({ ...finalPost, id: initialData.id });
         alert("글 수정이 완료되었습니다!");
-        navigate(`/detail/${finalPost.category}/${initialData.id}`);
+        navigate(`/detail/${initialData.id}`);
       } else {
         // 글 작성
         const postId = await addPost(finalPost);
         alert("글 작성이 완료되었습니다!");
-        navigate(`/detail/${finalPost.category}/${postId}`);
+        navigate(`/detail/${postId}`);
       }
     } catch (error) {
       console.log(error);
