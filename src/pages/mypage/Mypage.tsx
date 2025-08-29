@@ -7,9 +7,11 @@ import { useAuth } from "../../shared/hooks/useAuth";
 import { MypageActiveListType } from "../../shared/types/posts";
 import { getAllComments, getAllPosts } from "../../shared/apis/posts";
 import { ActLists } from "./components/ActLists";
-// import { useNavigate } from "react-router-dom";
+import { ActBoard } from "./components/ActBoard";
+import { useNavigate } from "react-router-dom";
+import { EditProfileModal } from "./components/EditProfileModal";
 
-type Panel = "posts" | "comments" | "likes" | null;
+export type Panel = "posts" | "comments" | "likes" | null;
 const likePosts: MypageActiveListType[] = [
   {
     id: "aa11",
@@ -25,10 +27,10 @@ const likePosts: MypageActiveListType[] = [
 
 // 좋아요 한 게시글id / title, 좋아요 한 날짜
 export const Mypage = () => {
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   const { profile, loading } = useAuth();
-  const isOwner = profile?.role === "owner";
 
+  const [isEditProfile, setIsEditProfile] = useState(false);
   const [myPosts, setMyPosts] = useState<MypageActiveListType[]>([]);
   const [myComments, setMyComments] = useState<MypageActiveListType[]>([]);
   const [myLikes] = useState<MypageActiveListType[]>(likePosts); // TODO 좋아요 미구현
@@ -55,7 +57,7 @@ export const Mypage = () => {
       const allComments = await getAllComments(profile?.userId);
       if (!allComments) setMyComments([]);
       const items = allComments.map((c) => ({
-        id: c.id || "",
+        id: c.postId || "",
         title: c.comment, // 댓글내용
         subTitle: c.postTitle, // 댓글 달린 포스트 제목
         createdAt: c.createdAt
@@ -65,17 +67,9 @@ export const Mypage = () => {
     fetchMyComments();
   }, [profile?.userId]);
 
-  const onEditProfile = () => {};
-
   const handleClickPost = (id: string) => {
     console.log("페이지이동", id);
-    // navigate(`/post/${id}`);
-    // TODO-URL변경, category이동... 확인 현재 /detail/category/postId임
-  };
-
-  const handleClickActivity = (type: "posts" | "comments" | "likes") => {
-    if (type === "posts" && !isOwner) return;
-    setActiveType(type);
+    navigate(`/detail/${id}`);
   };
 
   if (loading) {
@@ -132,54 +126,24 @@ export const Mypage = () => {
 
             <button
               className={styles.profileEditButton}
-              onClick={onEditProfile}
+              onClick={() => setIsEditProfile(true)}
             >
               Edit Profile
             </button>
           </div>
         </section>
       </div>
+      {isEditProfile && (
+        <EditProfileModal profile={profile} onClose={() => setIsEditProfile(false)} />
+      )}
 
       {/* Activity */}
-      <section aria-label="내 활동 요약">
-        <div className={styles.activity}>
-          <button
-            type="button"
-            aria-controls="mypage-list"
-            disabled={!isOwner}
-            title={!isOwner ? "관리자만 확인 가능합니다." : undefined}
-            onClick={() => handleClickActivity("posts")}
-          >
-            <p className={styles.subtitle}>Posts</p>
-            <span className={styles.counter}>
-              <FcRules size={20} />
-              {myPosts.length}
-            </span>
-          </button>
-          <button
-            type="button"
-            aria-controls="mypage-list"
-            onClick={() => handleClickActivity("comments")}
-          >
-            <p className={styles.subtitle}>Comments</p>
-            <span className={styles.counter}>
-              <FcComments size={20} />
-              {myComments.length}
-            </span>
-          </button>
-          <button
-            type="button"
-            aria-controls="mypage-list"
-            onClick={() => handleClickActivity("likes")}
-          >
-            <p className={styles.subtitle}>Likes</p>
-            <span className={styles.counter}>
-              <FcLike size={20} />
-              <span>{myLikes.length}</span>
-            </span>
-          </button>
-        </div>
-      </section>
+      <ActBoard
+        posts={myPosts}
+        likes={myLikes}
+        comments={myComments}
+        setActiveType={setActiveType}
+      />
 
       {/* My Activity Listt */}
       {activeType && (
