@@ -59,8 +59,10 @@ export const EditProfileModal = ({
       return null;
     });
   };
-  
-  const handleSubmit = () => {};
+
+  const handleSubmit = () => {
+    console.log(file, removePhoto);
+  };
 
   return (
     <div

@@ -133,8 +133,11 @@ export const Mypage = () => {
           </div>
         </section>
       </div>
-      {isEditProfile && (
-        <EditProfileModal profile={profile} onClose={() => setIsEditProfile(false)} />
+      {isEditProfile && profile && (
+        <EditProfileModal
+          profile={profile}
+          onClose={() => setIsEditProfile(false)}
+        />
       )}
 
       {/* Activity */}
