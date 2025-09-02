@@ -14,7 +14,7 @@ import { useAuth } from "../../shared/hooks/useAuth";
 
 export const Detail = () => {
   const navigate = useNavigate();
-  const { category, id } = useParams<string>();
+  const { id } = useParams<string>();
   const { profile } = useAuth();
   const isOwner = profile?.userId === import.meta.env.VITE_BLOG_OWNER_UID;
 
@@ -58,7 +58,7 @@ export const Detail = () => {
             size={20}
             className={styles.icons}
             onClick={() => {
-              navigate(`/edit/${category}/${id}`);
+              navigate(`/detail/${id}/edit`);
             }}
           />
         )}

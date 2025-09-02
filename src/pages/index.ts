@@ -4,7 +4,7 @@ import { Search } from "./search/Search";
 import { Write } from "./write/Write";
 import { Mypage } from "./mypage/Mypage";
 import { Detail } from "./detail/Detail";
-import { EditPosts } from "./editPosts/EditPosts";
+import { EditDetail } from "./editDetail/EditDetail";
 import { MenuMoreListsPage } from "./menuMoreListPage/MenuMoreListsPage";
 
 export {
@@ -12,7 +12,7 @@ export {
   Write,
   Mypage,
   Detail,
-  EditPosts,
+  EditDetail,
   Home,
   AboutMe,
   MenuMoreListsPage

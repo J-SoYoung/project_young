@@ -7,6 +7,7 @@ import profileImg from "../../../assets/m2.jpg";
 import { FormState, Post } from "../../types/posts";
 import { addPost, updatePost } from "../../apis/posts";
 import { getTodayDate } from "../../utils/getTodayDate";
+import { CATEGORIES, CATEGORY_META } from "../../types/category";
 
 type Mode = "write" | "edit";
 type Props = {
@@ -76,7 +77,9 @@ export const WriteForm = ({ mode, title, initialData, buttonText }: Props) => {
       author: "SoYoung",
       authorProfile: profileImg,
       createdAt:
-        mode === "edit" ? initialData?.createdAt ?? getTodayDate() : getTodayDate(),
+        mode === "edit"
+          ? initialData?.createdAt ?? getTodayDate()
+          : getTodayDate(),
       category: formState.category,
       title: formState.title,
       content: formState.content,
@@ -129,10 +132,9 @@ export const WriteForm = ({ mode, title, initialData, buttonText }: Props) => {
           required
         >
           <option value="">카테고리를 선택해주세요</option>
-          <option value="tech-notes">TechNotes</option>
-          <option value="thoughts">Thoughts</option>
-          <option value="deepdives">DeepDives</option>
-          <option value="portfolio">Portfolio</option>
+          {CATEGORIES.map((c) => {
+            return <option value={c}>{CATEGORY_META[c].label}</option>;
+          })}
         </select>
 
         <input

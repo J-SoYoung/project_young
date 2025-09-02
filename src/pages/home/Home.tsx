@@ -6,65 +6,55 @@ import { Gretting } from "./components/Greeting";
 
 import { Post } from "../../shared/types/posts";
 import { getPostsByCategory } from "../../shared/apis/posts";
+import {
+  CATEGORIES,
+  Category,
+  CATEGORY_META
+} from "../../shared/types/category";
+import { paths } from "../../routers/paths";
+
+type PostsByCategory = Record<Category, Post[]>;
 
 export const Home = () => {
-  const [techNotes, setTechNotes] = useState<Post[]>([]);
-  const [thoughts, setThoughts] = useState<Post[]>([]);
-  const [deepdives, setDeepdives] = useState<Post[]>([]);
-  const [portfolio, setPortfolio] = useState<Post[]>([]);
+  const [postsByCategory, setPostsByCategory] = useState<PostsByCategory>({
+    "tech-notes": [],
+    thoughts: [],
+    deepdives: [],
+    portfolio: []
+  });
 
   useEffect(() => {
-    const fetchData = async () => {
-      const [tech, thought, deepdive, portfolio] = await Promise.all([
-        getPostsByCategory("tech-notes"),
-        getPostsByCategory("thoughts"),
-        getPostsByCategory("deepdives"),
-        getPostsByCategory("portfolio")
-      ]);
-      setTechNotes(tech);
-      setThoughts(thought);
-      setDeepdives(deepdive);
-      setPortfolio(portfolio);
+    const fetchAll = async () => {
+      const results = await Promise.all(
+        CATEGORIES.map(async (category) => {
+          const posts = await getPostsByCategory(category);
+          // 배열반환, type 튜플로 인식, Category임을 명확히 선언
+          return [category, posts] as const;
+        })
+      );
+
+      // 배열을 객체로 변환, 예: { "tech-notes": [...] }
+      const mapped = Object.fromEntries(results) as PostsByCategory;
+      setPostsByCategory(mapped);
     };
-    fetchData();
+    fetchAll();
   }, []);
 
+  console.log(postsByCategory);
   return (
     <main className={styles.main}>
       <Gretting />
-      <div className={styles.noteSection}>
-        <Section
-          title={"Tech Notes"}
-          moreToLink={"/menu/tech-notes"}
-          description={
-            "개발 관련 기술 노트입니다"
-          }
-          posts={techNotes}
-        />
-        <Section
-          title={"Thoughts"}
-          moreToLink={"/menu/thoughts"}
-          description={
-            "개발 / 일상적인 생각을 정리한 글입니다"
-          }
-          posts={thoughts}
-        />
-      </div>
-
-      <Section
-        title={"Deep Dives"}
-        moreToLink={"/menu/deepdives"}
-        description={
-          "다양한 개발 주제에 대한 심층 분석, 튜토리얼을 정리한 글입니다"
-        }
-        posts={deepdives}
-      />
-      <Section
-        title={"Portfolio"}
-        moreToLink={"/menu/portfolio"}
-        description={"다양한 프로젝트와 작업물을 정리한 포트폴리오입니다"}
-        posts={portfolio}
-      />
+      {CATEGORIES.map((c, idx) => {
+        return (
+          <Section
+            key={idx}
+            title={CATEGORY_META[c].label}
+            moreToLink={paths.menu({ category: c })}
+            description={CATEGORY_META[c].description}
+            posts={postsByCategory[c]}
+          />
+        );
+      })}
     </main>
   );
 };

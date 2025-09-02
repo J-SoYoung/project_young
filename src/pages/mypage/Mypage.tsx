@@ -8,7 +8,7 @@ import { MypageActiveListType } from "../../shared/types/posts";
 import { getAllComments, getAllPosts } from "../../shared/apis/posts";
 import { ActLists } from "./components/ActLists";
 import { ActBoard } from "./components/ActBoard";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { EditProfileModal } from "./components/EditProfileModal";
 
 export type Panel = "posts" | "comments" | "likes" | null;
@@ -27,8 +27,9 @@ const likePosts: MypageActiveListType[] = [
 
 // 좋아요 한 게시글id / title, 좋아요 한 날짜
 export const Mypage = () => {
+  const { userId } = useParams();
   const navigate = useNavigate();
-  const { profile, loading } = useAuth();
+  const { profile } = useAuth();
 
   const [isEditProfile, setIsEditProfile] = useState(false);
   const [myPosts, setMyPosts] = useState<MypageActiveListType[]>([]);
@@ -36,6 +37,7 @@ export const Mypage = () => {
   const [myLikes] = useState<MypageActiveListType[]>(likePosts); // TODO 좋아요 미구현
   const [activeType, setActiveType] = useState<Panel>("posts");
 
+  // TODO - like 개발 후 useEffect 하나로 묶기, 데이터 각각요청중
   useEffect(() => {
     const fetchAllPosts = async () => {
       const allPosts = await getAllPosts();
@@ -72,13 +74,8 @@ export const Mypage = () => {
     navigate(`/detail/${id}`);
   };
 
-  if (loading) {
-    return (
-      <main>
-        <h1>MyPage</h1>
-        <div> 로딩중 </div>
-      </main>
-    );
+  if (!userId) {
+    return <div>로그인 후 이용가능합니다 </div>;
   }
 
   const map = {

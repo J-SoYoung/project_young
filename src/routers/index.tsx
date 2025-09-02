@@ -8,58 +8,30 @@ import "../index.css";
 import { Layout } from "../shared/Layout";
 import {
   Home,
-  EditPosts,
   Search,
   Write,
   MenuMoreListsPage,
   Detail,
+  EditDetail,
   AboutMe,
   Mypage
 } from "../pages";
+import { ROUTES } from "./paths";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Layout />,
     children: [
-      {
-        index: true, // path 없이 루트 경로를 의미
-        element: <Navigate to="/home" replace />
-      },
-      {
-        path: "/home",
-        element: <Home />
-      },
-      {
-        path: "/aboutMe",
-        element: <AboutMe />
-      },
-      {
-        path: "/search",
-        element: <Search />
-      },
-      {
-        path: "/mypage",
-        element: <Mypage />
-      },
-      {
-        path: "/write",
-        element: <Write />
-      },
-      {
-        path: "/edit/:category/:id",
-        element: <EditPosts />
-      },
-      {
-        // 카테고리 별 리스트 페이지
-        path: "/menu/:category",
-        element: <MenuMoreListsPage />
-      },
-      {
-        // 카테고리 별 상세 페이지
-        path: "/detail/:id",
-        element: <Detail />
-      }
+      { index: true, element: <Navigate to={ROUTES.HOME} replace /> },
+      { path: ROUTES.ABOUT, element: <AboutMe /> },
+      { path: ROUTES.DETAIL, element: <Detail /> },
+      { path: ROUTES.DETAIL_EDIT, element: <EditDetail /> },
+      { path: ROUTES.HOME, element: <Home /> },
+      { path: ROUTES.MENU, element: <MenuMoreListsPage /> },
+      { path: ROUTES.MYPAGE, element: <Mypage /> },
+      { path: ROUTES.SEARCH, element: <Search /> },
+      { path: ROUTES.WRITE, element: <Write /> },
     ]
   }
 ]);

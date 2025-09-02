@@ -15,7 +15,7 @@ import { MenuButtons } from "./MenuButtons";
 import { LoginModal } from "./LoginModal";
 
 export const Header = () => {
-  const { profile,authUser } = useAuth();
+  const { profile, authUser } = useAuth();
   const isOwner = profile?.userId === import.meta.env.VITE_BLOG_OWNER_UID;
 
   const { isTablet, isDesktop } = useDeviceType();
