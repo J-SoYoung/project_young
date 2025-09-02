@@ -15,7 +15,7 @@ import { MenuButtons } from "./MenuButtons";
 import { LoginModal } from "./LoginModal";
 
 export const Header = () => {
-  const { profile,authUser } = useAuth();
+  const { profile, authUser } = useAuth();
   const isOwner = profile?.userId === import.meta.env.VITE_BLOG_OWNER_UID;
 
   const { isTablet, isDesktop } = useDeviceType();
@@ -50,7 +50,10 @@ export const Header = () => {
         </div>
         <nav className={styles.nav}>
           {isTablet || isDesktop ? (
-            <MenuButtons menuType={"header"} />
+            <MenuButtons
+              menuType={"header"}
+              userId={profile && profile.userId}
+            />
           ) : (
             <AiOutlineMenu
               size={25}
@@ -92,7 +95,7 @@ export const Header = () => {
           )}
         </nav>
       </header>
-      {isMenuOpen && <MenuModal onClose={() => setIsMenuOpen(false)} />}
+      {isMenuOpen && <MenuModal onClose={() => setIsMenuOpen(false)} userId={profile && profile.userId} />}
     </>
   );
 };
