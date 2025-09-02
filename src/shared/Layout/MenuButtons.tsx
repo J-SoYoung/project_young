@@ -1,44 +1,35 @@
 import { Link } from "react-router-dom";
-import {
-  FcAnswers,
-  FcIdea,
-  FcCamera,
-  FcComments,
-  FcUnlock
-} from "react-icons/fc"; //Flat Color Icons
+import { FcUnlock } from "react-icons/fc"; //Flat Color Icons
 
 import styles from "./styles/menuButton.module.css";
+import { CATEGORIES, CATEGORY_META } from "../types/category";
 
 type MenuButtonProps = {
   menuType: "header" | "modal";
   onClose?: () => void; // Optional for modal
+  userId: string | null;
 };
 
-export const MenuButtons = ({ menuType, onClose }: MenuButtonProps) => {
+export const MenuButtons = ({ menuType, onClose, userId }: MenuButtonProps) => {
   return (
     <nav
       className={menuType === "modal" ? styles.menuModal : styles.menuButton}
     >
-      <Link to={"/menu/tech-notes"} onClick={onClose}>
-        <FcAnswers size={20} />
-        <span>TechNote</span>
-      </Link>
-      <Link to={"/menu/thoughts"} onClick={onClose}>
-        <FcIdea size={20} />
-        <span>Thought</span>
-      </Link>
-      <Link to={"/menu/deepdives"} onClick={onClose}>
-        <FcComments size={20} />
-        <span>DeepDives</span>
-      </Link>
-      <Link to={"/menu/portfolio"} onClick={onClose}>
-        <FcCamera size={20} />
-        <span>Portfolio</span>
-      </Link>
-      <Link to={"/mypage"} onClick={onClose}>
-        <FcUnlock size={20} />
-        <span>MyPage</span>
-      </Link>
+      {CATEGORIES.map((category) => {
+        const Icon = CATEGORY_META[category].icon; //컴포넌트 함수를
+        return (
+          <Link to={`/menu/${category}`} onClick={onClose}>
+            <Icon size={20} />
+            <span>{CATEGORY_META[category].label}</span>
+          </Link>
+        );
+      })}
+      {userId && (
+        <Link to={`/mypage/${userId}`} onClick={onClose}>
+          <FcUnlock size={20} />
+          <span>MyPage</span>
+        </Link>
+      )}
     </nav>
   );
 };
