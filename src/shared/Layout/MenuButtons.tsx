@@ -3,14 +3,15 @@ import { FcUnlock } from "react-icons/fc"; //Flat Color Icons
 
 import styles from "./styles/menuButton.module.css";
 import { CATEGORIES, CATEGORY_META } from "../types/category";
+import { useAuth } from "../hooks/useAuth";
 
 type MenuButtonProps = {
   menuType: "header" | "modal";
   onClose?: () => void; // Optional for modal
-  userId: string | null;
 };
 
-export const MenuButtons = ({ menuType, onClose, userId }: MenuButtonProps) => {
+export const MenuButtons = ({ menuType, onClose }: MenuButtonProps) => {
+  const { profile } = useAuth();
   return (
     <nav
       className={menuType === "modal" ? styles.menuModal : styles.menuButton}
@@ -24,8 +25,8 @@ export const MenuButtons = ({ menuType, onClose, userId }: MenuButtonProps) => {
           </Link>
         );
       })}
-      {userId && (
-        <Link to={`/mypage/${userId}`} onClick={onClose}>
+      {profile && (
+        <Link to={`/mypage/${profile.userId}`} onClick={onClose}>
           <FcUnlock size={20} />
           <span>MyPage</span>
         </Link>

@@ -50,10 +50,7 @@ export const Header = () => {
         </div>
         <nav className={styles.nav}>
           {isTablet || isDesktop ? (
-            <MenuButtons
-              menuType={"header"}
-              userId={profile && profile.userId}
-            />
+            <MenuButtons menuType={"header"} />
           ) : (
             <AiOutlineMenu
               size={25}
@@ -95,7 +92,7 @@ export const Header = () => {
           )}
         </nav>
       </header>
-      {isMenuOpen && <MenuModal onClose={() => setIsMenuOpen(false)} userId={profile && profile.userId} />}
+      {isMenuOpen && <MenuModal onClose={() => setIsMenuOpen(false)} />}
     </>
   );
 };
