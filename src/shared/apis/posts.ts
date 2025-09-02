@@ -124,11 +124,9 @@ export const addComment = async (newComment: CommentType) => {
 
 // 댓글 삭제
 export const deleteComment = async (postId: string, commentId: string) => {
-  console.log(postId, commentId);
   try {
     const commentRef = doc(db, "posts", postId, "comments", commentId);
     await deleteDoc(commentRef);
-    console.log("댓글 삭제 완료:", commentId);
   } catch (error) {
     console.error(error);
   }

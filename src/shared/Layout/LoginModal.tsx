@@ -22,7 +22,7 @@ export const LoginModal = ({ onClose }: { onClose: () => void }) => {
       }
       onClose();
     } catch (error) {
-      console.log(error);
+      console.error(error);
       alert("로그인 오류입니다.");
     }
   };

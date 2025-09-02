@@ -40,7 +40,6 @@ export const Home = () => {
     fetchAll();
   }, []);
 
-  console.log(postsByCategory);
   return (
     <main className={styles.main}>
       <Gretting />

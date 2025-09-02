@@ -22,7 +22,6 @@ export const ActBoard = ({
 
   const handleClickActivity = (type: "posts" | "comments" | "likes") => {
     if (type === "posts" && !isOwner) return;
-    console.log(type);
     setActiveType(type);
   };
 
