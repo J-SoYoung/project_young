@@ -71,11 +71,7 @@ export const Mypage = () => {
   }, [profile?.userId]);
 
   const handleClickPost = (id: string) => {
-<<<<<<< HEAD
     navigate(paths.detail({ id }));
-=======
-    navigate(`/detail/${id}`);
->>>>>>> e6b9229ad4f13e575fd3a7dfd593459102c49f7f
   };
 
   if (!userId) {
