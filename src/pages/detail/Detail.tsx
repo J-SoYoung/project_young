@@ -11,6 +11,7 @@ import { CommentInput, CommentList, MarkdownWithHighlight } from "./components";
 import { getPostById } from "../../shared/apis/posts";
 import { Post, CommentType } from "../../shared/types/posts";
 import { useAuth } from "../../shared/hooks/useAuth";
+import { paths } from "../../routers/paths";
 
 export const Detail = () => {
   const navigate = useNavigate();
@@ -53,12 +54,12 @@ export const Detail = () => {
     <main className={styles.main}>
       <div className={styles.postTitleBox}>
         <h1>{title}</h1>
-        {isOwner && (
+        {id && isOwner && (
           <LuPencil
             size={20}
             className={styles.icons}
             onClick={() => {
-              navigate(`/detail/${id}/edit`);
+              navigate(paths.edit({ id }));
             }}
           />
         )}

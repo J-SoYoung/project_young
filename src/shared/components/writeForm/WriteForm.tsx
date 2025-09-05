@@ -8,6 +8,7 @@ import { FormState, Post } from "../../types/posts";
 import { addPost, updatePost } from "../../apis/posts";
 import { getTodayDate } from "../../utils/getTodayDate";
 import { CATEGORIES, CATEGORY_META } from "../../types/category";
+import { paths } from "../../../routers/paths";
 
 type Mode = "write" | "edit";
 type Props = {
@@ -101,12 +102,12 @@ export const WriteForm = ({ mode, title, initialData, buttonText }: Props) => {
         // 글 수정
         await updatePost({ ...finalPost, id: initialData.id });
         alert("글 수정이 완료되었습니다!");
-        navigate(`/detail/${initialData.id}`);
+        navigate(paths.detail({ id: initialData.id }));
       } else {
         // 글 작성
         const postId = await addPost(finalPost);
         alert("글 작성이 완료되었습니다!");
-        navigate(`/detail/${postId}`);
+        navigate(paths.detail({ id: postId }));
       }
     } catch (error) {
       console.log(error);
