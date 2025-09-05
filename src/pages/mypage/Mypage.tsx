@@ -10,6 +10,7 @@ import { ActLists } from "./components/ActLists";
 import { ActBoard } from "./components/ActBoard";
 import { useNavigate, useParams } from "react-router-dom";
 import { EditProfileModal } from "./components/EditProfileModal";
+import { paths } from "../../routers/paths";
 
 export type Panel = "posts" | "comments" | "likes" | null;
 const likePosts: MypageActiveListType[] = [
@@ -70,7 +71,11 @@ export const Mypage = () => {
   }, [profile?.userId]);
 
   const handleClickPost = (id: string) => {
+<<<<<<< HEAD
+    navigate(paths.detail({ id }));
+=======
     navigate(`/detail/${id}`);
+>>>>>>> e6b9229ad4f13e575fd3a7dfd593459102c49f7f
   };
 
   if (!userId) {
