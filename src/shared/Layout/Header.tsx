@@ -13,6 +13,7 @@ import { logout } from "../service/auth";
 import { MenuModal } from "./MenuModal";
 import { MenuButtons } from "./MenuButtons";
 import { LoginModal } from "./LoginModal";
+import { paths } from "../../routers/paths";
 
 export const Header = () => {
   const { profile, authUser } = useAuth();
@@ -46,7 +47,7 @@ export const Header = () => {
     <>
       <header className={styles.header}>
         <div className={styles.logo}>
-          <Link to="/">DEV.SoYoung</Link>
+          <Link to={paths.home()}>DEV.SoYoung</Link>
         </div>
         <nav className={styles.nav}>
           {isTablet || isDesktop ? (
@@ -86,7 +87,7 @@ export const Header = () => {
           {isLoginOpen && <LoginModal onClose={() => setIsLoginOpen(false)} />}
 
           {isOwner && (
-            <Link to={"/write"}>
+            <Link to={paths.write()}>
               <AiFillSignature size={27} className={styles.icons} />
             </Link>
           )}

@@ -70,7 +70,6 @@ export const Mypage = () => {
   }, [profile?.userId]);
 
   const handleClickPost = (id: string) => {
-    console.log("페이지이동", id);
     navigate(`/detail/${id}`);
   };
 

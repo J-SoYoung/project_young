@@ -15,7 +15,7 @@ export const ROUTES = {
 } as const;
 
 export const paths = {
-  about: () => ROUTES.HOME,
+  about: () => ROUTES.ABOUT,
   detail: ({ id }: { id: string }) => `/detail/${id}`,
   edit: ({ id }: { id: string }) => `/detail/${id}/edit`,
   home: () => ROUTES.HOME,

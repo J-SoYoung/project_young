@@ -21,7 +21,6 @@ export const getOrCreateUserProfile = async (
   googleUser: FirebaseUser,
   isOwnerUid: string
 ) => {
-  console.log(googleUser, isOwnerUid);
   const ref = doc(db, USERS, googleUser.uid);
   const snapshot = await getDoc(ref);
 
