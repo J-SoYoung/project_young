@@ -6,6 +6,7 @@ import { Mypage } from "./mypage/Mypage";
 import { Detail } from "./detail/Detail";
 import { EditDetail } from "./editDetail/EditDetail";
 import { MenuMoreListsPage } from "./menuMoreListPage/MenuMoreListsPage";
+import { NotFound } from "./notFound/NotFound";
 
 export {
   Search,
@@ -15,5 +16,6 @@ export {
   EditDetail,
   Home,
   AboutMe,
-  MenuMoreListsPage
+  MenuMoreListsPage,
+  NotFound
 };
