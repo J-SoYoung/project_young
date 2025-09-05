@@ -110,7 +110,7 @@ export const WriteForm = ({ mode, title, initialData, buttonText }: Props) => {
         navigate(paths.detail({ id: postId }));
       }
     } catch (error) {
-      console.log(error);
+      console.error(error);
       alert(`글 ${mode === "edit" ? "수정" : "작성"} 중 오류가 발생했습니다`);
       setIsLoading(false);
     }

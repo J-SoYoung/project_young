@@ -1,6 +1,8 @@
-import styles from "../styles/greeting.module.css";
-import profileIcon from "../../../assets/profile-icon.png";
 import { Link } from "react-router-dom";
+import styles from "../styles/greeting.module.css";
+
+import profileIcon from "../../../assets/profile-icon.png";
+import { paths } from "../../../routers/paths";
 
 export const Gretting = () => {
   return (
@@ -22,7 +24,7 @@ export const Gretting = () => {
       </div>
       <div className={styles.profileContainer}>
         <img src={profileIcon} className={styles.profile} />
-        <Link to={"/aboutMe"} className={styles.aboutMe}>
+        <Link to={paths.about()} className={styles.aboutMe}>
           About Me
         </Link>
       </div>
