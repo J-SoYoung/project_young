@@ -7,6 +7,8 @@ export const mustParse = <T>(
   value : unknown
 ) => {
   try {
+    // .parse() : zod검증메서드
+    // value가 스키마 규칙을 지키면 통과, 아니면 에러 throw
     return schema.parse(value);
   } catch {
     notFound();
