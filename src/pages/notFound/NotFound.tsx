@@ -5,6 +5,11 @@ import { Link } from "react-router-dom";
 import { paths } from "../../routers/paths";
 
 export const NotFound = () => {
+  // 에러 상태코드가 있으면 메시지에 반영(404/500 등)
+  // const err = useRouteError();
+  // const isResp = isRouteErrorResponse(err);
+  // const status = isResp ? err.status : 404;
+
   return (
     <main className={styles.wrap} aria-labelledby="nf-title">
       <div className={styles.animBox} aria-hidden="true">
@@ -16,7 +21,6 @@ export const NotFound = () => {
             className={styles.anim}
           />
         ) : (
-          // 애니메이션이 없을 때의 매우 가벼운 대체 UI
           <div className={styles.fallbackIcon}>😵‍💫</div>
         )}
       </div>
@@ -28,7 +32,11 @@ export const NotFound = () => {
       </p>
 
       <div className={styles.cta}>
-        <Link to={paths.home()} className={styles.linkBtn} aria-label="홈으로 이동">
+        <Link
+          to={paths.home()}
+          className={styles.linkBtn}
+          aria-label="홈으로 이동"
+        >
           홈으로 가기
         </Link>
       </div>

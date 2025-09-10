@@ -21,6 +21,14 @@ export const paths = {
   home: () => ROUTES.HOME,
   menu: ({ category }: { category: Category }) => `/menu/${category}`,
   mypage: ({ userId }: { userId: string }) => `/mypage/${userId}`,
-  search: () => ROUTES.SEARCH, // todo search
+  // 검색 query는 선택적 파라미터
+  search: ({ q }: { q?: string } = {}) => {
+    if (!q || q.trim().length === 0) {
+      // 검색어 없으면 전체 리스트 
+      return ROUTES.SEARCH;
+    }
+    const encoded = encodeURIComponent(q.trim());
+    return `${ROUTES.SEARCH}?q=${encoded}`;
+  },
   write: () => ROUTES.WRITE
 };
