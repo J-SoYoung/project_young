@@ -12,6 +12,7 @@ import {
   CATEGORY_META
 } from "../../shared/types/category";
 import { paths } from "../../routers/paths";
+import { SearchBar } from "../../shared/components";
 
 type PostsByCategory = Record<Category, Post[]>;
 
@@ -43,6 +44,7 @@ export const Home = () => {
   return (
     <main className={styles.main}>
       <Gretting />
+      <SearchBar />
       {CATEGORIES.map((c, idx) => {
         return (
           <Section
