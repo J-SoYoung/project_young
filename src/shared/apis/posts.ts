@@ -165,3 +165,25 @@ export const getAllComments = async (userId: string) => {
     return [];
   }
 };
+
+// 현재는 접두사 검색만 가능
+export const searchPosts = async (q: string) => {
+  try {
+    const postsRef = collection(db, "posts");
+    const searchQuery = query(
+      postsRef,
+      where("title", ">=", q),
+      where("title", "<=", q + "\uf8ff"),
+      orderBy("title") // 🔑 title 정렬 필수
+    );
+
+    const snapshot = await getDocs(searchQuery);
+    return snapshot.docs.map((doc) => ({
+      ...doc.data(),
+      id: doc.id
+    })) as Post[];
+  } catch (error) {
+    console.error(error);
+    return [];
+  }
+};
