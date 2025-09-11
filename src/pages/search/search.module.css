@@ -1,4 +1,29 @@
 .searchMessage {
-  padding: 1rem 0 1.5rem ;
+  padding: 1rem 0 1.5rem;
   box-sizing: border-box;
+}
+.subTitle {
+  margin: 3rem 0 1rem;
+}
+.list {
+  padding: 0;
+  margin: 0;
+}
+.list li {
+  display: block;
+  margin-bottom: 1rem;
+  margin: 0;
+  padding: 0.8rem 0;
+  box-sizing: border-box;
+  border-bottom: 1px solid var(--color-border);
+}
+.list time {
+  font-size: 0.85rem;
+  color: var(--color-muted);
+  display: block;
+}
+.list a {
+  font-weight: bold;
+  text-decoration: none;
+  color: var(--color-title);
 }
