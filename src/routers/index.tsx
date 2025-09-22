@@ -27,16 +27,16 @@ import {
 import { mustParse } from "./guard";
 
 const loadDetail = ({ params }: { params: unknown }) => {
-  mustParse(ParamDetailSchema, params);
+  return mustParse(ParamDetailSchema, params);
 };
 const loadDetailEdit = ({ params }: { params: unknown }) => {
-  mustParse(ParamDetailSchema, params);
+  return mustParse(ParamDetailSchema, params);
 };
 const loadMenuMore = ({ params }: { params: unknown }) => {
-  mustParse(ParamMenuSchema, params);
+  return mustParse(ParamMenuSchema, params);
 };
 const loadMypage = ({ params }: { params: unknown }) => {
-  mustParse(ParamMypageSchema, params);
+  return mustParse(ParamMypageSchema, params);
 };
 const loadSearch = ({ request }: { request: Request }) => {
   const url = new URL(request.url);
@@ -68,8 +68,8 @@ const router = createBrowserRouter([
       },
       { path: ROUTES.MYPAGE, loader: loadMypage, element: <Mypage /> },
       { path: ROUTES.SEARCH, loader: loadSearch, element: <Search /> },
-      { path: ROUTES.WRITE, element: <Write /> },
-      { path: "*", element: <NotFound /> }
+      { path: ROUTES.WRITE, element: <Write /> }
+      // { path: "*", element: <NotFound /> }
     ]
   }
 ]);

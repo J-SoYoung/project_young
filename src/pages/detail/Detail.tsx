@@ -1,4 +1,4 @@
-import { useNavigate, useParams } from "react-router-dom";
+import { useLoaderData, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 import { LuPencil } from "react-icons/lu";
@@ -15,7 +15,7 @@ import { paths } from "../../routers/paths";
 
 export const Detail = () => {
   const navigate = useNavigate();
-  const { id } = useParams<string>();
+  const { id } = useLoaderData();
   const { profile } = useAuth();
   const isOwner = profile?.userId === import.meta.env.VITE_BLOG_OWNER_UID;
 

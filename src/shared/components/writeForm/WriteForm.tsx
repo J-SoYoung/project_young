@@ -134,7 +134,7 @@ export const WriteForm = ({ mode, title, initialData, buttonText }: Props) => {
         >
           <option value="">카테고리를 선택해주세요</option>
           {CATEGORIES.map((c) => {
-            return <option value={c}>{CATEGORY_META[c].label}</option>;
+            return <option key={c} value={c}>{CATEGORY_META[c].label}</option>;
           })}
         </select>
 

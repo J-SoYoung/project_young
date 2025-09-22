@@ -8,7 +8,7 @@ import { MypageActiveListType } from "../../shared/types/posts";
 import { getAllComments, getAllPosts } from "../../shared/apis/posts";
 import { ActLists } from "./components/ActLists";
 import { ActBoard } from "./components/ActBoard";
-import { useNavigate, useParams } from "react-router-dom";
+import { useLoaderData, useNavigate } from "react-router-dom";
 import { EditProfileModal } from "./components/EditProfileModal";
 import { paths } from "../../routers/paths";
 
@@ -28,7 +28,7 @@ const likePosts: MypageActiveListType[] = [
 
 // 좋아요 한 게시글id / title, 좋아요 한 날짜
 export const Mypage = () => {
-  const { userId } = useParams();
+  const { userId } = useLoaderData();
   const navigate = useNavigate();
   const { profile } = useAuth();
 
