@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useLoaderData } from "react-router-dom";
 
 import styles from "./menuMoreListsPage.module.css";
 import { getMenuConfig } from "./getMenuConfig";
@@ -6,9 +6,8 @@ import { useEffect, useState } from "react";
 import { Post } from "../../shared/types/posts";
 import { getPostsByCategory } from "../../shared/apis/posts";
 
-
 export const MenuMoreListsPage = () => {
-  const { category } = useParams();
+  const { category } = useLoaderData();
   const [posts, setPosts] = useState<Post[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -23,10 +22,10 @@ export const MenuMoreListsPage = () => {
     fetchData();
   }, [category]);
 
-  const { title, component, desc } = getMenuConfig({category, posts});
+  const { title, component, desc } = getMenuConfig({ category, posts });
 
   if (isLoading) return <p>로딩중</p>;
-  
+
   return (
     <main className={styles.container}>
       <header className={styles.titleContainer}>

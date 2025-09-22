@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useLoaderData } from "react-router-dom";
 import { getPostById } from "../../shared/apis/posts";
 import { Post } from "../../shared/types/posts";
 import { WriteForm } from "../../shared/components";
 
 export const EditDetail = () => {
-  const { id } = useParams<{ id: string }>();
+  const { id } = useLoaderData();
 
   const [initialData, setInitialData] = useState<Post | null>(null);
   const [isLoading, setIsLoading] = useState(true);
