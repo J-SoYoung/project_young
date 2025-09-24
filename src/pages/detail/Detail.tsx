@@ -1,6 +1,5 @@
 import { useLoaderData, useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
-
+import { useQuery } from "@tanstack/react-query";
 import { LuPencil } from "react-icons/lu";
 import { FaHeart } from "react-icons/fa6";
 // import { FaRegHeart } from "react-icons/fa6";
@@ -9,9 +8,10 @@ import styles from "./styles/detail.module.css";
 import { CommentInput, CommentList, MarkdownWithHighlight } from "./components";
 
 import { getPostById } from "../../shared/apis/posts";
-import { Post, CommentType } from "../../shared/types/posts";
+import { Post } from "../../shared/types/posts";
 import { useAuth } from "../../shared/hooks/useAuth";
 import { paths } from "../../routers/paths";
+import { keys } from "../../shared/query/keys";
 
 export const Detail = () => {
   const navigate = useNavigate();
@@ -19,29 +19,20 @@ export const Detail = () => {
   const { profile } = useAuth();
   const isOwner = profile?.userId === import.meta.env.VITE_BLOG_OWNER_UID;
 
-  const [post, setPost] = useState<Omit<Post, "comments"> | null>(null);
-  const [commentLists, setCommentLists] = useState<CommentType[]>([]);
-  const [loading, setLoading] = useState(true);
+  const {
+    data: postWithComments,
+    isLoading
+    // isError,
+    // error
+  } = useQuery({
+    queryKey: keys.posts.detail(id),
+    queryFn: () => getPostById(id),
+    enabled: !!id // id 없으면 실행 안 함
+  });
 
-  useEffect(() => {
-    const fetchData = async () => {
-      if (!id) return alert("포스트를 찾을 수 없습니다");
-      const postWithComments = await getPostById(id);
-      if (!postWithComments) {
-        setPost(null);
-        setCommentLists([]);
-        setLoading(false);
-        return;
-      }
-      const { comments = [], ...postData } = postWithComments;
-      setPost(postData); // Omit<Post, "comments">
-      setCommentLists(comments); // CommentType[]
-      setLoading(false);
-    };
-    fetchData();
-  }, [id]);
+  const { comments, ...post } = postWithComments || ({} as Post);
 
-  if (loading) return <p> 로딩중 ... </p>;
+  if (isLoading) return <p> 로딩중 ... </p>;
   if (!post) return <p>포스트를 찾을 수 없습니다</p>;
 
   const { title, author, authorProfile, createdAt, content } = post;
@@ -76,11 +67,9 @@ export const Detail = () => {
           <div>
             <span className={styles.authorName}>{author}</span>
             <span className={styles.postDate}>{createdAt}</span>
-            {/* 예시 날짜 형식 Today at 11:37 AM */}
           </div>
         </div>
         <p className={styles.postLikeCount}>
-          {/* <FaRegHeart color="red" /> */}
           <FaHeart color="red" />
           <span>42</span>
         </p>
@@ -94,15 +83,16 @@ export const Detail = () => {
       {/* comment box */}
       <section className={styles.commentSection}>
         <h4 className={styles.commentHeader}>
-          댓글 {commentLists ? commentLists.length : 0}개
+          댓글 {comments ? comments.length : 0}개
         </h4>
         <CommentList
           postId={id || ""}
-          comments={commentLists ? commentLists : []}
-          setCommentLists={setCommentLists}
+          comments={comments ? comments : []}
+          // setCommentLists={setCommentLists}
         />
         {profile && (
-          <CommentInput postId={id} setCommentLists={setCommentLists} />
+          <CommentInput postId={id} />
+          // <CommentInput postId={id} setCommentLists={setCommentLists} />
         )}
       </section>
     </main>

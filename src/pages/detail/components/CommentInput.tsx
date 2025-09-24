@@ -8,12 +8,12 @@ import { useAuth } from "../../../shared/hooks/useAuth";
 
 type CommentInputProps = {
   postId: string | undefined;
-  setCommentLists: React.Dispatch<React.SetStateAction<[] | CommentType[]>>;
+  // setCommentLists: React.Dispatch<React.SetStateAction<[] | CommentType[]>>;
 };
 
 export const CommentInput = ({
   postId,
-  setCommentLists
+  // setCommentLists
 }: CommentInputProps) => {
   const { profile } = useAuth();
   const [comment, setComment] = useState("");
@@ -29,7 +29,7 @@ export const CommentInput = ({
       postId: postId as string
     };
     setComment("");
-    setCommentLists((prev) => [newComment, ...prev]);
+    // setCommentLists((prev) => [newComment, ...prev]);
     try {
       if (postId) {
         await addComment(newComment);
