@@ -133,7 +133,7 @@ export const deleteComment = async (postId: string, commentId: string) => {
 };
 
 // 댓글 전체 가져오기 (Mypage - activity)
-export const getAllComments = async (userId: string) => {
+export const getAllMyComments = async (userId: string) => {
   try {
     const q = query(
       collectionGroup(db, "comments"),
