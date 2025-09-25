@@ -1,15 +1,17 @@
-import { useEffect, useState } from "react";
-
+import { useState } from "react";
+import { useLoaderData, useNavigate } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
 import { FcComments, FcLike, FcRules } from "react-icons/fc";
 
 import styles from "./mypage.module.css";
-import { useAuth } from "../../shared/hooks/useAuth";
-import { MypageActiveListType } from "../../shared/types/posts";
-import { getAllComments, getAllPosts } from "../../shared/apis/posts";
 import { ActLists } from "./components/ActLists";
 import { ActBoard } from "./components/ActBoard";
-import { useLoaderData, useNavigate } from "react-router-dom";
 import { EditProfileModal } from "./components/EditProfileModal";
+
+import { keys } from "../../shared/query/keys";
+import { useAuth } from "../../shared/hooks/useAuth";
+import { MypageActiveListType } from "../../shared/types/posts";
+import { getAllMyComments, getAllPosts } from "../../shared/apis/posts";
 import { paths } from "../../routers/paths";
 
 export type Panel = "posts" | "comments" | "likes" | null;
@@ -33,46 +35,46 @@ export const Mypage = () => {
   const { profile } = useAuth();
 
   const [isEditProfile, setIsEditProfile] = useState(false);
-  const [myPosts, setMyPosts] = useState<MypageActiveListType[]>([]);
-  const [myComments, setMyComments] = useState<MypageActiveListType[]>([]);
   const [myLikes] = useState<MypageActiveListType[]>(likePosts); // TODO 좋아요 미구현
   const [activeType, setActiveType] = useState<Panel>("posts");
 
-  // TODO - like 개발 후 useEffect 하나로 묶기, 데이터 각각요청중
-  useEffect(() => {
-    const fetchAllPosts = async () => {
-      const allPosts = await getAllPosts();
-      if (!allPosts) setMyPosts([]);
-      const items = allPosts.map((p) => ({
+  const {
+    data: allMyPosts,
+    isLoading: allMyPostsLoading
+    // isError : allMyPostsError,
+  } = useQuery({
+    queryKey: keys.posts.allMyPosts(),
+    queryFn: () => getAllPosts(),
+    select: (allMyPosts) =>
+      allMyPosts.map((p) => ({
         id: p.id || "",
         title: p.title,
         subTitle: p.category,
         createdAt: p.createdAt
-      }));
-      setMyPosts(items);
-    };
-    fetchAllPosts();
-  }, []);
+      }))
+  });
 
-  useEffect(() => {
-    const fetchMyComments = async () => {
-      if (!profile?.userId) return;
-      const allComments = await getAllComments(profile?.userId);
-      if (!allComments) setMyComments([]);
-      const items = allComments.map((c) => ({
+  const {
+    data: allMyComments,
+    isLoading: allMyCommentsLoading
+    // isError : allMyCommentsError,
+  } = useQuery({
+    queryKey: keys.comments.allMyComments(userId),
+    queryFn: () => getAllMyComments(userId),
+    select: (allMyPosts) =>
+      allMyPosts.map((c) => ({
         id: c.postId || "",
         title: c.comment, // 댓글내용
         subTitle: c.postTitle, // 댓글 달린 포스트 제목
         createdAt: c.createdAt
-      }));
-      setMyComments(items);
-    };
-    fetchMyComments();
-  }, [profile?.userId]);
+      }))
+  });
 
   const handleClickPost = (id: string) => {
     navigate(paths.detail({ id }));
   };
+
+  if (allMyPostsLoading || allMyCommentsLoading) return <div>로딩중...</div>;
 
   if (!userId) {
     return <div>로그인 후 이용가능합니다 </div>;
@@ -82,13 +84,13 @@ export const Mypage = () => {
     posts: {
       title: "My Posts",
       emptyText: "작성한 포스트가 없습니다.",
-      lists: myPosts,
+      lists: allMyPosts || [],
       icon: <FcRules size={20} />
     },
     comments: {
       title: "My Comments",
       emptyText: "작성한 댓글이 없습니다.",
-      lists: myComments,
+      lists: allMyComments || [],
       icon: <FcComments size={20} />
     },
     likes: {
@@ -139,9 +141,9 @@ export const Mypage = () => {
 
       {/* Activity */}
       <ActBoard
-        posts={myPosts}
+        posts={allMyPosts || []}
         likes={myLikes}
-        comments={myComments}
+        comments={allMyComments || []}
         setActiveType={setActiveType}
       />
 
