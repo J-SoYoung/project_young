@@ -7,19 +7,20 @@ import styles from "../styles/commentList.module.css";
 type CommentListProps = {
   postId: string;
   comments: CommentType[];
-  setCommentLists: React.Dispatch<React.SetStateAction<[] | CommentType[]>>;
+  // setCommentLists: React.Dispatch<React.SetStateAction<[] | CommentType[]>>;
 };
 
 export const CommentList = ({
   postId,
   comments,
-  setCommentLists
+  // setCommentLists
 }: CommentListProps) => {
   const { profile } = useAuth();
+
   const handleDelete = (id: string) => {
     if (confirm("댓글을 정말 삭제하시겠습니까?")) {
       deleteComment(postId, id);
-      setCommentLists((prev) => prev.filter((comment) => comment.id !== id));
+      // setCommentLists((prev) => prev.filter((comment) => comment.id !== id));
     }
   };
 

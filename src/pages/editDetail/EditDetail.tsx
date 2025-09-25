@@ -1,24 +1,22 @@
-import { useEffect, useState } from "react";
 import { useLoaderData } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
+
 import { getPostById } from "../../shared/apis/posts";
-import { Post } from "../../shared/types/posts";
 import { WriteForm } from "../../shared/components";
+import { keys } from "../../shared/query/keys";
 
 export const EditDetail = () => {
   const { id } = useLoaderData();
-
-  const [initialData, setInitialData] = useState<Post | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    const fetchPost = async () => {
-      if (!id) return alert("잘못된 요청입니다");
-      const data = await getPostById(id);
-      setInitialData(data);
-      setIsLoading(false);
-    };
-    fetchPost();
-  }, [id]);
+  const {
+    data: initialData,
+    isLoading
+    // isError,
+    // error
+  } = useQuery({
+    queryKey: keys.posts.editPost(id),
+    queryFn: () => getPostById(id),
+    enabled: !!id
+  });
 
   if (isLoading) return <p> 로딩중 ... </p>;
   if (!initialData) return <p>포스트를 찾을 수 없습니다</p>;

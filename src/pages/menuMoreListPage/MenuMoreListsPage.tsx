@@ -1,27 +1,27 @@
 import { useLoaderData } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
 
 import styles from "./menuMoreListsPage.module.css";
 import { getMenuConfig } from "./getMenuConfig";
-import { useEffect, useState } from "react";
-import { Post } from "../../shared/types/posts";
+
 import { getPostsByCategory } from "../../shared/apis/posts";
+import { keys } from "../../shared/query/keys";
 
 export const MenuMoreListsPage = () => {
   const { category } = useLoaderData();
-  const [posts, setPosts] = useState<Post[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      if (!category) return alert("잘못된 요청입니다");
-      setIsLoading(true);
-      const data = await getPostsByCategory(category);
-      setPosts(data);
-      setIsLoading(false);
-    };
-    fetchData();
-  }, [category]);
+  const {
+    data: posts,
+    isLoading,
+    // isError,
+    // error
+  } = useQuery({
+    queryKey: keys.posts.category(category),
+    queryFn: () => getPostsByCategory(category),
+    enabled: !!category 
+  });
 
+  if (!posts) return <p>포스트를 찾을 수 없습니다</p>;
   const { title, component, desc } = getMenuConfig({ category, posts });
 
   if (isLoading) return <p>로딩중</p>;
