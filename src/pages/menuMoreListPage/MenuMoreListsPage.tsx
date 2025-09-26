@@ -16,7 +16,7 @@ export const MenuMoreListsPage = () => {
     // isError,
     // error
   } = useQuery({
-    queryKey: keys.posts.category(category),
+    queryKey: keys.posts.list(category),
     queryFn: () => getPostsByCategory(category),
     enabled: !!category 
   });
