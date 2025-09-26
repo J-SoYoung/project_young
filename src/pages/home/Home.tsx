@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useQueries } from "@tanstack/react-query";
 
 import styles from "./styles/home.module.css";
 import { Section } from "./components/Section";
@@ -13,33 +13,29 @@ import {
 } from "../../shared/types/category";
 import { paths } from "../../routers/paths";
 import { SearchBar } from "../../shared/components";
+import { keys } from "../../shared/query/keys";
 
 type PostsByCategory = Record<Category, Post[]>;
 
 export const Home = () => {
-  const [postsByCategory, setPostsByCategory] = useState<PostsByCategory>({
-    "tech-notes": [],
-    thoughts: [],
-    deepdives: [],
-    portfolio: []
+  const results = useQueries({
+    queries: CATEGORIES.map((category) => ({
+      queryKey: keys.posts.list(category),
+      queryFn: () => getPostsByCategory(category),
+      staleTime: 60_000
+    })),
+    combine: (res) => ({
+      isLoading: res.some((r) => r.isLoading),
+      isError: res.some((r) => r.isError),
+      data: Object.fromEntries(
+        CATEGORIES.map((c, i) => [c, res[i].data ?? []] as const)
+      ) as PostsByCategory
+    })
   });
 
-  useEffect(() => {
-    const fetchAll = async () => {
-      const results = await Promise.all(
-        CATEGORIES.map(async (category) => {
-          const posts = await getPostsByCategory(category);
-          // 배열반환, type 튜플로 인식, Category임을 명확히 선언
-          return [category, posts] as const;
-        })
-      );
-
-      // 배열을 객체로 변환, 예: { "tech-notes": [...] }
-      const mapped = Object.fromEntries(results) as PostsByCategory;
-      setPostsByCategory(mapped);
-    };
-    fetchAll();
-  }, []);
+  const { data, isLoading, isError } = results;
+  if (isLoading) return <div>Loading...</div>;
+  if (isError || !data) return <div>Error occurred</div>;
 
   return (
     <main className={styles.main}>
@@ -52,7 +48,7 @@ export const Home = () => {
             title={CATEGORY_META[c].label}
             moreToLink={paths.menu({ category: c })}
             description={CATEGORY_META[c].description}
-            posts={postsByCategory[c]}
+            posts={data[c]}
           />
         );
       })}
