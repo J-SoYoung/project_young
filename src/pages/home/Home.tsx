@@ -21,16 +21,19 @@ export const Home = () => {
   const results = useQueries({
     queries: CATEGORIES.map((category) => ({
       queryKey: keys.posts.list(category),
-      queryFn: () => getPostsByCategory(category),
-      staleTime: 60_000
+      queryFn: async () => {
+        const posts = await getPostsByCategory(category);
+        return [category, posts] as const;
+      }
     })),
-    combine: (res) => ({
-      isLoading: res.some((r) => r.isLoading),
-      isError: res.some((r) => r.isError),
-      data: Object.fromEntries(
-        CATEGORIES.map((c, i) => [c, res[i].data ?? []] as const)
-      ) as PostsByCategory
-    })
+    combine: (res) => {
+      const entries = res.map((r) => r.data) as [string, Post[]][];
+      return {
+        isLoading: res.some((r) => r.isLoading),
+        isError: res.some((r) => r.isError),
+        data: Object.fromEntries(entries) as PostsByCategory
+      };
+    }
   });
 
   const { data, isLoading, isError } = results;
