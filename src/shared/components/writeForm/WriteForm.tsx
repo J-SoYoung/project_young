@@ -5,10 +5,12 @@ import styles from "./writeForm.module.css";
 import profileImg from "../../../assets/m2.jpg";
 
 import { FormState, Post } from "../../types/posts";
-import { addPost, updatePost } from "../../apis/posts";
+import { addPost, editPost } from "../../apis/posts";
 import { getTodayDate } from "../../utils/getTodayDate";
 import { CATEGORIES, CATEGORY_META } from "../../types/category";
 import { paths } from "../../../routers/paths";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { keys } from "../../query/keys";
 
 type Mode = "write" | "edit";
 type Props = {
@@ -20,7 +22,8 @@ type Props = {
 
 export const WriteForm = ({ mode, title, initialData, buttonText }: Props) => {
   const navigate = useNavigate();
-  const [isLoading, setIsLoading] = useState(false);
+  const queryClient = useQueryClient();
+
   const [formState, setFormState] = useState<FormState>({
     title: "",
     content: "",
@@ -70,9 +73,45 @@ export const WriteForm = ({ mode, title, initialData, buttonText }: Props) => {
     }
   };
 
+  const { mutate: addPostMutate, isPending: addPostPending } = useMutation({
+    mutationFn: (post: Post) => {
+      return addPost(post);
+    },
+    onSuccess: (added: string, variables: Post) => {
+      if (variables.category) {
+        queryClient.invalidateQueries({
+          queryKey: keys.posts.list(variables.category)
+        });
+      }
+      queryClient.invalidateQueries({ queryKey: keys.posts.allMyPosts() });
+      navigate(paths.detail({ id: added }));
+    },
+    onError: (err) => {
+      alert("포스트 등록에 실패했습니다. 다시 시도해주세요.");
+      console.error("포스트 등록 실패:", err);
+    }
+  });
+
+  const { mutate: editPostMutate, isPending: editPostPending } = useMutation({
+    mutationFn: (post: Post) => editPost(post),
+    onSuccess: (editedId: string, variables: Post) => {
+      if (variables.category) {
+        queryClient.invalidateQueries({
+          queryKey: keys.posts.list(variables.category)
+        });
+      }
+      queryClient.invalidateQueries({ queryKey: keys.posts.detail(editedId) });
+      queryClient.invalidateQueries({ queryKey: keys.posts.allMyPosts() });
+      navigate(paths.detail({ id: editedId }));
+    },
+    onError: (err) => {
+      alert("포스트 수정에 실패했습니다. 다시 시도해주세요.");
+      console.error("포스트 수정 실패:", err);
+    }
+  });
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setIsLoading(true);
 
     const basePost = {
       author: "SoYoung",
@@ -97,29 +136,21 @@ export const WriteForm = ({ mode, title, initialData, buttonText }: Props) => {
       };
     }
 
-    try {
-      if (mode === "edit" && initialData?.id) {
-        // 글 수정
-        await updatePost({ ...finalPost, id: initialData.id });
-        alert("글 수정이 완료되었습니다!");
-        navigate(paths.detail({ id: initialData.id }));
-      } else {
-        // 글 작성
-        const postId = await addPost(finalPost);
-        alert("글 작성이 완료되었습니다!");
-        navigate(paths.detail({ id: postId }));
+    if (mode === "edit") {
+      if (!initialData?.id) {
+        alert("수정할 글의 ID가 없습니다.");
+        return;
       }
-    } catch (error) {
-      console.error(error);
-      alert(`글 ${mode === "edit" ? "수정" : "작성"} 중 오류가 발생했습니다`);
-      setIsLoading(false);
+      const payload = { ...finalPost, id: initialData.id };
+      editPostMutate(payload);
+    } else {
+      addPostMutate(finalPost);
     }
   };
 
-  if (isLoading)
-    return (
-      <p> 포스트를 {mode === "edit" ? "수정" : "작성"}하고 있습니다 ... </p>
-    );
+  if (addPostPending || editPostPending) {
+    return <p>포스트를 {mode === "edit" ? "수정" : "작성"}하고 있습니다 ...</p>;
+  }
 
   return (
     <section>
@@ -134,7 +165,11 @@ export const WriteForm = ({ mode, title, initialData, buttonText }: Props) => {
         >
           <option value="">카테고리를 선택해주세요</option>
           {CATEGORIES.map((c) => {
-            return <option key={c} value={c}>{CATEGORY_META[c].label}</option>;
+            return (
+              <option key={c} value={c}>
+                {CATEGORY_META[c].label}
+              </option>
+            );
           })}
         </select>
 
