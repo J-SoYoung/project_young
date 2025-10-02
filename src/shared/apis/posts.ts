@@ -94,15 +94,17 @@ export const addPost = async (post: Post) => {
 };
 
 // 게시글 수정
-export const updatePost = async (post: Post) => {
+export const editPost = async (post: Post): Promise<string> => {
   try {
     if (!post.id) {
-      return;
+      throw new Error("editPost: post.id가 없습니다.");
     }
-    const postRef = doc(db, "posts", post.id);
-    await updateDoc(postRef, post);
+    const { id, ...updates } = post; 
+    const postRef = doc(db, "posts", id);
+    await updateDoc(postRef, updates);
+    return id; 
   } catch (error) {
-    console.error("Error updatePost document: ", error);
+    console.error("Error editPost document: ", error);
     throw error;
   }
 };

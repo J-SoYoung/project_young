@@ -1,26 +1,37 @@
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { deleteComment } from "../../../shared/apis/posts";
 import { useAuth } from "../../../shared/hooks/useAuth";
 
 import { CommentType } from "../../../shared/types/posts";
 import styles from "../styles/commentList.module.css";
+import { keys } from "../../../shared/query/keys";
 
 type CommentListProps = {
   postId: string;
   comments: CommentType[];
-  // setCommentLists: React.Dispatch<React.SetStateAction<[] | CommentType[]>>;
 };
 
-export const CommentList = ({
-  postId,
-  comments,
-  // setCommentLists
-}: CommentListProps) => {
+export const CommentList = ({ postId, comments }: CommentListProps) => {
   const { profile } = useAuth();
+  const queryClient = useQueryClient();
+
+  const { mutate: deleteCommentMutate, isPending } = useMutation({
+    mutationFn: async (commentId: string) => {
+      return deleteComment(postId, commentId);
+    },
+    onError: (err) => {
+      alert("댓글 삭제에 실패했습니다. 다시 시도해주세요.");
+      console.error("댓글 삭제 실패:", err);
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: keys.posts.detail(postId) });
+    }
+  });
 
   const handleDelete = (id: string) => {
+    if (!id) return;
     if (confirm("댓글을 정말 삭제하시겠습니까?")) {
-      deleteComment(postId, id);
-      // setCommentLists((prev) => prev.filter((comment) => comment.id !== id));
+      deleteCommentMutate(id);
     }
   };
 
@@ -40,7 +51,7 @@ export const CommentList = ({
                   className={styles.deleteButton}
                   onClick={() => handleDelete(c.id || "")}
                 >
-                  삭제
+                  {isPending ? "삭제중..." : "삭제"}
                 </button>
               )}
             </div>
