@@ -4,18 +4,11 @@ import styles from "./styles/home.module.css";
 import { Section } from "./components/Section";
 import { Gretting } from "./components/Greeting";
 
-import { Post } from "../../shared/types/posts";
 import { getPostsByCategory } from "../../shared/apis/posts";
-import {
-  CATEGORIES,
-  Category,
-  CATEGORY_META
-} from "../../shared/types/category";
+import { CATEGORIES, CATEGORY_META } from "../../shared/types/category";
 import { paths } from "../../routers/paths";
 import { SearchBar } from "../../shared/components";
 import { keys } from "../../shared/query/keys";
-
-type PostsByCategory = Record<Category, Post[]>;
 
 export const Home = () => {
   const results = useQueries({
@@ -27,11 +20,13 @@ export const Home = () => {
       }
     })),
     combine: (res) => {
-      const entries = res.map((r) => r.data) as [string, Post[]][];
+      const entries = res.map(
+        (r, i) => r.data ?? ([CATEGORIES[i], []] as const)
+      );
       return {
         isLoading: res.some((r) => r.isLoading),
         isError: res.some((r) => r.isError),
-        data: Object.fromEntries(entries) as PostsByCategory
+        data: Object.fromEntries(entries)
       };
     }
   });
