@@ -88,11 +88,9 @@ export const Detail = () => {
         <CommentList
           postId={id || ""}
           comments={comments ? comments : []}
-          // setCommentLists={setCommentLists}
         />
         {profile && (
-          <CommentInput postId={id} />
-          // <CommentInput postId={id} setCommentLists={setCommentLists} />
+          <CommentInput postId={id || ""} />
         )}
       </section>
     </main>
