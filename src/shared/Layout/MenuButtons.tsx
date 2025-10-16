@@ -20,7 +20,7 @@ export const MenuButtons = ({ menuType, onClose }: MenuButtonProps) => {
       {CATEGORIES.map((category) => {
         const Icon = CATEGORY_META[category].icon; //컴포넌트 함수를
         return (
-          <Link to={paths.menu({ category: category })} onClick={onClose}>
+          <Link key={category} to={paths.menu({ category: category })} onClick={onClose}>
             <Icon size={20} />
             <span>{CATEGORY_META[category].label}</span>
           </Link>
