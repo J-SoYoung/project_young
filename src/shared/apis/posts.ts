@@ -33,14 +33,17 @@ export const getAllPosts = async () => {
 };
 
 // Get Posts // 카테고리 리스트 가져오기
-export const getPostsByCategory = async (category: string) => {
+export const getPostsByCategory = async (
+  category: string
+): Promise<[string, Post[]] | []> => {
   try {
     const q = query(collection(db, "posts"), where("category", "==", category));
     const snapshot = await getDocs(q);
-    return snapshot.docs.map((doc) => ({
+    const data = snapshot.docs.map((doc) => ({
       ...doc.data(),
       id: doc.id
     })) as Post[];
+    return [category, data];
   } catch (error) {
     console.error("Error getting posts by category: ", error);
     return [];
@@ -99,10 +102,10 @@ export const editPost = async (post: Post): Promise<string> => {
     if (!post.id) {
       throw new Error("editPost: post.id가 없습니다.");
     }
-    const { id, ...updates } = post; 
+    const { id, ...updates } = post;
     const postRef = doc(db, "posts", id);
     await updateDoc(postRef, updates);
-    return id; 
+    return id;
   } catch (error) {
     console.error("Error editPost document: ", error);
     throw error;
