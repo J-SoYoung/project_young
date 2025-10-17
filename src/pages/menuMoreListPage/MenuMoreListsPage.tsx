@@ -6,23 +6,25 @@ import { getMenuConfig } from "./getMenuConfig";
 
 import { getPostsByCategory } from "../../shared/apis/posts";
 import { keys } from "../../shared/query/keys";
+import { Post } from "../../shared/types/posts";
 
 export const MenuMoreListsPage = () => {
   const { category } = useLoaderData();
 
   const {
-    data: posts,
-    isLoading,
+    data,
+    isLoading
     // isError,
     // error
   } = useQuery({
     queryKey: keys.posts.list(category),
     queryFn: () => getPostsByCategory(category),
-    enabled: !!category 
+    enabled: !!category
   });
 
-  if (!posts) return <p>포스트를 찾을 수 없습니다</p>;
-  const { title, component, desc } = getMenuConfig({ category, posts });
+  const [categoryData, postsData] = data as [string, Post[]];
+  if (!data) return <p>포스트를 찾을 수 없습니다</p>;
+  const { title, component, desc } = getMenuConfig({ categoryData, postsData });
 
   if (isLoading) return <p>로딩중</p>;
 
